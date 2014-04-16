@@ -695,6 +695,7 @@ int main(int argc, char* argv[]){
         }
         for (auto mssm_mass : mssm_masses) {
           for (auto proc : sm_procs) {
+					std::cout<<"THIS WORKS"<<std::endl;
             if (hmap[proc+mssm_mass].first.GetBinContent(i) > 0.) {
               std::cout << "\e[31mWarning: Template " << proc+mssm_mass << " is populated in this bin\e[m" << std::endl;
               has_signal = true;
@@ -843,7 +844,7 @@ int main(int argc, char* argv[]){
 	// If option is set, scale histograms in datacard to a given cross-section
 	// ************************************************************************
 	if(scale_signal_datacard) {
-        ana.FillMSSMSignal(hmap, mssm_masses, var, sel, cat, "wt", "", ""); 
+      ana.FillMSSMSignal(hmap, mssm_masses, var, sel, cat, "wt", "", ""); 
 	    ana.FillHWWSignal(hmap, hww_masses, var, sel, cat, "wt", "_hww", "");
 	    ana.FillSMSignal(hmap, sm_masses, var, sel, cat, "wt", "", "");
     }

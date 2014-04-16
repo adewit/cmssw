@@ -116,7 +116,7 @@ namespace ic {
     // Categories for background estimates and control plots
     alias_map_["btag_loose"]                = "(n_jets<=1 && n_loose_bjets>=1)";
     // New categories for optimisation of H->hh->tautaubb
-    alias_map_["sasha"]                      = "(n_prebjets>=2 && n_bjets>=1)";
+    alias_map_["Sasha"]                      = "(n_prebjets>=2 && n_bjets>=1)";
     
     
     alias_map_["jpt1_20_jpt2_20_no-tag"]     = "(n_prebjets>=2)";
@@ -653,9 +653,21 @@ namespace ic {
     if (xs > 0) {
       if (verbosity_ > 1) std::cout << "[HhhAnalysis::GenerateSignal] " << sample << " scaled to lumi using cross section " << xs << " pb" << std::endl;
       signal_norm = GetRate(sample, sel, cat, wt);
+			if((std::get<0>(signal_norm)==0)&&(std::get<1>(signal_norm)==0)){
+  			std::cout<<"[HhhAnalysis::GenerateSignal] Warning: Rate for sample "<<sample<<" is 0. Setting signal to 0"<<std::endl;
+   			TH1::AddDirectory(false);
+	  		TH1F* htemp = new TH1F("hempty","hempty",1,0,1);
+	  		return std::make_pair(*htemp,signal_norm);
+			}
       signal_norm = ValueProduct(signal_norm, std::make_pair(this->GetLumiScaleFixedXS(sample, xs), 0.0));
     } else {
       signal_norm = GetLumiScaledRate(sample, sel, cat, wt);
+			if((std::get<0>(signal_norm)==0)&&std::get<1>(signal_norm)==0){
+	  		std::cout<<"[HhhAnalysis::GenerateSignal] Warning: Rate for sample "<<sample<<" is 0. Setting signal to 0"<<std::endl;
+	  		TH1::AddDirectory(false);
+	  		TH1F* htemp = new TH1F("hempty","hempty",1,0,1);
+	  		return std::make_pair(*htemp,signal_norm);
+	  	}
     }
     TH1F signal_shape = this->GetShape(var, sample, sel, cat, wt);
     SetNorm(&signal_shape, signal_norm.first);
@@ -809,10 +821,14 @@ namespace ic {
     for (auto const& m : masses) {
       auto signal_pair = this->GenerateSignal("GluGluToHTohhTo2Tau2B_mH-"+m, var, sel, cat, wt, fixed_xs);
       auto signal_pair_AZh = this->GenerateSignal("GluGluToAToZhToLLBB_mA-"+m, var, sel, cat, wt, fixed_xs);
+			if(std::get<0>(std::get<1>(signal_pair))!=0){
       hmap["ggHTohh"+infix+m+postfix] = signal_pair;
+			}
+			if(std::get<0>(std::get<1>(signal_pair_AZh))!=0){
       hmap["ggAToZh"+infix+m+postfix] = signal_pair_AZh;
       //PrintValue("ggHTohh"+postfix, signal_pair.second);
       //hmap["bbH"+infix+m+postfix] = this->GenerateSignal("SUSYBBHToTauTau_M-"+m,       var, sel, cat, wt, fixed_xs);
+		}
     }
   }
 
@@ -972,6 +988,10 @@ namespace ic {
                                       std::string const& weight) {
     if (verbosity_ > 1) std::cout << "--GetRate-- Sample:\"" << sample << "\" Selection:\"" << selection << "\" Category:\"" 
       << category << "\" Weight:\"" << weight << "\"" << std::endl;
+    if(!ttrees_[sample]){
+	  	std::cout<<"[HhhAnalysis::GetRate] Warning: sample "<<sample<<" not found. Setting rate to 0"<<std::endl;
+	  	return std::make_pair(0.,0.); 
+		}
     std::string full_selection = BuildCutString(selection, category, weight);
     TH1::AddDirectory(true);
     ttrees_[sample]->Draw("0.5>>htemp(1,0,1)", full_selection.c_str(), "goff");
@@ -979,7 +999,8 @@ namespace ic {
     TH1F *htemp = (TH1F*)gDirectory->Get("htemp");
     auto result = std::make_pair(Integral(htemp), Error(htemp));
     gDirectory->Delete("htemp;*");
-    return result;
+		return result;
+		
   }
 
   std::pair<double, double> HhhAnalysis::GetLumiScaledRate(std::string const& sample, 

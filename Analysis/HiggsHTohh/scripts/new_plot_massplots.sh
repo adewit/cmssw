@@ -28,9 +28,9 @@ HIGGSMASSBINS="0,50,100,150,200,250,300,350,400,450,500,550,600,650,700,750,800,
   --background_scheme="et_default" 
 
 ./bin/HiggsHTohhPlot --cfg=scripts/new_plot_"$ANA"_"$YEAR".cfg --channel=et --set_alias="sel:mt_1<30." \
-  --method=8 --var="m_sv"["$MSSMBINS"] --cat="sasha" \
+  --method=8 --var="m_sv"["$MSSMBINS"] --cat="Sasha" \
   --x_axis_label="M_{#tau#tau} [GeV]" $ET_INC_SHIFT \
-  --norm_bins=true --datacard="sasha"  \
+  --norm_bins=true --datacard="Sasha"  \
   --custom_y_axis_min=true --y_axis_min=0.0099 \
   --blind=true --x_blind_min=100 --x_blind_max=150 \
   --background_scheme="et_default" 
