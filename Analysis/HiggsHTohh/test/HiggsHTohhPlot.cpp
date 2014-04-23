@@ -152,6 +152,8 @@ int main(int argc, char* argv[]){
 	if (plot.plot_name() == "") {
 		plot.set_plot_name(reduced_var+"_"+datacard+"_"+channel_str+(is_2012 ? "_2012":"_2011"));
 	}
+	//std::cout<<plot.x_axis_label()<<std::endl;
+	
 	TH1::AddDirectory(false);
 
 	// ************************************************************************
@@ -695,7 +697,6 @@ int main(int argc, char* argv[]){
         }
         for (auto mssm_mass : mssm_masses) {
           for (auto proc : sm_procs) {
-					std::cout<<"THIS WORKS"<<std::endl;
             if (hmap[proc+mssm_mass].first.GetBinContent(i) > 0.) {
               std::cout << "\e[31mWarning: Template " << proc+mssm_mass << " is populated in this bin\e[m" << std::endl;
               has_signal = true;
@@ -866,6 +867,7 @@ int main(int argc, char* argv[]){
 		for (auto iter : hmap) {
 			iter.second.first.SetTitle(iter.first.c_str());
 			iter.second.first.SetName(iter.first.c_str());
+			iter.second.first.GetXaxis()->SetTitle(plot.x_axis_label().c_str());
 			iter.second.first.Write();
 		}
 		std::cout << "[HiggsHTohhPlot] Writing datacard input " << tfile_name << std::endl;
