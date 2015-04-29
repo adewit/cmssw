@@ -395,10 +395,12 @@ PileupJetIdentifier PileupJetIdAlgo::computeIdVariables(const reco::Jet * jet, f
 			  if(lPF!=nullptr) {
 			    pfTrk=(lPF->trackRef().get()==nullptr)?lPF->gsfTrackRef().get():lPF->trackRef().get();
 			  }
-			  
+                          if(((lPack==nullptr)&&(pfTrk!=nullptr))||(lPack!=nullptr)){
+                          
 			  reco::Track impactTrack = (lPack==nullptr)?(*pfTrk):lPack->pseudoTrack();
 			  internalId_.d0_ = fabs(impactTrack.dxy(vtx->position()));
 			  internalId_.dZ_ = fabs(impactTrack.dz(vtx->position()));
+                         }
 			}
 			internalId_.dRMeanCh_  += candPtDr;
 			internalId_.ptDCh_     += candPt*candPt;
@@ -416,19 +418,25 @@ PileupJetIdentifier PileupJetIdAlgo::computeIdVariables(const reco::Jet * jet, f
 					bool inVtx0 = find( vtx->tracks_begin(), vtx->tracks_end(), reco::TrackBaseRef(lPF->trackRef()) ) != vtx->tracks_end();
 					bool inAnyOther = false;
 					// alternative beta definition based on track-vertex distance of closest approach
-					double dZ0 = fabs(lPF->trackRef()->dz(vtx->position()));
-					double dZ = dZ0;
+					double dZ0 = -999;
+                                        double dZ = -999;
+					if(lPF->trackRef().get()!=nullptr){
+					dZ0 = fabs(lPF->trackRef()->dz(vtx->position()));
+					dZ = dZ0;
+                                        }
 					for(reco::VertexCollection::const_iterator  vi=allvtx.begin(); vi!=allvtx.end(); ++vi ) {
 						const reco::Vertex & iv = *vi;
 						if( iv.isFake() || iv.ndof() < 4 ) { continue; }
 						// the primary vertex may have been copied by the user: check identity by position
 						bool isVtx0  = (iv.position() - vtx->position()).r() < 0.02;
 						// 'classic' beta definition: check if the track is associated with any vertex other than the primary one
-						if( ! isVtx0 && ! inAnyOther ) {
+						if( ! isVtx0 && ! inAnyOther && lPF->trackRef().get()!=nullptr ) {
 							inAnyOther = find( iv.tracks_begin(), iv.tracks_end(), reco::TrackBaseRef(lPF->trackRef()) ) != iv.tracks_end();
 						}
 						// alternative beta: find closest vertex to the track
+					        if(lPF->trackRef().get()!=nullptr){
 						dZ = std::min(dZ,fabs(lPF->trackRef()->dz(iv.position())));
+                                                }
 					}
 					// classic beta/betaStar
 					if( inVtx0 && ! inAnyOther ) {
