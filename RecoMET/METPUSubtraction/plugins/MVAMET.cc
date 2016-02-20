@@ -33,7 +33,8 @@ MVAMET::MVAMET(const edm::ParameterSet& cfg){
   debug_ = (cfg.existsAs<bool>("debug")) ? cfg.getParameter<bool>("debug") : false;
   combineNLeptons_ = cfg.getParameter<int>("combineNLeptons");
   requireOS_ = cfg.getParameter<bool>("requireOS");
-  assert( (requireOS_ = true) ^ (combineNLeptons_ !=2));
+  assert( requireOS_==false || (combineNLeptons_ ==2));
+ 
   useTauSig_    = cfg.getParameter<bool>("useTauSig");
 
   srcVertices_  = consumes<reco::VertexCollection>(cfg.getParameter<edm::InputTag>("srcVertices"));
@@ -97,7 +98,7 @@ void MVAMET::doCombinations(int offset, int k)
     combination_.pop_back();
     return;
   }
-  for (size_t i = offset; i <= allLeptons_.size() - k; ++i)
+  for (size_t i = offset; i <= allLeptons_.size() -k ; ++i)
   {
     combination_.push_back(allLeptons_[i]);
     doCombinations(i+1, k-1);
@@ -162,13 +163,11 @@ void MVAMET::calculateRecoilingObjects(edm::Event &evt, const pat::MuonCollectio
     for (size_t i=0; i < leptons->size(); ++i)
       allLeptons_.push_back(leptons->ptrAt(i));
   }
-
   if(allLeptons_.size() >= combineNLeptons_ )
     doCombinations(0, combineNLeptons_);
 
   if(debug_)
     std::cout << allLeptons_.size() << " lead to " << combinations_.size();
-
   if(requireOS_)
     cleanLeptonsFromSS();
 

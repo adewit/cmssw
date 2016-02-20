@@ -204,7 +204,7 @@ def runMVAMET(process,
     ### MVA MET
     setattr(process,"MVAMET", cms.EDProducer("MVAMET",                                                
                                                 debug = cms.bool(False),
-                                                requireOS = cms.bool(True),
+                                                requireOS = cms.bool(False),
                                                 combineNLeptons = cms.int32(2),
                                                 MVAMETLabel = cms.string("MVAMET"),
                                                 srcMETs      = cms.VInputTag(
@@ -231,8 +231,8 @@ def runMVAMET(process,
                                                 srcTaus        = cms.InputTag(srcTaus+tauTypeID+"Cleaned"),
                                                 srcMuons       = cms.InputTag(srcMuons+muonTypeID),
                                                 weightFile     = cms.FileInPath('RecoMET/METPUSubtraction/data/weightfile.root'),
-                                                #srcLeptons  = cms.VInputTag("slimmedMuons", "slimmedElectrons", "slimmedTaus"), # to produce all possible combinations
-                                                srcLeptons  = cms.VInputTag(srcMuons+muonTypeID,srcElectrons+electronTypeID,srcTaus+tauTypeID+"Cleaned"), # to produce a selection specifically designed for trainings
+                                                srcLeptons  = cms.VInputTag("slimmedMuons", "slimmedElectrons", "slimmedTaus"), # to produce all possible combinations
+                                                #srcLeptons  = cms.VInputTag(srcMuons,srcElectrons,srcTaus), # to produce a selection specifically designed for trainings
                                                 useTauSig = cms.bool(True),
                                                 tausSignificance = cms.InputTag('tausSignificance', 'METCovariance'),
                                                 saveMap = cms.bool(False)
