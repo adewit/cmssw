@@ -80,7 +80,7 @@ def    applyTauID( process,
     setattr(process,src+label,cms.EDFilter("PATTauRefSelector",
                                            src = cms.InputTag(src),
                                            filter = cms.bool(False),
-                                           cut  = cms.string('pt > %f & abs(eta) < %f & tauID("byLooseCombinedIsolationDeltaBetaCorr3Hits") < 1.5 & tauID("againstMuonLoose3") > 0.5 & tauID("againstElectronLooseMVA5") > 0.5 '%(ptCut,etaCut))
+                                           cut  = cms.string('pt > %f & abs(eta) < %f & tauID("byLooseCombinedIsolationDeltaBetaCorr3Hits") < 1.5 & tauID("againstMuonLoose3") > 0.5 & tauID("againstElectronLooseMVA6") > 0.5 '%(ptCut,etaCut))
                                            ));
 
 
