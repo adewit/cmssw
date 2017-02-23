@@ -3,19 +3,19 @@ import FWCore.ParameterSet.Config as cms
 MicroEventContent = cms.PSet(
     outputCommands = cms.untracked.vstring(
         'drop *',
-        'keep *_slimmedPhotons_*_*',
+#        'keep *_slimmedPhotons_*_*',
         'keep *_slimmedElectrons_*_*',
         'keep *_slimmedMuons_*_*',
         'keep *_slimmedTaus_*_*',
-        'keep *_slimmedTausBoosted_*_*',
+#        'keep *_slimmedTausBoosted_*_*',
         'keep *_slimmedJets_*_*',
-        'keep *_slimmedJetsAK8_*_*',
-        'keep *_slimmedJetsPuppi_*_*',
+#        'keep *_slimmedJetsAK8_*_*',
+#        'keep *_slimmedJetsPuppi_*_*',
         'keep *_slimmedMETs_*_*',
         'keep *_slimmedMETsNoHF_*_*',
-        'keep *_slimmedMETsPuppi_*_*',
+#        'keep *_slimmedMETsPuppi_*_*',
         'keep *_slimmedSecondaryVertices_*_*',
-        'keep *_slimmedJetsAK8PFPuppiSoftDropPacked_SubJets_*',
+#        'keep *_slimmedJetsAK8PFPuppiSoftDropPacked_SubJets_*',
 
         'keep recoPhotonCores_reducedEgamma_*_*',
         'keep recoGsfElectronCores_reducedEgamma_*_*',
@@ -57,12 +57,12 @@ MicroEventContent = cms.PSet(
         'keep *_caloStage2Digis_EGamma_*',
         'keep *_caloStage2Digis_EtSum_*',
         # HLT
-        'keep *_TriggerResults_*_HLT',
-        'keep *_TriggerResults_*_*', # for MET filters (a catch all for the moment, but ideally it should be only the current process)
+#        'keep *_TriggerResults_*_HLT',
+#        'keep *_TriggerResults_*_*', # for MET filters (a catch all for the moment, but ideally it should be only the current process)
         'keep patPackedCandidates_lostTracks_*_*',
-        'keep HcalNoiseSummary_hcalnoise__*',
-        'keep recoCSCHaloData_CSCHaloData_*_*',
-        'keep recoBeamHaloSummary_BeamHaloSummary_*_*',
+#        'keep HcalNoiseSummary_hcalnoise__*',
+#        'keep recoCSCHaloData_CSCHaloData_*_*',
+#        'keep recoBeamHaloSummary_BeamHaloSummary_*_*',
         # Lumi
         'keep LumiScalerss_scalersRawToDigi_*_*',
     )
@@ -73,10 +73,10 @@ MicroEventContentMC = cms.PSet(
 MicroEventContentMC.outputCommands += [
         #'keep *_slimmedGenJets*_*_*',
         'keep *_slimmedGenJets_*_*',
-        'keep *_slimmedGenJetsAK8_*_*',
+#        'keep *_slimmedGenJetsAK8_*_*',
         'keep patPackedGenParticles_packedGenParticles_*_*',
         'keep recoGenParticles_prunedGenParticles_*_*',
-        'keep LHEEventProduct_*_*_*',
+#        'keep LHEEventProduct_*_*_*',
         'keep PileupSummaryInfos_slimmedAddPileupInfo_*_*',
         'keep GenFilterInfo_*_*_*',
         'keep GenLumiInfoHeader_generator_*_*',

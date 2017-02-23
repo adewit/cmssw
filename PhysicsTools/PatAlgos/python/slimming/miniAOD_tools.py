@@ -38,13 +38,13 @@ def miniAOD_customizeCommon(process):
         )
     process.patElectrons.addPFClusterIso = cms.bool(True)
     #add puppi isolation in miniAOD
-    process.patElectrons.addPuppiIsolation = cms.bool(True)
-    process.patElectrons.puppiIsolationChargedHadrons = cms.InputTag("egmElectronPUPPIIsolation","h+-DR030-BarVeto000-EndVeto001")
-    process.patElectrons.puppiIsolationNeutralHadrons = cms.InputTag("egmElectronPUPPIIsolation","h0-DR030-BarVeto000-EndVeto000")
-    process.patElectrons.puppiIsolationPhotons        = cms.InputTag("egmElectronPUPPIIsolation","gamma-DR030-BarVeto000-EndVeto008")
-    process.patElectrons.puppiNoLeptonsIsolationChargedHadrons = cms.InputTag("egmElectronPUPPINoLeptonsIsolation","h+-DR030-BarVeto000-EndVeto001")
-    process.patElectrons.puppiNoLeptonsIsolationNeutralHadrons = cms.InputTag("egmElectronPUPPINoLeptonsIsolation","h0-DR030-BarVeto000-EndVeto000")
-    process.patElectrons.puppiNoLeptonsIsolationPhotons        = cms.InputTag("egmElectronPUPPINoLeptonsIsolation","gamma-DR030-BarVeto000-EndVeto008")
+#    process.patElectrons.addPuppiIsolation = cms.bool(True)
+#    process.patElectrons.puppiIsolationChargedHadrons = cms.InputTag("egmElectronPUPPIIsolation","h+-DR030-BarVeto000-EndVeto001")
+#    process.patElectrons.puppiIsolationNeutralHadrons = cms.InputTag("egmElectronPUPPIIsolation","h0-DR030-BarVeto000-EndVeto000")
+#    process.patElectrons.puppiIsolationPhotons        = cms.InputTag("egmElectronPUPPIIsolation","gamma-DR030-BarVeto000-EndVeto008")
+#    process.patElectrons.puppiNoLeptonsIsolationChargedHadrons = cms.InputTag("egmElectronPUPPINoLeptonsIsolation","h+-DR030-BarVeto000-EndVeto001")
+#    process.patElectrons.puppiNoLeptonsIsolationNeutralHadrons = cms.InputTag("egmElectronPUPPINoLeptonsIsolation","h0-DR030-BarVeto000-EndVeto000")
+#    process.patElectrons.puppiNoLeptonsIsolationPhotons        = cms.InputTag("egmElectronPUPPINoLeptonsIsolation","gamma-DR030-BarVeto000-EndVeto008")
 
     process.patElectrons.ecalPFClusterIsoMap = cms.InputTag("reducedEgamma", "eleEcalPFClusIso")
     process.patElectrons.hcalPFClusterIsoMap = cms.InputTag("reducedEgamma", "eleHcalPFClusIso")
@@ -63,11 +63,11 @@ def miniAOD_customizeCommon(process):
     process.patPhotons.addPFClusterIso = cms.bool(True)
 
     #add puppi isolation in miniAOD
-    process.patPhotons.addPuppiIsolation = cms.bool(True)
-    process.patPhotons.puppiIsolationChargedHadrons = cms.InputTag("egmPhotonPUPPIIsolation","h+-DR030-")
-    process.patPhotons.puppiIsolationNeutralHadrons = cms.InputTag("egmPhotonPUPPIIsolation","h0-DR030-")
-    process.patPhotons.puppiIsolationPhotons        = cms.InputTag("egmPhotonPUPPIIsolation","gamma-DR030-")
-
+#    process.patPhotons.addPuppiIsolation = cms.bool(True)
+#    process.patPhotons.puppiIsolationChargedHadrons = cms.InputTag("egmPhotonPUPPIIsolation","h+-DR030-")
+#    process.patPhotons.puppiIsolationNeutralHadrons = cms.InputTag("egmPhotonPUPPIIsolation","h0-DR030-")
+#    process.patPhotons.puppiIsolationPhotons        = cms.InputTag("egmPhotonPUPPIIsolation","gamma-DR030-")
+#
     process.patPhotons.ecalPFClusterIsoMap = cms.InputTag("reducedEgamma", "phoEcalPFClusIso")
     process.patPhotons.hcalPFClusterIsoMap = cms.InputTag("reducedEgamma", "phoHcalPFClusIso")
     process.patPhotons.photonSource = cms.InputTag("reducedEgamma","reducedGedPhotons")
@@ -255,63 +255,63 @@ def miniAOD_customizeCommon(process):
     #---------------------------------------------------------------------------
 
     # Adding puppi jets
-    process.load('RecoJets.JetProducers.ak4PFJetsPuppi_cfi')
+#    process.load('RecoJets.JetProducers.ak4PFJetsPuppi_cfi')
 
-    process.ak4PFJetsPuppi.doAreaFastjet = True # even for standard ak4PFJets this is overwritten in RecoJets/Configuration/python/RecoPFJets_cff
+#    process.ak4PFJetsPuppi.doAreaFastjet = True # even for standard ak4PFJets this is overwritten in RecoJets/Configuration/python/RecoPFJets_cff
 
-    from RecoJets.JetAssociationProducers.j2tParametersVX_cfi import j2tParametersVX
-    process.ak4PFJetsPuppiTracksAssociatorAtVertex = cms.EDProducer("JetTracksAssociatorAtVertex",
-        j2tParametersVX,
-        jets = cms.InputTag("ak4PFJetsPuppi")
-    )
-    process.patJetPuppiCharge = cms.EDProducer("JetChargeProducer",
-        src = cms.InputTag("ak4PFJetsPuppiTracksAssociatorAtVertex"),
-        var = cms.string('Pt'),
-        exp = cms.double(1.0)
-    )
+#    from RecoJets.JetAssociationProducers.j2tParametersVX_cfi import j2tParametersVX
+#    process.ak4PFJetsPuppiTracksAssociatorAtVertex = cms.EDProducer("JetTracksAssociatorAtVertex",
+#        j2tParametersVX,
+#        jets = cms.InputTag("ak4PFJetsPuppi")
+#    )
+#    process.patJetPuppiCharge = cms.EDProducer("JetChargeProducer",
+#        src = cms.InputTag("ak4PFJetsPuppiTracksAssociatorAtVertex"),
+#        var = cms.string('Pt'),
+#        exp = cms.double(1.0)
+#    )
 
-    addJetCollection(process, postfix   = "", labelName = 'Puppi', jetSource = cms.InputTag('ak4PFJetsPuppi'),
-                    jetCorrections = ('AK4PFPuppi', ['L2Relative', 'L3Absolute'], ''),
-                    algo= 'AK', rParam = 0.4, btagDiscriminators = map(lambda x: x.value() ,process.patJets.discriminatorSources)
-                    )
+#    addJetCollection(process, postfix   = "", labelName = 'Puppi', jetSource = cms.InputTag('ak4PFJetsPuppi'),
+#                    jetCorrections = ('AK4PFPuppi', ['L2Relative', 'L3Absolute'], ''),
+#                    algo= 'AK', rParam = 0.4, btagDiscriminators = map(lambda x: x.value() ,process.patJets.discriminatorSources)
+#                    )
     
-    process.patJetGenJetMatchPuppi.matched = 'slimmedGenJets'
+#    process.patJetGenJetMatchPuppi.matched = 'slimmedGenJets'
     
-    process.patJetsPuppi.jetChargeSource = cms.InputTag("patJetPuppiCharge")
+#    process.patJetsPuppi.jetChargeSource = cms.InputTag("patJetPuppiCharge")
 
-    process.selectedPatJetsPuppi.cut = cms.string("pt > 15")
+#    process.selectedPatJetsPuppi.cut = cms.string("pt > 15")
 
-    process.load('PhysicsTools.PatAlgos.slimming.slimmedJets_cfi')
-    process.slimmedJetsPuppi = process.slimmedJets.clone()
-    process.slimmedJetsPuppi.src = cms.InputTag("selectedPatJetsPuppi")    
-    process.slimmedJetsPuppi.packedPFCandidates = cms.InputTag("packedPFCandidates")
+#    process.load('PhysicsTools.PatAlgos.slimming.slimmedJets_cfi')
+#    process.slimmedJetsPuppi = process.slimmedJets.clone()
+#    process.slimmedJetsPuppi.src = cms.InputTag("selectedPatJetsPuppi")    
+#    process.slimmedJetsPuppi.packedPFCandidates = cms.InputTag("packedPFCandidates")
 
     
     ## puppi met
-    from PhysicsTools.PatAlgos.slimming.puppiForMET_cff import makePuppies
-    makePuppies( process );
+#    from PhysicsTools.PatAlgos.slimming.puppiForMET_cff import makePuppies
+#    makePuppies( process );
 
-    runMetCorAndUncForMiniAODProduction(process, metType="Puppi",
-                                        pfCandColl=cms.InputTag("puppiForMET"),
-                                        jetCollUnskimmed="slimmedJetsPuppi",
-                                        recoMetFromPFCs=True,
-                                        jetFlavor="AK4PFPuppi",
-                                        postfix="Puppi"
-                                        )
+#    runMetCorAndUncForMiniAODProduction(process, metType="Puppi",
+#                                        pfCandColl=cms.InputTag("puppiForMET"),
+#                                        jetCollUnskimmed="slimmedJetsPuppi",
+#                                        recoMetFromPFCs=True,
+#                                        jetFlavor="AK4PFPuppi",
+#                                        postfix="Puppi"
+#                                        )
     
-    process.load('PhysicsTools.PatAlgos.slimming.slimmedMETs_cfi')
-    process.slimmedMETsPuppi = process.slimmedMETs.clone()
-    process.slimmedMETsPuppi.src = cms.InputTag("patMETsPuppi")
-    process.slimmedMETsPuppi.rawVariation =  cms.InputTag("patPFMetPuppi")
-    process.slimmedMETsPuppi.t1Uncertainties = cms.InputTag("patPFMetT1%sPuppi")
-    process.slimmedMETsPuppi.t01Variation = cms.InputTag("patPFMetT0pcT1Puppi")
-    process.slimmedMETsPuppi.t1SmearedVarsAndUncs = cms.InputTag("patPFMetT1Smear%sPuppi")
-    process.slimmedMETsPuppi.tXYUncForRaw = cms.InputTag("patPFMetTxyPuppi")
-    process.slimmedMETsPuppi.tXYUncForT1 = cms.InputTag("patPFMetT1TxyPuppi")
-    process.slimmedMETsPuppi.tXYUncForT01 = cms.InputTag("patPFMetT0pcT1TxyPuppi")
-    process.slimmedMETsPuppi.tXYUncForT1Smear = cms.InputTag("patPFMetT1SmearTxyPuppi")
-    process.slimmedMETsPuppi.tXYUncForT01Smear = cms.InputTag("patPFMetT0pcT1SmearTxyPuppi")
-    del process.slimmedMETsPuppi.caloMET
+#    process.load('PhysicsTools.PatAlgos.slimming.slimmedMETs_cfi')
+#    process.slimmedMETsPuppi = process.slimmedMETs.clone()
+#    process.slimmedMETsPuppi.src = cms.InputTag("patMETsPuppi")
+#    process.slimmedMETsPuppi.rawVariation =  cms.InputTag("patPFMetPuppi")
+#    process.slimmedMETsPuppi.t1Uncertainties = cms.InputTag("patPFMetT1%sPuppi")
+#    process.slimmedMETsPuppi.t01Variation = cms.InputTag("patPFMetT0pcT1Puppi")
+#    process.slimmedMETsPuppi.t1SmearedVarsAndUncs = cms.InputTag("patPFMetT1Smear%sPuppi")
+#    process.slimmedMETsPuppi.tXYUncForRaw = cms.InputTag("patPFMetTxyPuppi")
+#    process.slimmedMETsPuppi.tXYUncForT1 = cms.InputTag("patPFMetT1TxyPuppi")
+#    process.slimmedMETsPuppi.tXYUncForT01 = cms.InputTag("patPFMetT0pcT1TxyPuppi")
+#    process.slimmedMETsPuppi.tXYUncForT1Smear = cms.InputTag("patPFMetT1SmearTxyPuppi")
+#    process.slimmedMETsPuppi.tXYUncForT01Smear = cms.InputTag("patPFMetT0pcT1SmearTxyPuppi")
+#    del process.slimmedMETsPuppi.caloMET
 
 
 
