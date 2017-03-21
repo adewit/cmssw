@@ -47,7 +47,7 @@ if __name__ == '__main__':
 
     tasks=list()
   
-    tasks.append(('VBFPu200-fast','/VBFHToTauTau_M125_14TeV_powheg_pythia8/PhaseIIFall16DR82-PU200_90X_upgrade2023_realistic_v1-v1/AODSIM'))
+    tasks.append(('VBFPu200-near-full-stats','/VBFHToTauTau_M125_14TeV_powheg_pythia8/PhaseIIFall16DR82-PU200_90X_upgrade2023_realistic_v1-v1/AODSIM'))
 
     for task in tasks:
         print task[0]
