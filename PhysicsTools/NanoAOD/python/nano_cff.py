@@ -1,13 +1,13 @@
 import FWCore.ParameterSet.Config as cms
 from PhysicsTools.NanoAOD.common_cff import *
-from PhysicsTools.NanoAOD.jets_cff import *
-from PhysicsTools.NanoAOD.muons_cff import *
-from PhysicsTools.NanoAOD.taus_cff import *
-from PhysicsTools.NanoAOD.electrons_cff import *
-from PhysicsTools.NanoAOD.photons_cff import *
-from PhysicsTools.NanoAOD.globals_cff import *
-from PhysicsTools.NanoAOD.extraflags_cff import *
-from PhysicsTools.NanoAOD.ttbarCategorization_cff import *
+#from PhysicsTools.NanoAOD.jets_cff import *
+#from PhysicsTools.NanoAOD.muons_cff import *
+#from PhysicsTools.NanoAOD.taus_cff import *
+#from PhysicsTools.NanoAOD.electrons_cff import *
+#from PhysicsTools.NanoAOD.photons_cff import *
+#from PhysicsTools.NanoAOD.globals_cff import *
+#from PhysicsTools.NanoAOD.extraflags_cff import *
+#from PhysicsTools.NanoAOD.ttbarCategorization_cff import *
 from PhysicsTools.NanoAOD.genparticles_cff import *
 from PhysicsTools.NanoAOD.particlelevel_cff import *
 from PhysicsTools.NanoAOD.vertices_cff import *
@@ -107,7 +107,7 @@ genWeightsTable = cms.EDProducer("GenWeightsTableProducer",
     namedWeightLabels = cms.vstring(),
     lheWeightPrecision = cms.int32(14),
     maxPdfWeights = cms.uint32(150), 
-    debug = cms.untracked.bool(False),
+    debug = cms.untracked.bool(True),
 )
 lheInfoTable = cms.EDProducer("LHETablesProducer",
     lheInfo = cms.InputTag("externalLHEProducer"),
@@ -124,7 +124,8 @@ nanoSequence = cms.Sequence(
         jetTables + muonTables + tauTables + electronTables + photonTables +  globalTables +vertexTables+ metTables+simpleCleanerTable + triggerObjectTables + isoTrackTables +
 	l1bits)
 
-nanoSequenceMC = cms.Sequence(genParticleSequence + particleLevelSequence + nanoSequence + jetMC + muonMC + electronMC + photonMC + tauMC + metMC + ttbarCatMCProducers +  globalTablesMC + btagWeightTable + genWeightsTable + genParticleTables + particleLevelTables + lheInfoTable  + ttbarCategoryTable )
+nanoSequenceMC = cms.Sequence(genWeightsTable )
+#nanoSequenceMC = cms.Sequence(genParticleSequence + particleLevelSequence + nanoSequence + jetMC + muonMC + electronMC + photonMC + tauMC + metMC + ttbarCatMCProducers +  globalTablesMC + btagWeightTable + genWeightsTable + genParticleTables + particleLevelTables + lheInfoTable  + ttbarCategoryTable )
 
 
 def nanoAOD_customizeCommon(process):

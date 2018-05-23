@@ -12,7 +12,7 @@ process.GlobalTag.globaltag = autoCond['phase1_2017_realistic']
 
 process.options   = cms.untracked.PSet( wantSummary = cms.untracked.bool(True) )
 process.MessageLogger.cerr.FwkReport.reportEvery = 100
-process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(10000))
+process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(100))
 
 process.source = cms.Source("PoolSource", fileNames = cms.untracked.vstring())
 process.source.fileNames = [
@@ -22,7 +22,11 @@ process.source.fileNames = [
 # '/store/relval/CMSSW_9_4_0_pre3/RelValProdTTbar_13/MINIAODSIM/94X_mcRun2_asymptotic_v0-v1/10000/06F85EC5-7BB9-E711-A2CB-0025905A6134.root'
 
 #sample with LHE
-'/store/cmst3/group/nanoAOD/pre-94XMiniAODv2/TTToSemiLeptonic_TuneCP5_PSweights_13TeV-powheg-pythia8.root'
+#'root://cms-xrd-global.cern.ch//store/mc/RunIISummer16MiniAODv2/WGToLNuG_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/MINIAODSIM/PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/70000/02FE572F-88DA-E611-8CAB-001E67792884.root'
+'root://cms-xrd-global.cern.ch://store/mc/RunIIFall17MiniAOD/TTToSemiLeptonic_TuneCP5_13TeV-powheg-pythia8/MINIAODSIM/94X_mc2017_realistic_v10-v1/40000/A2100E10-51FE-E711-9D86-001E6739B019.root'
+#'root://cms-xrd-global.cern.ch:///store/mc/RunIIFall17MiniAODv2/WZ_TuneCP5_13TeV-pythia8/MINIAODSIM/PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/40000/3EFC7F98-2B42-E811-B1C3-00269E95B1B8.root'
+#'root://cms-xrd-global.cern.ch//store/mc/RunIIFall17MiniAODv2/Z1JetsToNuNu_M-50_LHEZpT_250-400_TuneCP5_13TeV-amcnloFXFX-pythia8/MINIAODSIM/PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/10000/00430106-6B42-E811-BA09-001F29089F7E.root'
+#'root://cms-xrd-global.cern.ch//store/mc/RunIIFall17MiniAOD/W2JetsToLNu_LHEWpT_400-inf_TuneCP5_13TeV-amcnloFXFX-pythia8/MINIAODSIM/94X_mc2017_realistic_v11-v1/100000/38E38F15-BB1C-E811-8338-0CC47A57CDD2.root'
 ]
 
 process.load("PhysicsTools.NanoAOD.nano_cff")
