@@ -108,6 +108,7 @@ namespace Rivet {
                 cat.stage1_cat_pTjet25GeV = HTXS::Stage1::UNKNOWN;
                 cat.stage1_cat_pTjet30GeV = HTXS::Stage1::UNKNOWN;
                 cat.stage1p1_cat = HTXS::Stage1p1::UNKNOWN;
+                cat.stage1p1_uncert_cat = HTXS::Stage1p1uncert::UNKNOWN;
 
                 if (prodMode == HTXS::UNKNOWN) 
                     return error(cat,HTXS::PRODMODE_DEFINED,
@@ -250,6 +251,11 @@ namespace Rivet {
 
                 cat.jets25 = jets.jetsByPt( Cuts::pT > 25.0 );
                 cat.jets30 = jets.jetsByPt( Cuts::pT > 30.0 );
+                if(cat.jets30.size()<1){
+                   cat.jeteta=-999;
+                } else {
+                   cat.jeteta=cat.jets30[0].pseudorapidity();
+                }
 
                 // check that four mometum sum of all stable particles satisfies momentum consevation
                 /*
@@ -272,6 +278,7 @@ namespace Rivet {
                 cat.stage1_cat_pTjet25GeV = getStage1Category(prodMode,cat.higgs,cat.jets25,cat.V);
                 cat.stage1_cat_pTjet30GeV = getStage1Category(prodMode,cat.higgs,cat.jets30,cat.V);      
                 cat.stage1p1_cat = getStage1p1Category(prodMode,cat.higgs,cat.jets30,cat.V);      
+                cat.stage1p1_uncert_cat = getStage1p1UncertCategory(prodMode,cat.higgs,cat.jets30,cat.V);
                 cat.errorCode = HTXS::SUCCESS; ++m_errorCount[HTXS::SUCCESS];
 
                 return cat;
@@ -473,8 +480,8 @@ namespace Rivet {
                     if (fwdHiggs) return GG2HLL_FWDH;
                     if      (V.pt()<75) return GG2HLL_PTV_0_75;
                     else if      (V.pt()<150) return GG2HLL_PTV_75_150;
-                    else if (jets.empty()) return GG2HLL_PTV_GT150_0J;
-                    return GG2HLL_PTV_GT150_GE1J;
+                    else if      (V.pt()>250) return GG2HLL_PTV_GT250;
+                    return jets.empty() ? GG2HLL_PTV_150_250_0J : GG2HLL_PTV_150_250_GE1J;
                 }
                 // 6.ttH,bbH,tH categories
                 else if (prodMode==HTXS::TTH) return Category(TTH_FWDH+ctrlHiggs);
@@ -482,6 +489,138 @@ namespace Rivet {
                 else if (prodMode==HTXS::TH ) return Category(TH_FWDH+ctrlHiggs);
                 return UNKNOWN;
             }
+
+            HTXS::Stage1p1uncert::Category getStage1p1UncertCategory(const HTXS::HiggsProdMode prodMode,
+                    const Particle &higgs,
+                    const Jets &jets,
+                    const Particle &V) {
+                using namespace HTXS::Stage1p1uncert;
+                int Njets=jets.size(), ctrlHiggs = std::abs(higgs.rapidity())<2.5, fwdHiggs = !ctrlHiggs;
+                //double pTj1 = !jets.empty() ? jets[0].momentum().pt() : 0;
+                int vbfTopo = vbfTopology(jets,higgs);
+
+                // 1. GGF Stage 1 categories
+                //    Following YR4 write-up: XXXXX
+                if (prodMode==HTXS::GGF || (prodMode==HTXS::GG2ZH && quarkDecay(V)) ) {
+                    if (fwdHiggs)        return GG2H_FWDH;
+                    if (Njets==0)        return GG2H_0J;
+                    else if (Njets==1)   return Category(GG2H_1J_PTH_0_60+getBin(higgs.pt(),{0,60,120,200}));
+                    else if (Njets>=2) {
+                        // events with pT_H>200 get priority over VBF cuts
+                        if(higgs.pt()<=200){
+                            if      (vbfTopo==2) return GG2H_VBFTOPO_JET3VETO;
+                            else if (vbfTopo==1) return GG2H_VBFTOPO_JET3;
+                        }
+                        // Njets >= 2jets without VBF topology
+                        return Category(GG2H_GE2J_PTH_0_60+getBin(higgs.pt(),{0,60,120,200}));
+                    } //pth <200
+                } // ggh
+                // 2. Electroweak qq->Hqq Stage 1 categories
+                else if (prodMode==HTXS::VBF || ( isVH(prodMode) && quarkDecay(V)) ) {
+                    if (std::abs(higgs.rapidity())>2.5) return QQ2HQQ_FWDH;
+                    if (higgs.pt()>=200) return QQ2HQQ_PTH_GT200;
+                    if (higgs.pt() <200 ){
+                        if (Njets==0) { return QQ2HQQ_PTH_0_200_0J;}
+                        if (Njets==1) { return QQ2HQQ_PTH_0_200_1J;}
+                        if (Njets >=2){
+                            double mjj=getMjj(jets);
+                            double ptHjj= getPtHjj(jets, higgs);
+                            if (mjj <60) return QQ2HQQ_PTH_0_200_GE2J_MJJ_0_60;
+                            else if (mjj <120) return QQ2HQQ_PTH_0_200_GE2J_MJJ_60_120;
+                            else if (mjj <350) return QQ2HQQ_PTH_0_200_GE2J_MJJ_120_350;
+                            else if (mjj <700){
+                                if (ptHjj<25) return QQ2HQQ_PTH_0_200_GE2J_MJJ_350_700_PTHJJ_0_25;
+                                else return QQ2HQQ_PTH_0_200_GE2J_MJJ_350_700_PTHJJ_GT25;
+                            }
+                            else { //if (mjj>=700)
+                                if (ptHjj<25) return QQ2HQQ_PTH_0_200_GE2J_MJJ_GT700_PTHJJ_0_25;
+                                else return QQ2HQQ_PTH_0_200_GE2J_MJJ_GT700_PTHJJ_GT25;
+                            }// mjj >=700
+                        }//njets >=2
+                    } //ptH<200
+                } // VBF
+                // 3. WH->Hlv categories
+                else if (prodMode==HTXS::WH) {
+                    if (fwdHiggs) return QQ2HLNU_FWDH;
+                    else if (V.pt()<75){
+                        if (jets.empty()) return QQ2HLNU_PTV_0_75_0J;
+                        else if (jets.size()==1) return QQ2HLNU_PTV_0_75_1J;
+                        else return QQ2HLNU_PTV_0_75_GE2J;
+                    } else if (V.pt()<150){
+                        if (jets.empty()) return QQ2HLNU_PTV_75_150_0J;
+                        else if (jets.size()==1) return QQ2HLNU_PTV_75_150_1J;
+                        else return QQ2HLNU_PTV_75_150_GE2J;
+                    } else if (V.pt()<250){
+                        if (jets.empty()) return QQ2HLNU_PTV_150_250_0J;
+                        else if (jets.size()==1) return QQ2HLNU_PTV_150_250_1J;
+                        else return QQ2HLNU_PTV_150_250_GE2J;
+                   } else if (V.pt()<400){
+                        if (jets.empty()) return QQ2HLNU_PTV_250_400_0J;
+                        else if (jets.size()==1) return QQ2HLNU_PTV_250_400_1J;
+                        else return QQ2HLNU_PTV_250_400_GE2J;
+                   } else {
+                        if (jets.empty()) return QQ2HLNU_PTV_GT400_0J;
+                        else if (jets.size()==1) return QQ2HLNU_PTV_GT400_1J;
+                        else return QQ2HLNU_PTV_GT400_GE2J;
+                   }
+                }
+                // 4. qq->ZH->llH categories
+                else if (prodMode==HTXS::QQ2ZH) {
+                    if (fwdHiggs) return QQ2HLL_FWDH;
+                    else if (V.pt()<75){ 
+                        if(jets.empty()) return QQ2HLL_PTV_0_75_0J;
+                        else if (jets.size()==1) return QQ2HLL_PTV_0_75_1J;
+                        else return QQ2HLL_PTV_0_75_GE2J;
+                    } else if (V.pt()<150){
+                        if(jets.empty()) return QQ2HLL_PTV_75_150_0J;
+                        else if (jets.size()==1) return QQ2HLL_PTV_75_150_1J;
+                        else return QQ2HLL_PTV_75_150_GE2J;
+                   } else if (V.pt()<250){
+                        if(jets.empty()) return QQ2HLL_PTV_150_250_0J;
+                        else if (jets.size()==1) return QQ2HLL_PTV_150_250_1J;
+                        else return QQ2HLL_PTV_150_250_GE2J;
+                   } else if (V.pt()<400){
+                        if(jets.empty()) return QQ2HLL_PTV_250_400_0J;
+                        else if (jets.size()==1) return QQ2HLL_PTV_250_400_1J;
+                        else return QQ2HLL_PTV_250_400_GE2J;
+                  } else  {
+                        if(jets.empty()) return QQ2HLL_PTV_GT400_0J;
+                        else if (jets.size()==1) return QQ2HLL_PTV_GT400_1J;
+                        else return QQ2HLL_PTV_GT400_GE2J;
+                  }
+                }
+                // 5. gg->ZH->llH categories
+                else if (prodMode==HTXS::GG2ZH ) {
+                    if (fwdHiggs) return GG2HLL_FWDH;
+                    else if (V.pt()<75){
+                        if(jets.empty())  return GG2HLL_PTV_0_75_0J;
+                        else if(jets.size()==1)  return GG2HLL_PTV_0_75_1J;
+                        else return GG2HLL_PTV_0_75_GE2J;
+                    } else if (V.pt()<150){
+                        if(jets.empty())  return GG2HLL_PTV_75_150_0J;
+                        else if(jets.size()==1)  return GG2HLL_PTV_75_150_1J;
+                        else return GG2HLL_PTV_75_150_GE2J;
+                    } else if (V.pt()<250){
+                        if(jets.empty())  return GG2HLL_PTV_150_250_0J;
+                        else if(jets.size()==1)  return GG2HLL_PTV_150_250_1J;
+                        else return GG2HLL_PTV_150_250_GE2J;
+                    } else if (V.pt()<400){
+                        if(jets.empty())  return GG2HLL_PTV_250_400_0J;
+                        else if(jets.size()==1)  return GG2HLL_PTV_250_400_1J;
+                        else return GG2HLL_PTV_250_400_GE2J;
+                    } else {
+                        if(jets.empty())  return GG2HLL_PTV_GT400_0J;
+                        else if(jets.size()==1)  return GG2HLL_PTV_GT400_1J;
+                        else return GG2HLL_PTV_GT400_GE2J;
+                   }
+                }
+                // 6.ttH,bbH,tH categories
+                else if (prodMode==HTXS::TTH) return Category(TTH_FWDH+ctrlHiggs);
+                else if (prodMode==HTXS::BBH) return Category(BBH_FWDH+ctrlHiggs);
+                else if (prodMode==HTXS::TH ) return Category(TH_FWDH+ctrlHiggs);
+                return UNKNOWN;
+            }
+
 
             /// @name Default Rivet analysis methods and steering methods
             /// @{

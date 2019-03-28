@@ -132,10 +132,11 @@ namespace HTXS {
           QQ2HLL_PTV_GT250 = 405,
           // gg -> ZH
           GG2HLL_FWDH = 500,
-          GG2HLL_PTV_0_75 = 502,
-          GG2HLL_PTV_75_150 = 503,
-          GG2HLL_PTV_GT150_0J = 504,
-          GG2HLL_PTV_GT150_GE1J = 505,
+          GG2HLL_PTV_0_75 = 501,
+          GG2HLL_PTV_75_150 = 502,
+          GG2HLL_PTV_150_250_0J = 503,
+          GG2HLL_PTV_150_250_GE1J = 504,
+          GG2HLL_PTV_GT250 = 505,
           // ttH
           TTH_FWDH = 600, TTH = 601,
           // bbH
@@ -144,6 +145,89 @@ namespace HTXS {
           TH_FWDH = 800, TH = 801
       };
   } // namespace Stage1
+
+  namespace Stage1p1uncert {
+      enum Category {
+          UNKNOWN  = 0,
+          // Gluon fusion -- As stage1
+          GG2H_FWDH = 100,
+          GG2H_VBFTOPO_JET3VETO = 101, GG2H_VBFTOPO_JET3 = 102,
+          GG2H_0J   = 103,
+          GG2H_1J_PTH_0_60 = 104,      GG2H_1J_PTH_60_120 = 105, GG2H_1J_PTH_120_200 = 106,   GG2H_1J_PTH_GT200 = 107,
+          GG2H_GE2J_PTH_0_60 = 108,      GG2H_GE2J_PTH_60_120 = 109, GG2H_GE2J_PTH_120_200 = 110,   GG2H_GE2J_PTH_GT200 = 111,
+          // "VBF"
+          QQ2HQQ_FWDH = 200,
+          QQ2HQQ_PTH_0_200_0J=201, QQ2HQQ_PTH_0_200_1J=202,
+          QQ2HQQ_PTH_0_200_GE2J_MJJ_0_60=203,
+          QQ2HQQ_PTH_0_200_GE2J_MJJ_60_120=204, // VH
+          QQ2HQQ_PTH_0_200_GE2J_MJJ_120_350=205,
+          QQ2HQQ_PTH_0_200_GE2J_MJJ_350_700_PTHJJ_0_25=206,
+          QQ2HQQ_PTH_0_200_GE2J_MJJ_350_700_PTHJJ_GT25=207,
+          QQ2HQQ_PTH_0_200_GE2J_MJJ_GT700_PTHJJ_0_25=208,
+          QQ2HQQ_PTH_0_200_GE2J_MJJ_GT700_PTHJJ_GT25=209,
+          QQ2HQQ_PTH_GT200=210,
+          //QQ2HQQ_VBFTOPO_JET3VETO = 201, QQ2HQQ_VBFTOPO_JET3 = 202,
+          //QQ2HQQ_VH2JET = 203, QQ2HQQ_REST = 204, QQ2HQQ_PTJET1_GT200 = 205,
+          // qq -> WH
+          QQ2HLNU_FWDH = 300,
+          QQ2HLNU_PTV_0_75_0J = 301,
+          QQ2HLNU_PTV_0_75_1J = 302,
+          QQ2HLNU_PTV_0_75_GE2J = 303,
+          QQ2HLNU_PTV_75_150_0J = 304,
+          QQ2HLNU_PTV_75_150_1J = 305,
+          QQ2HLNU_PTV_75_150_GE2J = 306,
+          QQ2HLNU_PTV_150_250_0J = 307,
+          QQ2HLNU_PTV_150_250_1J = 308,
+          QQ2HLNU_PTV_150_250_GE2J = 309,
+          QQ2HLNU_PTV_250_400_0J = 310,
+          QQ2HLNU_PTV_250_400_1J = 311,
+          QQ2HLNU_PTV_250_400_GE2J = 312,
+          QQ2HLNU_PTV_GT400_0J = 313, // possible to add splitting 400 and in number of jets
+          QQ2HLNU_PTV_GT400_1J = 314, // possible to add splitting 400 and in number of jets
+          QQ2HLNU_PTV_GT400_GE2J = 315, // possible to add splitting 400 and in number of jets
+          // qq -> ZH
+          QQ2HLL_FWDH = 400,
+          QQ2HLL_PTV_0_75_0J = 401,
+          QQ2HLL_PTV_0_75_1J = 402,
+          QQ2HLL_PTV_0_75_GE2J = 403,
+          QQ2HLL_PTV_75_150_0J = 404,
+          QQ2HLL_PTV_75_150_1J = 405,
+          QQ2HLL_PTV_75_150_GE2J = 406,
+          QQ2HLL_PTV_150_250_0J = 407,
+          QQ2HLL_PTV_150_250_1J = 408,
+          QQ2HLL_PTV_150_250_GE2J = 409,
+          QQ2HLL_PTV_250_400_0J = 410,
+          QQ2HLL_PTV_250_400_1J = 411,
+          QQ2HLL_PTV_250_400_GE2J = 412,
+          QQ2HLL_PTV_GT400_0J = 413,
+          QQ2HLL_PTV_GT400_1J = 414,
+          QQ2HLL_PTV_GT400_GE2J = 415,
+          // gg -> ZH
+          GG2HLL_FWDH = 500,
+          GG2HLL_PTV_0_75_0J = 501,
+          GG2HLL_PTV_0_75_1J = 502,
+          GG2HLL_PTV_0_75_GE2J = 503,
+          GG2HLL_PTV_75_150_0J = 504,
+          GG2HLL_PTV_75_150_1J = 505,
+          GG2HLL_PTV_75_150_GE2J = 506,
+          GG2HLL_PTV_150_250_0J = 507,
+          GG2HLL_PTV_150_250_1J = 508,
+          GG2HLL_PTV_150_250_GE2J = 509,
+          GG2HLL_PTV_250_400_0J = 510,
+          GG2HLL_PTV_250_400_1J = 511,
+          GG2HLL_PTV_250_400_GE2J = 512,
+          GG2HLL_PTV_GT400_0J = 513,
+          GG2HLL_PTV_GT400_1J = 514,
+          GG2HLL_PTV_GT400_GE2J = 515,
+          // ttH
+          TTH_FWDH = 600, TTH = 601,
+          // bbH
+          BBH_FWDH = 700, BBH = 701,
+          // tH
+          TH_FWDH = 800, TH = 801
+      };
+  } // namespace Stage1
+
 
   
 //#ifdef ROOT_TLorentzVector
@@ -177,12 +261,14 @@ namespace HTXS {
       // Jets are built ignoring Higgs decay products and leptons from V decays
       // jets with pT > 25 GeV and 30 GeV
       TLVs jets25, jets30;
+      double jeteta;
       // Event categorization according to YR4 wrtietup
       // https://cds.cern.ch/record/2138079
       HTXS::Stage0::Category stage0_cat;
       HTXS::Stage1::Category stage1_cat_pTjet25GeV;
       HTXS::Stage1::Category stage1_cat_pTjet30GeV;
       HTXS::Stage1p1::Category stage1p1_cat;
+      HTXS::Stage1p1uncert::Category stage1p1_uncert_cat;
       // Error code :: classification was succesful or some error occured
       HTXS::ErrorCode errorCode;
     };
@@ -202,6 +288,8 @@ namespace HTXS {
       cat.stage1_cat_pTjet25GeV = htxs_cat_rivet.stage1_cat_pTjet25GeV;
       cat.stage1_cat_pTjet30GeV = htxs_cat_rivet.stage1_cat_pTjet30GeV;
       cat.stage1p1_cat = htxs_cat_rivet.stage1p1_cat;
+      cat.stage1p1_uncert_cat = htxs_cat_rivet.stage1p1_uncert_cat;
+      cat.jeteta = htxs_cat_rivet.jeteta;
       return cat;    
     }
     
@@ -287,8 +375,10 @@ namespace Rivet {
     HTXS::Stage1::Category stage1_cat_pTjet30GeV;
     /// Stage-1 HTXS event classifcation, see: https://indico.cern.ch/event/740110/contributions/3216027/attachments/1768478/2872402/2018-12-10_STXS.pdf
     HTXS::Stage1p1::Category stage1p1_cat;
+    HTXS::Stage1p1uncert::Category stage1p1_uncert_cat;
     /// Error code: Whether classification was succesful or some error occured
     HTXS::ErrorCode errorCode;
+    double jeteta;
   };
 } // namespace Rivet
 #endif
