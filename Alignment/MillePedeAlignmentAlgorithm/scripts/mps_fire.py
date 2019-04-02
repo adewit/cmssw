@@ -74,6 +74,7 @@ request_cpus          = {cpus:d}
         job_submit_template += """\
 +BigMemJob            = True
 +AccountingGroup      = "group_u_CMS.e_cms_caf_bigmem"
++Requirements         = (OpSysAndVer =?= "SLCern6")
 
 # automatically remove the job if the submitter has no permissions to run a BigMemJob
 periodic_remove       = !regexp("group_u_CMS.e_cms_caf_bigmem", AccountingGroup) && BigMemJob =?= True
