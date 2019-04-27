@@ -175,6 +175,8 @@ process.seqTrackselRefit = trackselRefit.getSequence(process, '.oO[trackcollecti
                                                     )
 
 .oO[trackhitfiltercommands]Oo.
+
+process.TTRHBuilderAngleAndTemplate.PixelCPE = cms.string('PixelCPEClusterRepair')
 """
 
 
