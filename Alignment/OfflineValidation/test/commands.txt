@@ -1,0 +1,4 @@
+python PVValidationJobSubmitter.py -j TestEta2p7 -D /StreamExpress/Run2017B-TkAlMinBias-Express-v1/ALCARECO -i test_Express_2017B.ini -b 297215 -e 297215 -r -s
+python PVValidationJobSubmitter.py -j TestPublicPlots -D /HLTPhysics/Run2017C-TkAlMinBias-PromptReco-v1/ALCARECO -i test_forPublicPlots.ini -b 299592 -e 299599 -r -s
+python PVValidationJobSubmitter.py -j TestPublicPlotsDesign -D /HLTPhysics/Run2017C-TkAlMinBias-PromptReco-v1/ALCARECO -i test_forPublicPlots_design.ini -b 299592 -e 299599 -r -s
+python PVValidationJobSubmitter.py -j Test2017ReReco -D /HLTPhysics/Run2017B-TkAlMinBias-PromptReco-v1/ALCARECO -i test_EOY_2017.ini -b 297020 -e 298397 -r 
