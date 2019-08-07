@@ -838,7 +838,7 @@ PrimaryVertexValidation::analyze(const edm::Event& iEvent, const edm::EventSetup
 		if(hit->isValid() && ( subid == PixelSubdetector::PixelBarrel ) ) {
 		  int layer = tTopo->pxbLayer(detId);
 		  if(layer==1){
-		    const SiPixelRecHit* prechit = dynamic_cast<const SiPixelRecHit*>(*iHit);//to be used to get the associated cluster and the cluster probability      
+		    const SiPixelRecHit* prechit = dynamic_cast<const SiPixelRecHit*>(hit);//to be used to get the associated cluster and the cluster probability      
 
 		    double clusterProbability= prechit->clusterProbability(0);
 		    if (clusterProbability > 0){
