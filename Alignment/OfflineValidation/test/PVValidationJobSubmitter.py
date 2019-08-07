@@ -24,6 +24,43 @@ import collections
 import multiprocessing
 
 ##############################################
+def write_HTCondor_submit_file(path, name, nruns, proxy_path=None):
+##############################################
+    """Writes 'job.submit' file in `path`.
+    Arguments:
+    - `path`: job directory
+    - `script`: script to be executed
+    - `proxy_path`: path to proxy (only used in case of requested proxy forward)
+    """
+        
+    job_submit_template="""\
+universe              = vanilla
+executable            = {script:s}
+output                = {jobm:s}/{out:s}.out
+error                 = {jobm:s}/{out:s}.err
+log                   = {jobm:s}/{out:s}.log
+transfer_output_files = ""
++JobFlavour           = "{flavour:s}"
++AccountingGroup     = "group_u_CMS.CAF.ALCA"
+queue {njobs:s}
+"""
+    if proxy_path is not None:
+        job_submit_template += """\
++x509userproxy        = "{proxy:s}"
+"""
+        
+    job_submit_file = os.path.join(path, "job_"+name+".submit")
+    with open(job_submit_file, "w") as f:
+        f.write(job_submit_template.format(script = os.path.join(path,name+"_$(ProcId).sh"),
+                                           out  = name+"_$(ProcId)",
+                                           jobm = os.path.abspath(path),
+                                           flavour = "tomorrow",
+                                           njobs = str(nruns),
+                                           proxy = proxy_path))
+
+    return job_submit_file
+
+##############################################
 def getCommandOutput(command):
 ##############################################
     """This function executes `command` and returns it output.
@@ -40,7 +77,7 @@ def getCommandOutput(command):
 ##############################################
 def getFilesForRun(blob):
 ##############################################
-    cmd2 = ' das_client.py --limit=0 --query \'file run='+blob[0]+' dataset='+blob[1]+'\''
+    cmd2 = ' dasgoclient -limit=0 -query \'file run='+blob[0]+' dataset='+blob[1]+'\''
     #cmd2 = 'dasgoclient -query \'file run='+blob[0]+' dataset='+blob[1]+'\''
     q = Popen(cmd2 , shell=True, stdout=PIPE, stderr=PIPE)
     out, err = q.communicate()
@@ -71,7 +108,7 @@ def getLuminosity(minRun,maxRun,isRunBased):
         return myCachedLumi
 
     #output = subprocess.check_output(["/afs/cern.ch/user/m/musich/.local/bin/brilcalc", "lumi", "-b", "STABLE BEAMS", "--normtag=/afs/cern.ch/user/l/lumipro/public/normtag_file/normtag_BRIL.json", "-u", "/pb", "--begin", str(minRun),"--end",str(maxRun),"--output-style","csv"])
-    output = subprocess.check_output(["/afs/cern.ch/user/m/musich/.local/bin/brilcalc", "lumi", "-b", "STABLE BEAMS","-u", "/pb", "--begin", str(minRun),"--end",str(maxRun),"--output-style","csv"])
+    output = subprocess.check_output(["/afs/cern.ch/user/a/adewit/.local/bin/brilcalc", "lumi", "-b", "STABLE BEAMS","-u", "/pb", "--begin", str(minRun),"--end",str(maxRun),"--output-style","csv","-c","web"])
 
     print "INSIDE GET LUMINOSITY"
     print output
@@ -254,11 +291,12 @@ def split(sequence, size):
 class Job:
 #############
 
-    def __init__(self, job_id, job_name, isDA, isMC, applyBOWS, applyEXTRACOND, extraconditions, runboundary, lumilist, intlumi, maxevents, gt, allFromGT, alignmentDB, alignmentTAG, apeDB, apeTAG, bowDB, bowTAG, vertextype, tracktype, applyruncontrol, ptcut, CMSSW_dir ,the_dir):
+    def __init__(self,job_number, job_id, job_name, isDA, isMC, applyBOWS, applyEXTRACOND, extraconditions, runboundary, lumilist, intlumi, maxevents, gt, allFromGT, alignmentDB, alignmentTAG, apeDB, apeTAG, bowDB, bowTAG, vertextype, tracktype, applyruncontrol, ptcut, CMSSW_dir ,the_dir, tasknm):
 ###############################
-        self.job_id=job_id    
-        self.batch_job_id = None 
-        self.job_name=job_name
+        self.job_number        = job_number
+        self.job_id            = job_id    
+        self.batch_job_id      = None 
+        self.job_name          = job_name
         
         self.isDA              = isDA             
         self.isMC              = isMC             
@@ -281,18 +319,22 @@ class Job:
         self.tracktype         = tracktype        
         self.applyruncontrol   = applyruncontrol  
         self.ptcut             = ptcut            
+        self.tasknm            = tasknm
 
         self.the_dir=the_dir
         self.CMSSW_dir=CMSSW_dir
 
         self.output_full_name=self.getOutputBaseName()+"_"+str(self.job_id)
-
+        self.output_number_name=self.getOutputBaseName()+"_"+str(self.job_number)
+        
         self.cfg_dir=None
         self.outputCfgName=None
         
         # LSF variables        
         self.LSF_dir=None
+        self.BASH_dir=None
         self.output_LSF_name=None
+        self.output_BASH_name=None
 
         self.lfn_list=list()      
 
@@ -324,9 +366,13 @@ class Job:
 
         # decide which template according to data/mc
         if self.isMC:
+            #template_cfg_file = os.path.join(self.the_dir,"PVValidation_T_DropBPix1_cfg.py")
             template_cfg_file = os.path.join(self.the_dir,"PVValidation_T_standardRefit_cfg.py")
+            #template_cfg_file = os.path.join(self.the_dir,"PVValidation_T_standardRefit_GenericCPE_cfg.py")
         else:
+            #template_cfg_file = os.path.join(self.the_dir,"PVValidation_T_DropBPix1_cfg.py")
             template_cfg_file = os.path.join(self.the_dir,"PVValidation_T_standardRefit_cfg.py")
+            #template_cfg_file = os.path.join(self.the_dir,"PVValidation_T_standardRefit_GenericCPE_cfg.py")
 
         fin = open(template_cfg_file)
 
@@ -477,6 +523,48 @@ class Job:
 
         fout.close()
 
+
+    def createTheBashFile(self):
+###############################
+
+       # directory to store the BASH to be submitted
+        self.BASH_dir = os.path.join(self.the_dir,"BASH"+self.tasknm)
+        if not os.path.exists(self.BASH_dir):
+            os.makedirs(self.BASH_dir)
+
+        self.output_BASH_name=self.output_number_name+".sh"
+        fout=open(os.path.join(self.BASH_dir,self.output_BASH_name),'w')
+    
+        job_name = self.output_full_name
+
+        log_dir = os.path.join(self.the_dir,"log")
+        if not os.path.exists(log_dir):
+            os.makedirs(log_dir)
+
+        fout.write("#!/bin/bash \n")
+        fout.write("export EOS_MGM_URL=root://eoscms.cern.ch \n")
+        fout.write("JobName="+job_name+" \n")
+        fout.write("echo  \"Job started at \" `date` \n")
+        fout.write("CMSSW_DIR="+os.path.join(self.CMSSW_dir,"src")+" \n")
+        fout.write("OUT_DIR="+self.OUTDIR+" \n")
+        fout.write("LXBATCH_DIR=$PWD \n") 
+        #fout.write("cd "+os.path.join(self.CMSSW_dir,"src")+" \n")
+        fout.write("cd ${CMSSW_DIR} \n")
+        fout.write("eval `scramv1 runtime -sh` \n")
+        fout.write("echo \"batch dir: $LXBATCH_DIR release: $CMSSW_DIR release base: $CMSSW_RELEASE_BASE\" \n") 
+        fout.write("cd $LXBATCH_DIR \n") 
+        fout.write("cp "+os.path.join(self.cfg_dir,self.outputCfgName)+" . \n")
+        fout.write("echo \"cmsRun "+self.outputCfgName+"\" \n")
+        fout.write("cmsRun "+self.outputCfgName+" \n")
+        fout.write("echo \"Content of working dir is \"`ls -lh` \n")
+        #fout.write("less condor_exec.exe \n")
+        fout.write("for RootOutputFile in $(ls *root ); do xrdcp -f ${RootOutputFile} root://eoscms//eos/cms${OUT_DIR}/${RootOutputFile} ; done \n")
+        #fout.write("mv ${JobName}.out ${CMSSW_DIR}/BASH \n")
+        fout.write("echo  \"Job ended at \" `date` \n")
+        fout.write("exit 0 \n")
+
+        fout.close()
+
     def getOutputFileName(self):
 ############################################
         return os.path.join(self.OUTDIR,self.output_full_name+".root")
@@ -521,7 +609,8 @@ def main():
     (opts, args) = parser.parse_args()
 
     now = datetime.datetime.now()
-    t = now.strftime("test_%Y_%m_%d_%H_%M_%S_DATA_PixQualityFlag")
+    #t = now.strftime("test_%Y_%m_%d_%H_%M_%S_DATA_PixQualityFlag")
+    t = "2016UltraLegacy"
     t+=opts.taskname
     
     USER = os.environ.get('USER')
@@ -684,7 +773,7 @@ def main():
     if(doRunBased):
         print ">>>> This is Data!"
         print ">>>> Doing run based selection"
-        cmd = 'das_client.py --limit=0 --query \'run dataset='+opts.data+'\''
+        cmd = 'dasgoclient -limit=0 -query \'run dataset='+opts.data+'\''
         #cmd = 'dasgoclient -query \'run dataset='+opts.data+'\''
         p = Popen(cmd , shell=True, stdout=PIPE, stderr=PIPE)
         out, err = p.communicate()
@@ -732,7 +821,7 @@ def main():
             #if(int(run)%100==0):
             #    print "preparing run",run
             myRuns.append(run)
-            #cmd2 = ' das_client.py --limit=0 --query \'file run='+run+' dataset='+opts.data+'\''
+            #cmd2 = ' das_client --limit=0 --query \'file run='+run+' dataset='+opts.data+'\''
             #q = Popen(cmd2 , shell=True, stdout=PIPE, stderr=PIPE)
             #out2, err2 = q.communicate()
         
@@ -778,7 +867,7 @@ def main():
    
         if (to_bool(isMC[iConf])):
             print ">>>> This is MC!"
-            cmd = 'das_client.py --limit=0 --query \'file dataset='+opts.data+'\''
+            cmd = 'dasgoclient -limit=0 -query \'file dataset='+opts.data+'\''
             #cmd = 'dasgoclient -query \'file dataset='+opts.data+'\''
             s = Popen(cmd , shell=True, stdout=PIPE, stderr=PIPE)
             out,err = s.communicate()
@@ -806,6 +895,10 @@ def main():
         mergedFile = None
 
         print "myRuns =====>",myRuns
+
+        totalJobs=0
+        theBashDir=None
+        theBaseName=None
 
         for jobN,theSrcFiles in enumerate(inputFiles):
             print "JOB:",jobN,"run",myRuns[jobN],theSrcFiles
@@ -850,7 +943,10 @@ def main():
 
             updateDB(((iConf+1)*10)+(jobN+1),runInfo)
 
-            aJob = Job(thejobIndex,
+            totalJobs=totalJobs+1
+
+            aJob = Job(jobN,
+                       thejobIndex,
                        jobName[iConf],isDA[iConf],isMC[iConf],
                        applyBOWS[iConf],applyEXTRACOND[iConf],conditions[iConf],
                        myRuns[jobN], lumilist[iConf], theLumi, maxevents[iConf],
@@ -860,27 +956,28 @@ def main():
                        bowDB[iConf], bowTAG[iConf],
                        vertextype[iConf], tracktype[iConf],
                        applyruncontrol[iConf],
-                       ptcut[iConf],input_CMSSW_BASE,AnalysisStep_dir)
+                       ptcut[iConf],input_CMSSW_BASE,AnalysisStep_dir,opts.taskname)
             
             aJob.setEOSout(eosdir)
             aJob.createTheCfgFile(theSrcFiles)
-            aJob.createTheLSFFile()
+            aJob.createTheBashFile()
 
             output_file_list1.append("xrdcp root://eoscms//eos/cms"+aJob.getOutputFileName()+" /tmp/$USER/"+opts.taskname+" \n")
             if jobN == 0:
+                theBashDir=aJob.BASH_dir
+                theBaseName=aJob.getOutputBaseName()
                 mergedFile = "/tmp/$USER/"+opts.taskname+"/"+aJob.getOutputBaseName()+" "+opts.taskname+".root"
                 output_file_list2.append("/tmp/$USER/"+opts.taskname+"/"+aJob.getOutputBaseName()+opts.taskname+".root ")
-            output_file_list2.append("/tmp/$USER/"+opts.taskname+"/"+os.path.split(aJob.getOutputFileName())[1]+" ")    
-   
-            if opts.submit:
-                aJob.submit()
-                batchJobIds.append(aJob.getBatchjobId())
+            output_file_list2.append("/tmp/$USER/"+opts.taskname+"/"+os.path.split(aJob.getOutputFileName())[1]+" ")       
             del aJob
 
+        job_submit_file = write_HTCondor_submit_file(theBashDir,theBaseName,totalJobs,None)
+
         if opts.submit:
-            print "********************************************************"
-            for theBatchJobId in batchJobIds:
-                print "theBatchJobId is: ",theBatchJobId
+            os.system("chmod u+x "+theBashDir+"/*.sh")
+            submissionCommand = "condor_submit "+job_submit_file
+            submissionOutput = getCommandOutput(submissionCommand)
+            print submissionOutput
 
         fout.write("#!/bin/bash \n")
         fout.write("MAIL=$USER@mail.cern.ch \n")
@@ -907,7 +1004,7 @@ def main():
             lastJobOutput = getCommandOutput(lastJobCommand)
             print lastJobOutput
 
-        fout.close()
+            fout.close()
         del output_file_list1
         
 if __name__ == "__main__":        
