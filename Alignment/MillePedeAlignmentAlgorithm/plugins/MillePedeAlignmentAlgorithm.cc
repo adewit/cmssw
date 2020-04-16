@@ -565,6 +565,8 @@ MillePedeAlignmentAlgorithm::addReferenceTrajectory(const edm::EventSetup &setup
         aGblTrajectory.fit(Chi2, Ndf, lostWeight);
         std::cout << " GblFit: " << Chi2 << ", " << Ndf << ", " << lostWeight << std::endl; */
         // write to MP binary file
+        aGblTrajectory.printTrajectory(1);
+        aGblTrajectory.printPoints(1);
         if (aGblTrajectory.isValid() && aGblTrajectory.getNumPoints() >= theMinNumHits) aGblTrajectory.milleOut(*theBinary);
       }
       if (refTrajPtr->gblInput().size() == 2) {
@@ -574,6 +576,7 @@ MillePedeAlignmentAlgorithm::addReferenceTrajectory(const edm::EventSetup &setup
         if (aGblTrajectory.isValid() && aGblTrajectory.getNumPoints() >= theMinNumHits) aGblTrajectory.milleOut(*theBinary);
       }
     } else {
+      std::cout<<"We should not be here"<<std::endl;
       // to add hits if all fine:
       std::vector<AlignmentParameters*> parVec(refTrajPtr->recHits().size());
       // collect hit statistics, assuming that there are no y-only hits
@@ -773,6 +776,7 @@ int MillePedeAlignmentAlgorithm::addMeasurementData(const edm::EventSetup &setup
                                                     unsigned int iHit,
                                                     AlignmentParameters *&params)
 {
+  std::cout<<"ADD MEASUREMENT DATA"<<std::endl;
   params = nullptr;
   theFloatBufferX.clear();
   theFloatBufferY.clear();
@@ -794,13 +798,21 @@ int MillePedeAlignmentAlgorithm::addMeasurementData(const edm::EventSetup &setup
   if (!this->globalDerivativesHierarchy(eventInfo,
                                         tsos, alidet, alidet, theFloatBufferX, // 2x alidet, sic!
                                         theFloatBufferY, theIntBuffer, params)) {
+    std::cout<<"Oopsie"<<std::endl;
     return -1; // problem
   } else if (theFloatBufferX.empty() && ignoreHitsWithoutGlobalDerivatives_) {
+     std::cout<<"Ignoring hit without global derivative"<<std::endl;
      return 0; // empty for X: no alignable for hit, nor calibrations
   } else {
     // store measurement even if no alignable or calibrations
     // -> measurement used for pede-internal track-fit
-    return this->callMille(refTrajPtr, iHit, theIntBuffer, theFloatBufferX, theFloatBufferY);
+    if(alidet){
+        std::cout<<"There is an alignable for this detId"<<std::endl;
+        return this->callMille(refTrajPtr, iHit, theIntBuffer, theFloatBufferX, theFloatBufferY, 0);
+    } else {
+        std::cout<<"No alignable for this detId"<<std::endl;
+        return this->callMille(refTrajPtr, iHit, theIntBuffer, theFloatBufferX, theFloatBufferY, 1);
+    }
   }
 }
 
@@ -810,6 +822,7 @@ int MillePedeAlignmentAlgorithm::addGlobalData(const edm::EventSetup &setup, con
                                                     const ReferenceTrajectoryBase::ReferenceTrajectoryPtr &refTrajPtr,
                                                     unsigned int iHit, GblPoint &gblPoint)
 {
+  std::cout<<"ADD GLOBAL DATA"<<std::endl;
   AlignmentParameters* params = nullptr;
   std::vector<double> theDoubleBufferX, theDoubleBufferY;
   theDoubleBufferX.clear();
@@ -830,13 +843,18 @@ int MillePedeAlignmentAlgorithm::addGlobalData(const edm::EventSetup &setup, con
                                         theDoubleBufferY, theIntBuffer, params)) {
     return -1; // problem
   }
+  if(!alidet){
+     std::cout<<"This is probably the BS"<<std::endl;
+  }
   //calibration parameters
   int globalLabel;
   std::vector<IntegratedCalibrationBase::ValuesIndexPair> derivs;
   for (auto iCalib = theCalibrations.begin(); iCalib != theCalibrations.end(); ++iCalib) {
+    std::cout<<"Here's some calibrations"<<std::endl;
     // get all derivatives of this calibration // const unsigned int num =
     (*iCalib)->derivatives(derivs, *recHitPtr, tsos, setup, eventInfo);
     for (auto iValuesInd = derivs.begin(); iValuesInd != derivs.end(); ++iValuesInd) {
+      std::cout<<iValuesInd->first.first<<" , "<<iValuesInd->first.second<<std::endl;
       // transfer label and x/y derivatives
       globalLabel = thePedeLabels->calibrationLabel(*iCalib, iValuesInd->second);
       if (globalLabel > 0 && globalLabel <= 2147483647) {
@@ -851,6 +869,7 @@ int MillePedeAlignmentAlgorithm::addGlobalData(const edm::EventSetup &setup, con
     }
   }
   unsigned int numGlobals = theIntBuffer.size();
+  std::cout<<"numGlobals: "<<numGlobals<<std::endl;
   if (numGlobals > 0)
   {
     Eigen::Matrix<double, 2, Eigen::Dynamic> globalDer{2, numGlobals};
@@ -1383,15 +1402,15 @@ int MillePedeAlignmentAlgorithm
 ::callMille(const ReferenceTrajectoryBase::ReferenceTrajectoryPtr &refTrajPtr,
             unsigned int iTrajHit, const std::vector<int> &globalLabels,
             const std::vector<float> &globalDerivativesX,
-            const std::vector<float> &globalDerivativesY)
+            const std::vector<float> &globalDerivativesY, bool printResidual)
 {
   const ConstRecHitPointer aRecHit(refTrajPtr->recHits()[iTrajHit]);
 
   if((aRecHit)->dimension() == 1) {
-    return this->callMille1D(refTrajPtr, iTrajHit, globalLabels, globalDerivativesX);
+    return this->callMille1D(refTrajPtr, iTrajHit, globalLabels, globalDerivativesX, printResidual);
   } else {
     return this->callMille2D(refTrajPtr, iTrajHit, globalLabels,
-                             globalDerivativesX, globalDerivativesY);
+                             globalDerivativesX, globalDerivativesY, printResidual);
   }
 }
 
@@ -1400,7 +1419,7 @@ int MillePedeAlignmentAlgorithm
 int MillePedeAlignmentAlgorithm
 ::callMille1D(const ReferenceTrajectoryBase::ReferenceTrajectoryPtr &refTrajPtr,
               unsigned int iTrajHit, const std::vector<int> &globalLabels,
-              const std::vector<float> &globalDerivativesX)
+              const std::vector<float> &globalDerivativesX, bool printResidual)
 {
   const ConstRecHitPointer aRecHit(refTrajPtr->recHits()[iTrajHit]);
   const unsigned int xIndex = iTrajHit*2; // the even ones are local x
@@ -1416,6 +1435,11 @@ int MillePedeAlignmentAlgorithm
   // residuum and error
   float residX = refTrajPtr->measurements()[xIndex] - refTrajPtr->trajectoryPositions()[xIndex];
   float hitErrX = TMath::Sqrt(refTrajPtr->measurementErrors()[xIndex][xIndex]);
+
+  if(printResidual){
+      std::cout<<"Residual: "<<residX<<std::endl;
+      std::cout<<"hitErrX: "<<hitErrX<<std::endl;
+  }
 
   // number of global derivatives
   const int nGlobal = globalDerivativesX.size();
@@ -1440,7 +1464,7 @@ int MillePedeAlignmentAlgorithm
 ::callMille2D(const ReferenceTrajectoryBase::ReferenceTrajectoryPtr &refTrajPtr,
               unsigned int iTrajHit, const std::vector<int> &globalLabels,
               const std::vector<float> &globalDerivativesx,
-              const std::vector<float> &globalDerivativesy)
+              const std::vector<float> &globalDerivativesy, bool printResidual)
 {
   const ConstRecHitPointer aRecHit(refTrajPtr->recHits()[iTrajHit]);
 
@@ -1514,6 +1538,12 @@ int MillePedeAlignmentAlgorithm
     std::swap(newLocalDerivsX, newLocalDerivsY);
     std::swap(newGlobDerivsX, newGlobDerivsY);
   }
+
+  if(printResidual){
+      std::cout<<"Residual: "<<newResidX<<std::endl;
+      std::cout<<"hitErrX: "<<newHitErrX<<std::endl;
+  }
+
 
   // &(globalLabels[0]) is valid - as long as vector is not empty
   // cf. http://www.parashift.com/c++-faq-lite/containers.html#faq-34.3

@@ -153,8 +153,10 @@ bool ReferenceTrajectory::construct(const TrajectoryStateOnSurface &refTsos,
   theNomField = magField->nominalValue(); // nominal magnetic field in kGauss
   // local storage vector of all rechits (including rechit for beam spot in case it is used)
   TransientTrackingRecHit::ConstRecHitContainer allRecHits;
-
+  std::cout<<"Using beamspot? "<<useBeamSpot_<<std::endl;
   if (useBeamSpot_ && propDir_==alongMomentum) {
+    std::cout<<"Point: "<<beamSpot.x0()<<" "<<beamSpot.y0()<<" "<<beamSpot.z0()<<std::endl;
+    std::cout<<"Beam width X: "<<beamSpot.BeamWidthX()<<" Beam width Y: "<<beamSpot.BeamWidthY()<<std::endl;
     
     GlobalPoint bs(beamSpot.x0(), beamSpot.y0(), beamSpot.z0());
     
@@ -167,6 +169,7 @@ bool ReferenceTrajectory::construct(const TrajectoryStateOnSurface &refTsos,
 
     FreeTrajectoryState pcaFts = tsctbl.trackStateAtPCA();
     GlobalVector bd(beamSpot.dxdz(), beamSpot.dydz(), 1.0);
+    std::cout<<"dxdz "<<beamSpot.dxdz()<<" dydz "<<beamSpot.dydz()<<std::endl;
     
     //propagation FIXME: Should use same propagator everywhere...
     AnalyticalPropagator propagator(magField);
@@ -188,6 +191,8 @@ bool ReferenceTrajectory::construct(const TrajectoryStateOnSurface &refTsos,
 					  bsGeom,
 					  theRefTsos.freeState()->momentum().phi()));
     allRecHits.push_back(bsRecHit);
+    std::cout<<"RecHit pushed back:"<<std::endl;
+    std::cout<<bsRecHit->localPosition().x()<<" "<<bsRecHit->localPosition().y()<<" "<<bsRecHit->localPosition().z()<<std::endl;
 
   }
   

@@ -195,12 +195,12 @@ class MillePedeAlignmentAlgorithm : public AlignmentAlgorithmBase
   int callMille(const ReferenceTrajectoryBase::ReferenceTrajectoryPtr &refTrajPtr,
                 unsigned int iTrajHit, const std::vector<int> &globalLabels,
                 const std::vector<float> &globalDerivativesX,
-                const std::vector<float> &globalDerivativesY);
+                const std::vector<float> &globalDerivativesY, bool printResdiual);
 
   /// calls Mille for 1D hits
   int callMille1D(const ReferenceTrajectoryBase::ReferenceTrajectoryPtr &refTrajPtr,
                   unsigned int iTrajHit, const std::vector<int> &globalLabels,
-                  const std::vector<float> &globalDerivativesX);
+                  const std::vector<float> &globalDerivativesX, bool printResidual);
 
   /// calls Mille for x and possibly y component of hit,
   /// y is skipped for non-real 2D (e.g. SiStripRecHit2D),
@@ -208,7 +208,7 @@ class MillePedeAlignmentAlgorithm : public AlignmentAlgorithmBase
   int callMille2D ( const ReferenceTrajectoryBase::ReferenceTrajectoryPtr &refTrajPtr,
                     unsigned int iTrajHit, const std::vector<int> &globalLabels,
                     const std::vector<float> &globalDerivativesx,
-                    const std::vector<float> &globalDerivativesy);
+                    const std::vector<float> &globalDerivativesy, bool printResidual);
 
   template <typename CovarianceMatrix,
             typename LocalDerivativeMatrix,

@@ -99,8 +99,8 @@ AlignableDetOrUnitPtr AlignableNavigator::alignableFromDetId( const DetId& detid
     return position->second;
   }
    
-  throw cms::Exception("BadLogic") 
-    << "[AlignableNavigator::alignableDetFromDetId] DetId " << detid.rawId() << " not found";
+  //throw cms::Exception("BadLogic") 
+  //  << "[AlignableNavigator::alignableDetFromDetId] DetId " << detid.rawId() << " not found";
 
   return static_cast<AlignableDet*>(nullptr);
 }
