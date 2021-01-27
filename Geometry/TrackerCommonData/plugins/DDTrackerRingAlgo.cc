@@ -73,6 +73,10 @@ private:
   double startAngle;      //Start Phi angle
   double radius;          //Radius
   vector<double> center;  //Phi values
+  vector<double> phiAngles;
+  vector<double> radiusValues;
+  vector<double> zRotAngles;
+  bool hasinfo;
   bool isZPlus;           //Is Z positive ?
   double tiltAngle;       //Module's tilt angle (absolute value)
   bool isFlipped;         //Is the module flipped ?
@@ -98,6 +102,18 @@ void DDTrackerRingAlgo::initialize(const DDNumericArguments& nArgs,
   startAngle = nArgs["StartAngle"];
   radius = nArgs["Radius"];
   center = vArgs["Center"];
+  if(nArgs.find("hasExtraInfo")!=nArgs.end()){
+    hasinfo = bool(nArgs["hasExtraInfo"]);
+  } else hasinfo=false;
+  if(hasinfo){
+    zRotAngles = vArgs["zRotAngleVec"];
+    phiAngles = vArgs["phiAngleVec"];
+    radiusValues = vArgs["radiusVec"];
+  } else {
+    zRotAngles = vector<double>();
+    phiAngles = vector<double>();
+    radiusValues = vector<double>();
+  }
   isZPlus = bool(nArgs["IsZPlus"]);
   tiltAngle = nArgs["TiltAngle"];
   isFlipped = bool(nArgs["IsFlipped"]);
@@ -126,8 +142,8 @@ void DDTrackerRingAlgo::initialize(const DDNumericArguments& nArgs,
 }
 
 void DDTrackerRingAlgo::execute(DDCompactView& cpv) {
-  DDRotation flipRot, tiltRot, phiRot, globalRot;                          // Identity
-  DDRotationMatrix flipMatrix, tiltMatrix, phiRotMatrix, globalRotMatrix;  // Identity matrix
+  DDRotation flipRot, tiltRot, phiOwnAxisRot, phiRot, globalRot;                          // Identity
+  DDRotationMatrix flipMatrix, tiltMatrix, phiOwnAxisRotMatrix, phiRotMatrix, globalRotMatrix;  // Identity matrix
   string rotstr = "RTrackerRingAlgo";
 
   // flipMatrix calculus
@@ -197,8 +213,26 @@ void DDTrackerRingAlgo::execute(DDCompactView& cpv) {
   for (int i = 0; i < n; i++) {
     // phiRotMatrix calculus
     double phix = phi;
+    double phix_ownaxis=0 * CLHEP::deg;
+    if (hasinfo){
+      phix = phiAngles.at(i) * CLHEP::deg;
+      phix_ownaxis=zRotAngles.at(i) * CLHEP::deg;
+      radius = radiusValues.at(i);
+    }
     double phiy = phix + 90. * CLHEP::deg;
+    double phiy_ownaxis = phix_ownaxis + 90. * CLHEP::deg;
     double phideg = phix / CLHEP::deg;
+    double phideg_ownaxis = phix_ownaxis / CLHEP::deg;
+    if(phideg_ownaxis != 0){
+      string phiOwnAxisRotstr = rotstr + "PhiOwnAxis" + to_string(phideg_ownaxis * 10.);
+      phiOwnAxisRot = DDRotation(DDName(phiOwnAxisRotstr, idNameSpace));
+      if(!phiOwnAxisRot) {
+        LogDebug("TrackerGeom") << "DDTrackerRingAlgo test: Creating a new rotation: " << phiOwnAxisRotstr << "\t90., "
+                                << phix_ownaxis / CLHEP::deg << ", 90.," << phiy_ownaxis / CLHEP::deg << ", 0., 0.";
+        phiOwnAxisRot = DDrot(DDName(phiOwnAxisRotstr, idNameSpace), theta, phix_ownaxis, theta, phiy_ownaxis, 0., 0.);
+      }
+      phiOwnAxisRotMatrix = phiOwnAxisRot.matrix();
+    }
     if (phideg != 0) {
       string phiRotstr = rotstr + "Phi" + to_string(phideg * 10.);
       phiRot = DDRotation(DDName(phiRotstr, idNameSpace));
@@ -227,13 +261,14 @@ void DDTrackerRingAlgo::execute(DDCompactView& cpv) {
     if (!globalRot) {
       LogDebug("TrackerGeom") << "DDTrackerRingAlgo test: Creating a new "
                               << "rotation: " << globalRotstr;
-      globalRotMatrix = phiRotMatrix * tiltMatrix;
+      //globalRotMatrix = phiRotMatrix * tiltMatrix;
+      globalRotMatrix = phiOwnAxisRotMatrix * phiRotMatrix * tiltMatrix;
       globalRot = DDrot(DDName(globalRotstr, idNameSpace), make_unique<DDRotationMatrix>(globalRotMatrix));
     }
 
     // translation def
-    double xpos = radius * cos(phi) + center[0];
-    double ypos = radius * sin(phi) + center[1];
+    double xpos = radius * cos(phix) + center[0];
+    double ypos = radius * sin(phix) + center[1];
     double zpos = center[2];
     DDTranslation tran(xpos, ypos, zpos);
 
