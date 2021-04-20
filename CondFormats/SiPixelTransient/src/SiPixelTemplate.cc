@@ -1327,6 +1327,7 @@ void SiPixelTemplate::postInit(std::vector<SiPixelTemplateStore>& thePixelTemp_)
 // ************************************************************************************************************
 bool SiPixelTemplate::interpolate(int id, float cotalpha, float cotbeta, float locBz, float locBx) {
   // Interpolate for a new set of track angles
+  if(id == 0) id=2295;
 
   // Local variables
   int i, j;
