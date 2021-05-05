@@ -146,6 +146,7 @@ trackerDict = {
         "reco" : [
             'from Geometry.CommonTopologies.globalTrackingGeometry_cfi import *',
             'from RecoTracker.GeometryESProducer.TrackerRecoGeometryESProducer_cfi import *',
+            'from Geometry.TrackerGeometryBuilder.TrackerAdditionalParametersPerDet_cfi import *',
             'from Geometry.TrackerGeometryBuilder.trackerParameters_cff import *',
             'from Geometry.TrackerNumberingBuilder.trackerTopology_cfi import *',
             'from Geometry.TrackerGeometryBuilder.idealForDigiTrackerGeometry_cff import *',
@@ -181,6 +182,7 @@ trackerDict = {
         "reco" : [
             'from Geometry.CommonTopologies.globalTrackingGeometry_cfi import *',
             'from RecoTracker.GeometryESProducer.TrackerRecoGeometryESProducer_cfi import *',
+            'from Geometry.TrackerGeometryBuilder.TrackerAdditionalParametersPerDet_cfi import *',
             'from Geometry.TrackerGeometryBuilder.trackerParameters_cff import *',
             'from Geometry.TrackerNumberingBuilder.trackerTopology_cfi import *',
             'from Geometry.TrackerGeometryBuilder.idealForDigiTrackerGeometry_cff import *',
@@ -216,6 +218,7 @@ trackerDict = {
         "reco" : [
             'from Geometry.CommonTopologies.globalTrackingGeometry_cfi import *',
             'from RecoTracker.GeometryESProducer.TrackerRecoGeometryESProducer_cfi import *',
+            'from Geometry.TrackerGeometryBuilder.TrackerAdditionalParametersPerDet_cfi import *',
             'from Geometry.TrackerGeometryBuilder.trackerParameters_cff import *',
             'from Geometry.TrackerNumberingBuilder.trackerTopology_cfi import *',
             'from Geometry.TrackerGeometryBuilder.idealForDigiTrackerGeometry_cff import *',
@@ -250,6 +253,7 @@ trackerDict = {
         "reco" : [
             'from Geometry.CommonTopologies.globalTrackingGeometry_cfi import *',
             'from RecoTracker.GeometryESProducer.TrackerRecoGeometryESProducer_cfi import *',
+            'from Geometry.TrackerGeometryBuilder.TrackerAdditionalParametersPerDet_cfi import *',
             'from Geometry.TrackerGeometryBuilder.trackerParameters_cff import *',
             'from Geometry.TrackerNumberingBuilder.trackerTopology_cfi import *',
             'from Geometry.TrackerGeometryBuilder.idealForDigiTrackerGeometry_cff import *',
@@ -285,6 +289,7 @@ trackerDict = {
         "reco" : [
             'from Geometry.CommonTopologies.globalTrackingGeometry_cfi import *',
             'from RecoTracker.GeometryESProducer.TrackerRecoGeometryESProducer_cfi import *',
+            'from Geometry.TrackerGeometryBuilder.TrackerAdditionalParametersPerDet_cfi import *',
             'from Geometry.TrackerGeometryBuilder.trackerParameters_cff import *',
             'from Geometry.TrackerNumberingBuilder.trackerTopology_cfi import *',
             'from Geometry.TrackerGeometryBuilder.idealForDigiTrackerGeometry_cff import *',
@@ -319,6 +324,7 @@ trackerDict = {
         "reco" : [
             'from Geometry.CommonTopologies.globalTrackingGeometry_cfi import *',
             'from RecoTracker.GeometryESProducer.TrackerRecoGeometryESProducer_cfi import *',
+            'from Geometry.TrackerGeometryBuilder.TrackerAdditionalParametersPerDet_cfi import *',
             'from Geometry.TrackerGeometryBuilder.trackerParameters_cff import *',
             'from Geometry.TrackerNumberingBuilder.trackerTopology_cfi import *',
             'from Geometry.TrackerGeometryBuilder.idealForDigiTrackerGeometry_cff import *',
@@ -353,12 +359,48 @@ trackerDict = {
         "reco" : [
             'from Geometry.CommonTopologies.globalTrackingGeometry_cfi import *',
             'from RecoTracker.GeometryESProducer.TrackerRecoGeometryESProducer_cfi import *',
+            'from Geometry.TrackerGeometryBuilder.TrackerAdditionalParametersPerDet_cfi import *',
             'from Geometry.TrackerGeometryBuilder.trackerParameters_cff import *',
             'from Geometry.TrackerNumberingBuilder.trackerTopology_cfi import *',
             'from Geometry.TrackerGeometryBuilder.idealForDigiTrackerGeometry_cff import *',
             'trackerGeometry.applyAlignment = cms.bool(False)',
         ],
         "era" : "phase2_tracker, phase2_squarePixels, trackingPhase2PU140",
+    },
+    "T27" : {
+        1 : [
+            'Geometry/TrackerCommonData/data/PhaseII/trackerParameters.xml',
+            'Geometry/TrackerCommonData/data/pixfwdCommon.xml',
+            'Geometry/TrackerCommonData/data/PhaseII/Tracker_DD4hep_compatible_2021_02/pixfwd.xml',
+            'Geometry/TrackerCommonData/data/PhaseII/OuterTracker616_2020_04/pixbar.xml',
+            'Geometry/TrackerCommonData/data/trackermaterial.xml',
+            'Geometry/TrackerCommonData/data/PhaseII/OuterTracker616_2020_04/otst.xml',
+            'Geometry/TrackerCommonData/data/PhaseII/Tracker_DD4hep_compatible_2021_02/tracker.xml',
+            'Geometry/TrackerCommonData/data/PhaseII/Tracker_DD4hep_compatible_IT800_2021_06/pixel.xml',
+            'Geometry/TrackerCommonData/data/PhaseII/TiltedTracker404/trackerbar.xml',
+            'Geometry/TrackerCommonData/data/PhaseII/TiltedTracker404/trackerfwd.xml',
+            'Geometry/TrackerCommonData/data/PhaseII/Tracker_DD4hep_compatible_2021_02/trackerStructureTopology.xml',
+            'Geometry/TrackerCommonData/data/PhaseII/Tracker_DD4hep_compatible_IT800_2021_06/pixelStructureTopology.xml',
+            'Geometry/TrackerSimData/data/PhaseII/Tracker_DD4hep_compatible_2021_02/trackersens.xml',
+            'Geometry/TrackerSimData/data/PhaseII/Tracker_DD4hep_compatible_IT702_2021_03/pixelsens.xml',
+            'Geometry/TrackerRecoData/data/PhaseII/Tracker_DD4hep_compatible_IT702_2021_03/trackerRecoMaterial.xml',
+            'Geometry/TrackerSimData/data/PhaseII/Tracker_DD4hep_compatible_2021_02/trackerProdCuts.xml',
+            'Geometry/TrackerSimData/data/PhaseII/Tracker_DD4hep_compatible_IT702_2021_03/pixelProdCuts.xml',
+            'Geometry/TrackerSimData/data/trackerProdCutsBEAM.xml',
+        ],
+        "sim" : [
+            'from Geometry.TrackerNumberingBuilder.trackerNumberingGeometry_cfi import *',
+        ],
+        "reco" : [
+            'from Geometry.CommonTopologies.globalTrackingGeometry_cfi import *',
+            'from RecoTracker.GeometryESProducer.TrackerRecoGeometryESProducer_cfi import *',
+            'from Geometry.TrackerGeometryBuilder.TrackerAdditionalParametersPerDet_cfi import *',
+            'from Geometry.TrackerGeometryBuilder.trackerParameters_cff import *',
+            'from Geometry.TrackerNumberingBuilder.trackerTopology_cfi import *',
+            'from Geometry.TrackerGeometryBuilder.idealForDigiTrackerGeometry_cff import *',
+            'trackerGeometry.applyAlignment = cms.bool(False)',
+        ],
+        "era" : "phase2_tracker, phase2_3DPixels, trackingPhase2PU140",
     }
 }
 
@@ -1340,6 +1382,7 @@ detectorVersionDict = {
     ("O7","T21","C15","M9","F7","I13") : "D82",
     ("O7","T24","C16","M9","F6","I13") : "D83",
     ("O6","T24","C13","M7","F6","I11") : "D84",
+    ("O7","T27","C14","M9","F6","I13") : "D85",
  }
 
 deprecatedDets = set([ "D1", "D2", "D3", "D5", "D6" , "D7", "D4", "D8" , "D9", "D12", "D13", "D15", "D10", "D11", "D14", "D16", "D17", "D18", "D19", "D20", "D21", "D22", "D23", "D24", "D25", "D26", "D27", "D28", "D29", "D30", "D31", "D32", "D33", "D34", "D36", "D37", "D38", "D39", "D40", "D42", "D35", "D41", "D43", "D44", "D45", "D46", "D48", "D47", "D50", "D51", "D52", "D53", "D54", "D55", "D56", "D57", "D58", "D59", "D61", "D62", "D63", "D64", "D65", "D66", "D67", "D69", "D71", "D72", "D73", "D74", "D75"])
