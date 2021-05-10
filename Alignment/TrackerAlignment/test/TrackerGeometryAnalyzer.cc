@@ -6,6 +6,7 @@
 // for creation of TrackerGeometry
 #include "CondFormats/GeometryObjects/interface/PTrackerParameters.h"
 #include "Geometry/Records/interface/PTrackerParametersRcd.h"
+#include "Geometry/Records/interface/PTrackerGeometricDetExtraRcd.h"
 #include "Geometry/Records/interface/IdealGeometryRecord.h"
 #include "Geometry/TrackerNumberingBuilder/interface/GeometricDet.h"
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeomBuilderFromGeometricDet.h"
@@ -76,8 +77,12 @@ void TrackerGeometryAnalyzer ::setTrackerGeometry(const edm::EventSetup& setup) 
   edm::ESHandle<PTrackerParameters> trackerParams;
   setup.get<PTrackerParametersRcd>().get(trackerParams);
 
+  edm::ESHandle<PTrackerGeometricDetExtra> trackerGeometricDetExtra;
+  setup.get<PTrackerGeometricDetExtraRcd>().get(trackerGeometricDetExtra);
+
+
   TrackerGeomBuilderFromGeometricDet trackerGeometryBuilder;
-  trackerGeometry = trackerGeometryBuilder.build(&(*geometricDet), *trackerParams, trackerTopology);
+  trackerGeometry = trackerGeometryBuilder.build(&(*geometricDet), &(*trackerGeometricDetExtra), *trackerParams, trackerTopology);
   alignableObjectId_ = AlignableObjectId{trackerGeometry, nullptr, nullptr, nullptr};
 }
 

@@ -44,6 +44,7 @@
 #include "Geometry/CommonTopologies/interface/GeometryAligner.h"
 #include "CondFormats/GeometryObjects/interface/PTrackerParameters.h"
 #include "Geometry/Records/interface/PTrackerParametersRcd.h"
+#include "Geometry/Records/interface/PTrackerGeometricDetExtraRcd.h"
 #include "Geometry/Records/interface/MuonGeometryRecord.h"
 #include "CondFormats/AlignmentRecord/interface/TrackerAlignmentRcd.h"
 #include "CondFormats/AlignmentRecord/interface/TrackerAlignmentErrorExtendedRcd.h"
@@ -140,8 +141,10 @@ void AlignmentMonitorAsAnalyzer::analyze(const edm::Event& iEvent, const edm::Ev
     iSetup.get<IdealGeometryRecord>().get(theGeometricDet);
     edm::ESHandle<PTrackerParameters> ptp;
     iSetup.get<PTrackerParametersRcd>().get(ptp);
+    edm::ESHandle<PTrackerGeometricDetExtra> ptgde;
+    iSetup.get<PTrackerGeometricDetExtraRcd>().get(ptgde);
     TrackerGeomBuilderFromGeometricDet trackerBuilder;
-    std::shared_ptr<TrackerGeometry> theTracker(trackerBuilder.build(&(*theGeometricDet), *ptp, tTopo));
+    std::shared_ptr<TrackerGeometry> theTracker(trackerBuilder.build(&(*theGeometricDet), &(*ptgde), *ptp, tTopo));
 
     edm::ESHandle<DTGeometry> theMuonDT = iSetup.getHandle(esTokenDT_);
     edm::ESHandle<CSCGeometry> theMuonCSC = iSetup.getHandle(esTokenCSC_);
