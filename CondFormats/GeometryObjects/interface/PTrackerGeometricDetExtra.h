@@ -1,15 +1,15 @@
-#ifndef CondFormats_PGeometricDetExtra_h
-#define CondFormats_PGeometricDetExtra_h
+#ifndef CondFormats_PTrackerGeometricDetExtra_h
+#define CondFormats_PTrackerGeometricDetExtra_h
 
 #include "CondFormats/Serialization/interface/Serializable.h"
 
 #include <vector>
 #include <string>
 
-class PGeometricDetExtra {
+class PTrackerGeometricDetExtra {
 public:
-  PGeometricDetExtra(){};
-  ~PGeometricDetExtra(){};
+  PTrackerGeometricDetExtra(){};
+  ~PTrackerGeometricDetExtra(){};
 
   struct Item {
     int _geographicalId;  // to be converted to DetId

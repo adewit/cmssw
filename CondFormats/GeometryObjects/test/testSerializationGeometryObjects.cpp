@@ -7,11 +7,11 @@ int main() {
   testSerialization<PCaloGeometry>();
   testSerialization<PGeometricDet>();
   //testSerialization<PGeometricDet::Item>(); has uninitialized booleans
-  testSerialization<PGeometricDetExtra>();
-  testSerialization<PGeometricDetExtra::Item>();
+  testSerialization<PTrackerGeometricDetExtra>();
+  testSerialization<PTrackerGeometricDetExtra::Item>();
   testSerialization<RecoIdealGeometry>();
   testSerialization<std::vector<PGeometricDet::Item>>();
-  testSerialization<std::vector<PGeometricDetExtra::Item>>();
+  testSerialization<std::vector<PTrackerGeometricDetExtra::Item>>();
   testSerialization<PTrackerParameters>();
   testSerialization<PTrackerParameters::Item>();
   testSerialization<HcalParameters>();

@@ -63,7 +63,6 @@ public:
         m_isBricked(isBricked) {
 
 	  std::cout << "m_isBricked = " << m_isBricked << std::endl;
-	  std::cout << "nrows = " << nrows << std::endl;
 
     // Calculate the edge of the active sensor with respect to the center,
     // that is simply the half-size.
