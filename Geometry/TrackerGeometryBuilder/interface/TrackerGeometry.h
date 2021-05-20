@@ -15,7 +15,6 @@ class TrackerGeometry final : public TrackingGeometry {
   explicit TrackerGeometry(GeometricDet const* gd = nullptr);
 
   friend class TrackerGeomBuilderFromGeometricDet;
-  friend class TrackerGeomBuilderFromGeometricDetTEST;
 
   void addType(GeomDetType const* p);
   void addDetUnit(GeomDet const* p);

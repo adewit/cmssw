@@ -61,9 +61,6 @@ public:
         m_ROCS_Y(ROCS_Y),              // 8 for SLHC
         m_upgradeGeometry(upgradeGeometry),
         m_isBricked(isBricked) {
-
-	  std::cout << "m_isBricked = " << m_isBricked << std::endl;
-
     // Calculate the edge of the active sensor with respect to the center,
     // that is simply the half-size.
     // Take into account large pixels
