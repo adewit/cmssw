@@ -19,7 +19,6 @@ namespace edm {
 class PTrackerPhase2ITParameters;
 class PTrackerPhase2ITParametersRcd;
 
-
 class TrackerPhase2ITParametersESModule : public edm::ESProducer {
 public:
   TrackerPhase2ITParametersESModule(const edm::ParameterSet&);
@@ -34,12 +33,9 @@ private:
   edm::ESGetToken<GeometricDet, IdealGeometryRecord> geometricDetToken_;
 };
 
-
-
 TrackerPhase2ITParametersESModule::TrackerPhase2ITParametersESModule(const edm::ParameterSet& ps) {
   auto cc = setWhatProduced(this);
-  geometricDetToken_ = cc.consumesFrom<GeometricDet, IdealGeometryRecord>(edm::ESInputTag()); 
-
+  geometricDetToken_ = cc.consumesFrom<GeometricDet, IdealGeometryRecord>(edm::ESInputTag());
 }
 
 void TrackerPhase2ITParametersESModule::fillDescriptions(edm::ConfigurationDescriptions& descriptions) {
@@ -47,8 +43,10 @@ void TrackerPhase2ITParametersESModule::fillDescriptions(edm::ConfigurationDescr
   descriptions.add("TrackerPhase2ITParameters", desc);
 }
 
-TrackerPhase2ITParametersESModule::ReturnType TrackerPhase2ITParametersESModule::produce(const PTrackerPhase2ITParametersRcd& iRecord) {
-  edm::LogInfo("TrackerPhase2ITParameters") << "TrackerPhase2ITParametersESModule::produce(const PTrackerPhase2ITParametersRcd& iRecord)";
+TrackerPhase2ITParametersESModule::ReturnType TrackerPhase2ITParametersESModule::produce(
+    const PTrackerPhase2ITParametersRcd& iRecord) {
+  edm::LogInfo("TrackerPhase2ITParameters")
+      << "TrackerPhase2ITParametersESModule::produce(const PTrackerPhase2ITParametersRcd& iRecord)";
 
   auto ptitp = std::make_unique<PTrackerPhase2ITParameters>();
 
@@ -56,7 +54,6 @@ TrackerPhase2ITParametersESModule::ReturnType TrackerPhase2ITParametersESModule:
 
   std::vector<const GeometricDet*> comp;
   gd->deepComponents(comp);
- 
 
   for (auto& i : comp) {
     ptitp->setGeographicalId(i->geographicalId());
@@ -65,7 +62,5 @@ TrackerPhase2ITParametersESModule::ReturnType TrackerPhase2ITParametersESModule:
 
   return ptitp;
 }
-
-
 
 DEFINE_FWK_EVENTSETUP_MODULE(TrackerPhase2ITParametersESModule);

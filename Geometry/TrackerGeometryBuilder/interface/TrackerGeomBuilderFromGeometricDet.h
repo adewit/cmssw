@@ -17,7 +17,10 @@ class PTrackerParameters;
 
 class TrackerGeomBuilderFromGeometricDet {
 public:
-  TrackerGeometry* build(const GeometricDet* gd, const PTrackerPhase2ITParameters* ptitp, const PTrackerParameters& ptp, const TrackerTopology* tTopo);
+  TrackerGeometry* build(const GeometricDet* gd,
+                         const PTrackerPhase2ITParameters* ptitp,
+                         const PTrackerParameters& ptp,
+                         const TrackerTopology* tTopo);
 
 private:
   void buildPixel(std::vector<const GeometricDet*> const&,

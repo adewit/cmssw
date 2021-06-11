@@ -8,11 +8,11 @@
 
 class PTrackerPhase2ITParameters {
 public:
-  PTrackerPhase2ITParameters(){
-  intParams_.resize(ISIZE, std::vector<int>(0, 0));
-  floatParams_.resize(FSIZE, std::vector<float>(0, 0.));
-  boolParams_.resize(BSIZE, std::vector<bool>(0, false));
-};
+  PTrackerPhase2ITParameters() {
+    intParams_.resize(ISIZE, std::vector<int>(0, 0));
+    floatParams_.resize(FSIZE, std::vector<float>(0, 0.));
+    boolParams_.resize(BSIZE, std::vector<bool>(0, false));
+  };
   ~PTrackerPhase2ITParameters(){};
 
   enum IntParamIndex { GEOGRAPHICAL_ID = 0, ISIZE = 1 };
@@ -23,10 +23,9 @@ public:
   bool getBricked(int theIndex) const;
   std::vector<int> getAllGeographicalIds() const;
   std::vector<bool> getAllBricked() const;
-  
+
   void setGeographicalId(int geographicalId);
   void setBricked(bool isBricked);
-
 
   std::vector<std::vector<int>> intParams_;
   std::vector<std::vector<bool>> boolParams_;

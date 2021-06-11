@@ -80,9 +80,9 @@ void TrackerGeometryAnalyzer ::setTrackerGeometry(const edm::EventSetup& setup) 
   edm::ESHandle<PTrackerPhase2ITParameters> trackerGeometricDetExtra;
   setup.get<PTrackerPhase2ITParametersRcd>().get(trackerGeometricDetExtra);
 
-
   TrackerGeomBuilderFromGeometricDet trackerGeometryBuilder;
-  trackerGeometry = trackerGeometryBuilder.build(&(*geometricDet), &(*trackerGeometricDetExtra), *trackerParams, trackerTopology);
+  trackerGeometry =
+      trackerGeometryBuilder.build(&(*geometricDet), &(*trackerGeometricDetExtra), *trackerParams, trackerTopology);
   alignableObjectId_ = AlignableObjectId{trackerGeometry, nullptr, nullptr, nullptr};
 }
 

@@ -53,7 +53,6 @@
 #include "CondFormats/GeometryObjects/interface/PTrackerParameters.h"
 #include "CondFormats/GeometryObjects/interface/PTrackerPhase2ITParameters.h"
 
-
 #include "DataFormats/TrackerCommon/interface/TrackerTopology.h"
 
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeometry.h"

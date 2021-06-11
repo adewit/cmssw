@@ -32,7 +32,6 @@
 #include "CondFormats/GeometryObjects/interface/PTrackerPhase2ITParameters.h"
 #include "Geometry/Records/interface/PTrackerPhase2ITParametersRcd.h"
 
-
 #include "CondFormats/GeometryObjects/interface/HcalParameters.h"
 #include "Geometry/Records/interface/HcalParametersRcd.h"
 

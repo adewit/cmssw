@@ -89,7 +89,7 @@ std::unique_ptr<TrackerGeometry> MisalignedTrackerESProducer::produce(const Trac
   // Create the tracker geometry from ideal geometry
   const GeometricDet* gD = &iRecord.get(geomDetToken_);
   const PTrackerParameters& ptp = iRecord.get(ptpToken_);
-  const PTrackerPhase2ITParameters *ptitp = &iRecord.get(ptitpToken_);
+  const PTrackerPhase2ITParameters* ptitp = &iRecord.get(ptitpToken_);
 
   TrackerGeomBuilderFromGeometricDet trackerBuilder;
   std::unique_ptr<TrackerGeometry> theTracker(trackerBuilder.build(gD, ptitp, ptp, tTopo));

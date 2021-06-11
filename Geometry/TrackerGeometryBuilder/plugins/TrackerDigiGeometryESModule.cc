@@ -67,7 +67,8 @@ TrackerDigiGeometryESModule::TrackerDigiGeometryESModule(const edm::ParameterSet
     geometricDetToken_ = cc.consumesFrom<GeometricDet, IdealGeometryRecord>(kEmptyTag);
     trackerTopoToken_ = cc.consumesFrom<TrackerTopology, TrackerTopologyRcd>(kEmptyTag);
     trackerParamsToken_ = cc.consumesFrom<PTrackerParameters, PTrackerParametersRcd>(kEmptyTag);
-    trackerGeometricDetExtraToken_ = cc.consumesFrom<PTrackerPhase2ITParameters, PTrackerPhase2ITParametersRcd>(kEmptyTag);
+    trackerGeometricDetExtraToken_ =
+        cc.consumesFrom<PTrackerPhase2ITParameters, PTrackerPhase2ITParametersRcd>(kEmptyTag);
 
     if (applyAlignment_) {
       const edm::ESInputTag kAlignTag{"", alignmentsLabel_};
