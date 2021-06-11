@@ -174,15 +174,12 @@ void TrackerGeomBuilderFromGeometricDet::buildPixel(
   std::vector<int> geographicalIdParams = ptitp->getAllGeographicalIds();  
  
   for (unsigned int i=0; i<geographicalIdParams.size(); i++){  
-    std::cout<<"GEO ID "<<geographicalIdParams.at(i)<<" , "<<brickedParams.at(i)<<std::endl;
     brickedness_map[geographicalIdParams.at(i)] = brickedParams.at(i);
   } 
  
 
   for (auto const& i : gdv) {
     std::string const& detName = i->name();
-    std::cout<<"detName " <<detName<<std::endl;
-    std::cout<<"GEO ID "<<i->geographicalId()<<" , brickedness "<<brickedness_map[i->geographicalId()]<<std::endl;
     if (thePixelDetTypeMap.find(detName) == thePixelDetTypeMap.end()) {
       std::cout<<"Found detName in thePixelDetTypeMap "<<std::endl;
       std::unique_ptr<const Bounds> bounds(i->bounds());
