@@ -10,7 +10,7 @@ trackerGeometry.applyAlignment = cms.bool(False)
 
 #Tracker
 from RecoTracker.GeometryESProducer.TrackerRecoGeometryESProducer_cfi import *
-from Geometry.TrackerGeometryBuilder.TrackerGeometricDetExtra_cfi import *
+from Geometry.TrackerGeometryBuilder.TrackerPhase2ITParameters_cfi import *
 
 #Muon
 from RecoMuon.DetLayers.muonDetLayerGeometry_cfi import *

@@ -6,7 +6,7 @@
 // for creation of TrackerGeometry
 #include "CondFormats/GeometryObjects/interface/PTrackerParameters.h"
 #include "Geometry/Records/interface/PTrackerParametersRcd.h"
-#include "Geometry/Records/interface/PTrackerGeometricDetExtraRcd.h"
+#include "Geometry/Records/interface/PTrackerPhase2ITParametersRcd.h"
 #include "Geometry/Records/interface/IdealGeometryRecord.h"
 #include "Geometry/TrackerNumberingBuilder/interface/GeometricDet.h"
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeomBuilderFromGeometricDet.h"
@@ -77,8 +77,8 @@ void TrackerGeometryAnalyzer ::setTrackerGeometry(const edm::EventSetup& setup) 
   edm::ESHandle<PTrackerParameters> trackerParams;
   setup.get<PTrackerParametersRcd>().get(trackerParams);
 
-  edm::ESHandle<PTrackerGeometricDetExtra> trackerGeometricDetExtra;
-  setup.get<PTrackerGeometricDetExtraRcd>().get(trackerGeometricDetExtra);
+  edm::ESHandle<PTrackerPhase2ITParameters> trackerGeometricDetExtra;
+  setup.get<PTrackerPhase2ITParametersRcd>().get(trackerGeometricDetExtra);
 
 
   TrackerGeomBuilderFromGeometricDet trackerGeometryBuilder;

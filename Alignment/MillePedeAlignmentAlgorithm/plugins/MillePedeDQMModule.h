@@ -39,7 +39,7 @@
 /*** Records for ESWatcher ***/
 #include "Geometry/Records/interface/IdealGeometryRecord.h"
 #include "Geometry/Records/interface/PTrackerParametersRcd.h"
-#include "Geometry/Records/interface/PTrackerGeometricDetExtraRcd.h"
+#include "Geometry/Records/interface/PTrackerPhase2ITParametersRcd.h"
 #include "Geometry/Records/interface/TrackerTopologyRcd.h"
 
 /*** MillePede ***/
@@ -81,7 +81,7 @@ private:  //===================================================================
   const edm::ESGetToken<TrackerTopology, TrackerTopologyRcd> tTopoToken_;
   const edm::ESGetToken<GeometricDet, IdealGeometryRecord> gDetToken_;
   const edm::ESGetToken<PTrackerParameters, PTrackerParametersRcd> ptpToken_;
-  const edm::ESGetToken<PTrackerGeometricDetExtra, PTrackerGeometricDetExtraRcd> ptgdeToken_;
+  const edm::ESGetToken<PTrackerPhase2ITParameters, PTrackerPhase2ITParametersRcd> ptitpToken_;
   const edm::ESGetToken<AlignPCLThresholds, AlignPCLThresholdsRcd> aliThrToken_;
 
   const edm::ParameterSet mpReaderConfig_;

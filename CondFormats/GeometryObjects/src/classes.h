@@ -1,5 +1,5 @@
 #include "CondFormats/GeometryObjects/interface/PGeometricDet.h"
-#include "CondFormats/GeometryObjects/interface/PTrackerGeometricDetExtra.h"
+#include "CondFormats/GeometryObjects/interface/PTrackerPhase2ITParameters.h"
 #include "CondFormats/GeometryObjects/interface/PGeometricTimingDet.h"
 #include "CondFormats/GeometryObjects/interface/PCaloGeometry.h"
 #include "CondFormats/GeometryObjects/interface/RecoIdealGeometry.h"

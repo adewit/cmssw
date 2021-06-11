@@ -73,7 +73,7 @@ public:
                                          << ", BIG_PIX_PER_ROC_Y " << BIG_PIX_PER_ROC_Y << ", ROWS_PER_ROC "
                                          << ROWS_PER_ROC << ", COLS_PER_ROC " << COLS_PER_ROC << ", ROCS_X " << ROCS_X
                                          << ", ROCS_Y " << ROCS_Y << "\nNROWS " << m_ROWS_PER_ROC * m_ROCS_X
-                                         << ", NCOL " << m_COLS_PER_ROC * m_ROCS_Y;
+                                         << ", NCOL " << m_COLS_PER_ROC * m_ROCS_Y << ", isBricked "<<m_isBricked;
   }
 
   // Topology interface, go from Masurement to Local corrdinates

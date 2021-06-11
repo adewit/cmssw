@@ -7,7 +7,7 @@
 #include "Geometry/TrackerGeometryBuilder/interface/PlaneBuilderFromGeometricDet.h"
 #include "Geometry/TrackerNumberingBuilder/interface/GeometricDet.h"
 #include "Geometry/CommonDetUnit/interface/GeomDetType.h"
-#include "CondFormats/GeometryObjects/interface/PTrackerGeometricDetExtra.h"
+#include "CondFormats/GeometryObjects/interface/PTrackerPhase2ITParameters.h"
 
 class TrackerGeometry;
 class TrackerTopology;
@@ -17,11 +17,11 @@ class PTrackerParameters;
 
 class TrackerGeomBuilderFromGeometricDet {
 public:
-  TrackerGeometry* build(const GeometricDet* gd, const PTrackerGeometricDetExtra* ptgdex, const PTrackerParameters& ptp, const TrackerTopology* tTopo);
+  TrackerGeometry* build(const GeometricDet* gd, const PTrackerPhase2ITParameters* ptitp, const PTrackerParameters& ptp, const TrackerTopology* tTopo);
 
 private:
   void buildPixel(std::vector<const GeometricDet*> const&,
-                  const PTrackerGeometricDetExtra* const&,
+                  const PTrackerPhase2ITParameters* const&,
                   TrackerGeometry*,
                   GeomDetType::SubDetector det,
                   bool upgradeGeometry,

@@ -29,7 +29,7 @@ MillePedeDQMModule ::MillePedeDQMModule(const edm::ParameterSet& config)
     : tTopoToken_(esConsumes<edm::Transition::BeginRun>()),
       gDetToken_(esConsumes<edm::Transition::BeginRun>()),
       ptpToken_(esConsumes<edm::Transition::BeginRun>()),
-      ptgdeToken_(esConsumes<edm::Transition::BeginRun>()),
+      ptitpToken_(esConsumes<edm::Transition::BeginRun>()),
       aliThrToken_(esConsumes<edm::Transition::BeginRun>()),
       mpReaderConfig_(config.getParameter<edm::ParameterSet>("MillePedeFileReader")) {
   consumes<AlignmentToken, edm::InProcess>(config.getParameter<edm::InputTag>("alignmentTokenSrc"));
@@ -88,7 +88,7 @@ void MillePedeDQMModule ::beginRun(const edm::Run&, const edm::EventSetup& setup
   const TrackerTopology* const tTopo = &setup.getData(tTopoToken_);
   const GeometricDet* geometricDet = &setup.getData(gDetToken_);
   const PTrackerParameters* ptp = &setup.getData(ptpToken_);
-  const PTrackerGeometricDetExtra* ptgdex = &setup.getData(ptgdeToken_);
+  const PTrackerPhase2ITParameters* ptitp = &setup.getData(ptitpToken_);
 
   // take the thresholds from DB
   const auto& thresholds_ = &setup.getData(aliThrToken_);
@@ -98,7 +98,7 @@ void MillePedeDQMModule ::beginRun(const edm::Run&, const edm::EventSetup& setup
 
   TrackerGeomBuilderFromGeometricDet builder;
 
-  const auto trackerGeometry = builder.build(geometricDet, ptgdex, *ptp, tTopo);
+  const auto trackerGeometry = builder.build(geometricDet, ptitp, *ptp, tTopo);
   tracker_ = std::make_unique<AlignableTracker>(trackerGeometry, tTopo);
 
   const std::string labelerPlugin{"PedeLabeler"};

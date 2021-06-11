@@ -51,7 +51,7 @@
 #include "CondFormats/AlignmentRecord/interface/TrackerAlignmentErrorExtendedRcd.h"
 #include "CondFormats/AlignmentRecord/interface/TrackerSurfaceDeformationRcd.h"
 #include "CondFormats/GeometryObjects/interface/PTrackerParameters.h"
-#include "CondFormats/GeometryObjects/interface/PTrackerGeometricDetExtra.h"
+#include "CondFormats/GeometryObjects/interface/PTrackerPhase2ITParameters.h"
 
 
 #include "DataFormats/TrackerCommon/interface/TrackerTopology.h"
@@ -61,7 +61,7 @@
 #include "Geometry/Records/interface/IdealGeometryRecord.h"
 #include "Geometry/Records/interface/TrackerTopologyRcd.h"
 #include "Geometry/Records/interface/PTrackerParametersRcd.h"
-#include "Geometry/Records/interface/PTrackerGeometricDetExtraRcd.h"
+#include "Geometry/Records/interface/PTrackerPhase2ITParametersRcd.h"
 
 #include "CLHEP/Vector/RotationInterfaces.h"
 
@@ -91,7 +91,7 @@ private:
 
   const edm::ESGetToken<GeometricDet, IdealGeometryRecord> geomDetToken_;
   const edm::ESGetToken<PTrackerParameters, PTrackerParametersRcd> ptpToken_;
-  const edm::ESGetToken<PTrackerGeometricDetExtra, PTrackerGeometricDetExtraRcd> ptgdeToken_;
+  const edm::ESGetToken<PTrackerPhase2ITParameters, PTrackerPhase2ITParametersRcd> ptitpToken_;
   const edm::ESGetToken<TrackerTopology, TrackerTopologyRcd> topoToken_;
   const edm::ESGetToken<Alignments, TrackerAlignmentRcd> aliToken_;
   const edm::ESGetToken<AlignmentErrorsExtended, TrackerAlignmentErrorExtendedRcd> aliErrorToken_;
@@ -113,7 +113,7 @@ private:
 CreateIdealTkAlRecords::CreateIdealTkAlRecords(const edm::ParameterSet& iConfig)
     : geomDetToken_(esConsumes()),
       ptpToken_(esConsumes()),
-      ptgdeToken_(esConsumes()),
+      ptitpToken_(esConsumes()),
       topoToken_(esConsumes()),
       aliToken_(esConsumes()),
       aliErrorToken_(esConsumes()),
@@ -256,12 +256,12 @@ void CreateIdealTkAlRecords::clearAlignmentInfos() {
 std::unique_ptr<TrackerGeometry> CreateIdealTkAlRecords::retrieveGeometry(const edm::EventSetup& iSetup) {
   const GeometricDet* geometricDet = &iSetup.getData(geomDetToken_);
   const PTrackerParameters& ptp = iSetup.getData(ptpToken_);
-  const PTrackerGeometricDetExtra* ptgdex = &iSetup.getData(ptgdeToken_);
+  const PTrackerPhase2ITParameters* ptitp = &iSetup.getData(ptitpToken_);
   const TrackerTopology* tTopo = &iSetup.getData(topoToken_);
 
   TrackerGeomBuilderFromGeometricDet trackerBuilder;
 
-  return std::unique_ptr<TrackerGeometry>{trackerBuilder.build(geometricDet, ptgdex, ptp, tTopo)};
+  return std::unique_ptr<TrackerGeometry>{trackerBuilder.build(geometricDet, ptitp, ptp, tTopo)};
 }
 
 void CreateIdealTkAlRecords::addAlignmentInfo(const GeomDet& det) {

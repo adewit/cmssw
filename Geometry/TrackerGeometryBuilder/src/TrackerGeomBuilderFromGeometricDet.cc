@@ -11,7 +11,7 @@
 #include "Geometry/TrackerGeometryBuilder/interface/PixelTopologyBuilder.h"
 #include "Geometry/TrackerGeometryBuilder/interface/StripTopologyBuilder.h"
 #include "CondFormats/GeometryObjects/interface/PTrackerParameters.h"
-#include "CondFormats/GeometryObjects/interface/PTrackerGeometricDetExtra.h"
+#include "CondFormats/GeometryObjects/interface/PTrackerPhase2ITParameters.h"
 #include "DataFormats/DetId/interface/DetId.h"
 #include "DataFormats/TrackerCommon/interface/TrackerTopology.h"
 #include "DataFormats/GeometrySurface/interface/MediumProperties.h"
@@ -42,7 +42,7 @@ namespace {
 }  // namespace
 
 TrackerGeometry* TrackerGeomBuilderFromGeometricDet::build(const GeometricDet* gd,
-                                                           const PTrackerGeometricDetExtra* ptgdex,
+                                                           const PTrackerPhase2ITParameters* ptitpx,
                                                            const PTrackerParameters& ptp,
                                                            const TrackerTopology* tTopo) {
   if (ptp.vpars.size() != 6) {
@@ -103,25 +103,25 @@ TrackerGeometry* TrackerGeomBuilderFromGeometricDet::build(const GeometricDet* g
   for (unsigned int i = 0; i < 6; ++i) {
     if (gdsubdetmap[i] == GeometricDet::PixelBarrel)
       buildPixel(
-          dets[i], ptgdex, tracker, GeomDetEnumerators::SubDetector::PixelBarrel, false, BIG_PIX_PER_ROC_X, BIG_PIX_PER_ROC_Y);
+          dets[i], ptitpx, tracker, GeomDetEnumerators::SubDetector::PixelBarrel, false, BIG_PIX_PER_ROC_X, BIG_PIX_PER_ROC_Y);
     if (gdsubdetmap[i] == GeometricDet::PixelPhase1Barrel)
-      buildPixel(dets[i], ptgdex, tracker, GeomDetEnumerators::SubDetector::P1PXB, false, BIG_PIX_PER_ROC_X, BIG_PIX_PER_ROC_Y);
+      buildPixel(dets[i], ptitpx, tracker, GeomDetEnumerators::SubDetector::P1PXB, false, BIG_PIX_PER_ROC_X, BIG_PIX_PER_ROC_Y);
     // Phase2 case
     if (gdsubdetmap[i] == GeometricDet::PixelPhase2Barrel)
-      buildPixel(dets[i], ptgdex, tracker, GeomDetEnumerators::SubDetector::P2PXB, true, BIG_PIX_PER_ROC_X, BIG_PIX_PER_ROC_Y);
+      buildPixel(dets[i], ptitpx, tracker, GeomDetEnumerators::SubDetector::P2PXB, true, BIG_PIX_PER_ROC_X, BIG_PIX_PER_ROC_Y);
     //
     if (gdsubdetmap[i] == GeometricDet::PixelEndCap)
       buildPixel(
-          dets[i], ptgdex, tracker, GeomDetEnumerators::SubDetector::PixelEndcap, false, BIG_PIX_PER_ROC_X, BIG_PIX_PER_ROC_Y);
+          dets[i], ptitpx, tracker, GeomDetEnumerators::SubDetector::PixelEndcap, false, BIG_PIX_PER_ROC_X, BIG_PIX_PER_ROC_Y);
     if (gdsubdetmap[i] == GeometricDet::PixelPhase1EndCap)
       buildPixel(
-          dets[i], ptgdex, tracker, GeomDetEnumerators::SubDetector::P1PXEC, false, BIG_PIX_PER_ROC_X, BIG_PIX_PER_ROC_Y);
+          dets[i], ptitpx, tracker, GeomDetEnumerators::SubDetector::P1PXEC, false, BIG_PIX_PER_ROC_X, BIG_PIX_PER_ROC_Y);
     if (gdsubdetmap[i] == GeometricDet::PixelPhase2EndCap)
-      buildPixel(dets[i], ptgdex, tracker, GeomDetEnumerators::SubDetector::P2PXEC, true, BIG_PIX_PER_ROC_X, BIG_PIX_PER_ROC_Y);
+      buildPixel(dets[i], ptitpx, tracker, GeomDetEnumerators::SubDetector::P2PXEC, true, BIG_PIX_PER_ROC_X, BIG_PIX_PER_ROC_Y);
     if (gdsubdetmap[i] == GeometricDet::OTPhase2Barrel)
-      buildPixel(dets[i], ptgdex, tracker, GeomDetEnumerators::SubDetector::P2OTB, true, BIG_PIX_PER_ROC_X, BIG_PIX_PER_ROC_Y);
+      buildPixel(dets[i], ptitpx, tracker, GeomDetEnumerators::SubDetector::P2OTB, true, BIG_PIX_PER_ROC_X, BIG_PIX_PER_ROC_Y);
     if (gdsubdetmap[i] == GeometricDet::OTPhase2EndCap)
-      buildPixel(dets[i], ptgdex, tracker, GeomDetEnumerators::SubDetector::P2OTEC, true, BIG_PIX_PER_ROC_X, BIG_PIX_PER_ROC_Y);
+      buildPixel(dets[i], ptitpx, tracker, GeomDetEnumerators::SubDetector::P2OTEC, true, BIG_PIX_PER_ROC_X, BIG_PIX_PER_ROC_Y);
   }
   //now building Strips
   for (unsigned int i = 0; i < 6; ++i) {
@@ -153,7 +153,7 @@ TrackerGeometry* TrackerGeomBuilderFromGeometricDet::build(const GeometricDet* g
 
 void TrackerGeomBuilderFromGeometricDet::buildPixel(
     std::vector<const GeometricDet*> const& gdv,
-    const PTrackerGeometricDetExtra* const& ptgde,
+    const PTrackerPhase2ITParameters* const& ptitp,
     TrackerGeometry* tracker,
     GeomDetType::SubDetector det,
     bool upgradeGeometry,
@@ -169,15 +169,22 @@ void TrackerGeomBuilderFromGeometricDet::buildPixel(
   tracker->setOffsetDU(GeomDetEnumerators::subDetGeom[det]);
 
   std::map<DetId,bool> brickedness_map;
-  
-  for (auto const& j: ptgde->pgdes_){
-    brickedness_map[j._geographicalId] = j._isBricked;
-  }
-
+ 
+  std::vector<bool> brickedParams = ptitp->getAllBricked();  
+  std::vector<int> geographicalIdParams = ptitp->getAllGeographicalIds();  
+ 
+  for (unsigned int i=0; i<geographicalIdParams.size(); i++){  
+    std::cout<<"GEO ID "<<geographicalIdParams.at(i)<<" , "<<brickedParams.at(i)<<std::endl;
+    brickedness_map[geographicalIdParams.at(i)] = brickedParams.at(i);
+  } 
+ 
 
   for (auto const& i : gdv) {
     std::string const& detName = i->name();
+    std::cout<<"detName " <<detName<<std::endl;
+    std::cout<<"GEO ID "<<i->geographicalId()<<" , brickedness "<<brickedness_map[i->geographicalId()]<<std::endl;
     if (thePixelDetTypeMap.find(detName) == thePixelDetTypeMap.end()) {
+      std::cout<<"Found detName in thePixelDetTypeMap "<<std::endl;
       std::unique_ptr<const Bounds> bounds(i->bounds());
       PixelTopology* t = PixelTopologyBuilder().build(bounds.get(),
                                                       upgradeGeometry,

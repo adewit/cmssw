@@ -15,12 +15,12 @@
 #include "CondFormats/AlignmentRecord/interface/TrackerAlignmentErrorExtendedRcd.h"
 #include "CondFormats/AlignmentRecord/interface/TrackerSurfaceDeformationRcd.h"
 #include "CondFormats/GeometryObjects/interface/PTrackerParameters.h"
-#include "CondFormats/GeometryObjects/interface/PTrackerGeometricDetExtra.h"
+#include "CondFormats/GeometryObjects/interface/PTrackerPhase2ITParameters.h"
 #include "Geometry/CommonTopologies/interface/GeometryAligner.h"
 #include "Geometry/Records/interface/TrackerDigiGeometryRecord.h"
 #include "Geometry/Records/interface/IdealGeometryRecord.h"
 #include "Geometry/Records/interface/PTrackerParametersRcd.h"
-#include "Geometry/Records/interface/PTrackerGeometricDetExtraRcd.h"
+#include "Geometry/Records/interface/PTrackerPhase2ITParametersRcd.h"
 #include "Geometry/Records/interface/TrackerTopologyRcd.h"
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeometry.h"
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeomBuilderFromGeometricDet.h"
@@ -46,7 +46,7 @@ private:
   edm::ESGetToken<GeometricDet, IdealGeometryRecord> geometricDetToken_;
   edm::ESGetToken<TrackerTopology, TrackerTopologyRcd> trackerTopoToken_;
   edm::ESGetToken<PTrackerParameters, PTrackerParametersRcd> trackerParamsToken_;
-  edm::ESGetToken<PTrackerGeometricDetExtra, PTrackerGeometricDetExtraRcd> trackerGeometricDetExtraToken_;
+  edm::ESGetToken<PTrackerPhase2ITParameters, PTrackerPhase2ITParametersRcd> trackerGeometricDetExtraToken_;
 
   edm::ESGetToken<Alignments, GlobalPositionRcd> globalAlignmentToken_;
   edm::ESGetToken<Alignments, TrackerAlignmentRcd> trackerAlignmentToken_;
@@ -67,7 +67,7 @@ TrackerDigiGeometryESModule::TrackerDigiGeometryESModule(const edm::ParameterSet
     geometricDetToken_ = cc.consumesFrom<GeometricDet, IdealGeometryRecord>(kEmptyTag);
     trackerTopoToken_ = cc.consumesFrom<TrackerTopology, TrackerTopologyRcd>(kEmptyTag);
     trackerParamsToken_ = cc.consumesFrom<PTrackerParameters, PTrackerParametersRcd>(kEmptyTag);
-    trackerGeometricDetExtraToken_ = cc.consumesFrom<PTrackerGeometricDetExtra, PTrackerGeometricDetExtraRcd>(kEmptyTag);
+    trackerGeometricDetExtraToken_ = cc.consumesFrom<PTrackerPhase2ITParameters, PTrackerPhase2ITParametersRcd>(kEmptyTag);
 
     if (applyAlignment_) {
       const edm::ESInputTag kAlignTag{"", alignmentsLabel_};
@@ -113,10 +113,10 @@ std::unique_ptr<TrackerGeometry> TrackerDigiGeometryESModule::produce(const Trac
 
   auto const& ptp = iRecord.get(trackerParamsToken_);
 
-  auto const& tgdex = iRecord.get(trackerGeometricDetExtraToken_);
+  auto const& ptitp = iRecord.get(trackerGeometricDetExtraToken_);
 
   TrackerGeomBuilderFromGeometricDet builder;
-  std::unique_ptr<TrackerGeometry> tracker(builder.build(&gD, &tgdex, ptp, &tTopo));
+  std::unique_ptr<TrackerGeometry> tracker(builder.build(&gD, &ptitp, ptp, &tTopo));
 
   if (applyAlignment_) {
     // Since fake is fully working when checking for 'empty', we should get rid of applyAlignment_!

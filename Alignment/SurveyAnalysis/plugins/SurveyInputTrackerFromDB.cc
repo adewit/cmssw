@@ -8,7 +8,7 @@
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeomBuilderFromGeometricDet.h"
 #include "CondFormats/GeometryObjects/interface/PTrackerParameters.h"
 #include "Geometry/Records/interface/PTrackerParametersRcd.h"
-#include "Geometry/Records/interface/PTrackerGeometricDetExtraRcd.h"
+#include "Geometry/Records/interface/PTrackerPhase2ITParametersRcd.h"
 
 // Database
 #include "CondCore/DBOutputService/interface/PoolDBOutputService.h"
@@ -41,9 +41,9 @@ void SurveyInputTrackerFromDB::analyze(const edm::Event&, const edm::EventSetup&
     setup.get<IdealGeometryRecord>().get(geom);
     edm::ESHandle<PTrackerParameters> ptp;
     setup.get<PTrackerParametersRcd>().get(ptp);
-    edm::ESHandle<PTrackerGeometricDetExtra> ptgdex;
-    setup.get<PTrackerGeometricDetExtraRcd>().get(ptgdex);
-    TrackerGeometry* tracker = TrackerGeomBuilderFromGeometricDet().build(&*geom, &*ptgdex, *ptp, tTopo);
+    edm::ESHandle<PTrackerPhase2ITParameters> ptitp;
+    setup.get<PTrackerPhase2ITParametersRcd>().get(ptitp);
+    TrackerGeometry* tracker = TrackerGeomBuilderFromGeometricDet().build(&*geom, &*ptitp, *ptp, tTopo);
 
     addComponent(new AlignableTracker(tracker, tTopo));
     addSurveyInfo(detector());

@@ -47,9 +47,9 @@
 #include "CondFormats/AlignmentRecord/interface/TrackerSurfaceDeformationRcd.h"
 
 #include "CondFormats/GeometryObjects/interface/PTrackerParameters.h"
-#include "CondFormats/GeometryObjects/interface/PTrackerGeometricDetExtra.h"
+#include "CondFormats/GeometryObjects/interface/PTrackerPhase2ITParameters.h"
 #include "Geometry/Records/interface/PTrackerParametersRcd.h"
-#include "Geometry/Records/interface/PTrackerGeometricDetExtraRcd.h"
+#include "Geometry/Records/interface/PTrackerPhase2ITParametersRcd.h"
 
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeometry.h"
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeomBuilderFromGeometricDet.h"
@@ -87,7 +87,7 @@ private:
   const edm::ESGetToken<TrackerTopology, TrackerTopologyRcd> topoToken_;
   const edm::ESGetToken<GeometricDet, IdealGeometryRecord> geomDetToken_;
   const edm::ESGetToken<PTrackerParameters, PTrackerParametersRcd> ptpToken_;
-  const edm::ESGetToken<PTrackerGeometricDetExtra, PTrackerGeometricDetExtraRcd> ptgdeToken_;
+  const edm::ESGetToken<PTrackerPhase2ITParameters, PTrackerPhase2ITParametersRcd> ptitpToken_;
   const edm::ESGetToken<Alignments, TrackerAlignmentRcd> aliToken_;
   const edm::ESGetToken<AlignmentErrorsExtended, TrackerAlignmentErrorExtendedRcd> aliErrorToken_;
   const edm::ESGetToken<AlignmentSurfaceDeformations, TrackerSurfaceDeformationRcd> surfDefToken_;
@@ -135,7 +135,7 @@ TrackerGeometryIntoNtuples::TrackerGeometryIntoNtuples(const edm::ParameterSet& 
     : topoToken_(esConsumes()),
       geomDetToken_(esConsumes()),
       ptpToken_(esConsumes()),
-      ptgdeToken_(esConsumes()),
+      ptitpToken_(esConsumes()),
       aliToken_(esConsumes()),
       aliErrorToken_(esConsumes()),
       surfDefToken_(esConsumes()),
@@ -188,11 +188,11 @@ void TrackerGeometryIntoNtuples::analyze(const edm::Event& iEvent, const edm::Ev
   //accessing the initial geometry
   const GeometricDet* theGeometricDet = &iSetup.getData(geomDetToken_);
   const PTrackerParameters* ptp = &iSetup.getData(ptpToken_);
-  const PTrackerGeometricDetExtra* ptgde = &iSetup.getData(ptgdeToken_);
+  const PTrackerPhase2ITParameters* ptitp = &iSetup.getData(ptitpToken_);
 
   TrackerGeomBuilderFromGeometricDet trackerBuilder;
   //currernt tracker
-  TrackerGeometry* theCurTracker = trackerBuilder.build(theGeometricDet, ptgde, *ptp, tTopo);
+  TrackerGeometry* theCurTracker = trackerBuilder.build(theGeometricDet, ptitp, *ptp, tTopo);
 
   //build the tracker
   const Alignments* alignments = &iSetup.getData(aliToken_);

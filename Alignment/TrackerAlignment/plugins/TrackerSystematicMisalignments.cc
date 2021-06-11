@@ -41,7 +41,7 @@
 TrackerSystematicMisalignments::TrackerSystematicMisalignments(const edm::ParameterSet& cfg)
     : geomDetToken_(esConsumes()),
       ptpToken_(esConsumes()),
-      ptgdeToken_(esConsumes()),
+      ptitpToken_(esConsumes()),
       topoToken_(esConsumes()),
       aliToken_(esConsumes()),
       aliErrorToken_(esConsumes()),
@@ -114,10 +114,10 @@ void TrackerSystematicMisalignments::analyze(const edm::Event& event, const edm:
   //Retrieve tracker topology from geometry
   const GeometricDet* geom = &setup.getData(geomDetToken_);
   const PTrackerParameters& ptp = setup.getData(ptpToken_);
-  const PTrackerGeometricDetExtra* ptgdex = &setup.getData(ptgdeToken_);
+  const PTrackerPhase2ITParameters* ptitp = &setup.getData(ptitpToken_);
   const TrackerTopology* tTopo = &setup.getData(topoToken_);
 
-  TrackerGeometry* tracker = TrackerGeomBuilderFromGeometricDet().build(geom, ptgdex, ptp, tTopo);
+  TrackerGeometry* tracker = TrackerGeomBuilderFromGeometricDet().build(geom, ptitp, ptp, tTopo);
 
   //take geometry from DB or randomly generate geometry
   if (m_fromDBGeom) {

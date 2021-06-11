@@ -6,7 +6,7 @@ from Geometry.CommonTopologies.globalTrackingGeometry_cfi import *
 
 # Tracker
 from RecoTracker.GeometryESProducer.TrackerRecoGeometryESProducer_cfi import *
-from Geometry.TrackerGeometryBuilder.TrackerGeometricDetExtra_cfi import *
+from Geometry.TrackerGeometryBuilder.TrackerPhase2ITParameters_cfi import *
 
 # Alignment
 from Geometry.TrackerGeometryBuilder.idealForDigiTrackerGeometry_cff import *
