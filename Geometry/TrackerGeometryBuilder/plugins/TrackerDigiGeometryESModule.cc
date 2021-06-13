@@ -15,12 +15,12 @@
 #include "CondFormats/AlignmentRecord/interface/TrackerAlignmentErrorExtendedRcd.h"
 #include "CondFormats/AlignmentRecord/interface/TrackerSurfaceDeformationRcd.h"
 #include "CondFormats/GeometryObjects/interface/PTrackerParameters.h"
-#include "CondFormats/GeometryObjects/interface/PTrackerPhase2ITParameters.h"
+#include "CondFormats/GeometryObjects/interface/PTrackerAdditionalParametersPerDet.h"
 #include "Geometry/CommonTopologies/interface/GeometryAligner.h"
 #include "Geometry/Records/interface/TrackerDigiGeometryRecord.h"
 #include "Geometry/Records/interface/IdealGeometryRecord.h"
 #include "Geometry/Records/interface/PTrackerParametersRcd.h"
-#include "Geometry/Records/interface/PTrackerPhase2ITParametersRcd.h"
+#include "Geometry/Records/interface/PTrackerAdditionalParametersPerDetRcd.h"
 #include "Geometry/Records/interface/TrackerTopologyRcd.h"
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeometry.h"
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeomBuilderFromGeometricDet.h"
@@ -46,7 +46,7 @@ private:
   edm::ESGetToken<GeometricDet, IdealGeometryRecord> geometricDetToken_;
   edm::ESGetToken<TrackerTopology, TrackerTopologyRcd> trackerTopoToken_;
   edm::ESGetToken<PTrackerParameters, PTrackerParametersRcd> trackerParamsToken_;
-  edm::ESGetToken<PTrackerPhase2ITParameters, PTrackerPhase2ITParametersRcd> trackerGeometricDetExtraToken_;
+  edm::ESGetToken<PTrackerAdditionalParametersPerDet, PTrackerAdditionalParametersPerDetRcd> trackerGeometricDetExtraToken_;
 
   edm::ESGetToken<Alignments, GlobalPositionRcd> globalAlignmentToken_;
   edm::ESGetToken<Alignments, TrackerAlignmentRcd> trackerAlignmentToken_;
@@ -68,7 +68,7 @@ TrackerDigiGeometryESModule::TrackerDigiGeometryESModule(const edm::ParameterSet
     trackerTopoToken_ = cc.consumesFrom<TrackerTopology, TrackerTopologyRcd>(kEmptyTag);
     trackerParamsToken_ = cc.consumesFrom<PTrackerParameters, PTrackerParametersRcd>(kEmptyTag);
     trackerGeometricDetExtraToken_ =
-        cc.consumesFrom<PTrackerPhase2ITParameters, PTrackerPhase2ITParametersRcd>(kEmptyTag);
+        cc.consumesFrom<PTrackerAdditionalParametersPerDet, PTrackerAdditionalParametersPerDetRcd>(kEmptyTag);
 
     if (applyAlignment_) {
       const edm::ESInputTag kAlignTag{"", alignmentsLabel_};

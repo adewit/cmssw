@@ -47,9 +47,9 @@
 #include "CondFormats/AlignmentRecord/interface/TrackerSurfaceDeformationRcd.h"
 
 #include "CondFormats/GeometryObjects/interface/PTrackerParameters.h"
-#include "CondFormats/GeometryObjects/interface/PTrackerPhase2ITParameters.h"
+#include "CondFormats/GeometryObjects/interface/PTrackerAdditionalParametersPerDet.h"
 #include "Geometry/Records/interface/PTrackerParametersRcd.h"
-#include "Geometry/Records/interface/PTrackerPhase2ITParametersRcd.h"
+#include "Geometry/Records/interface/PTrackerAdditionalParametersPerDetRcd.h"
 
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeometry.h"
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeomBuilderFromGeometricDet.h"
@@ -87,7 +87,7 @@ private:
   const edm::ESGetToken<TrackerTopology, TrackerTopologyRcd> topoToken_;
   const edm::ESGetToken<GeometricDet, IdealGeometryRecord> geomDetToken_;
   const edm::ESGetToken<PTrackerParameters, PTrackerParametersRcd> ptpToken_;
-  const edm::ESGetToken<PTrackerPhase2ITParameters, PTrackerPhase2ITParametersRcd> ptitpToken_;
+  const edm::ESGetToken<PTrackerAdditionalParametersPerDet, PTrackerAdditionalParametersPerDetRcd> ptitpToken_;
   const edm::ESGetToken<Alignments, TrackerAlignmentRcd> aliToken_;
   const edm::ESGetToken<AlignmentErrorsExtended, TrackerAlignmentErrorExtendedRcd> aliErrorToken_;
   const edm::ESGetToken<AlignmentSurfaceDeformations, TrackerSurfaceDeformationRcd> surfDefToken_;
@@ -188,7 +188,7 @@ void TrackerGeometryIntoNtuples::analyze(const edm::Event& iEvent, const edm::Ev
   //accessing the initial geometry
   const GeometricDet* theGeometricDet = &iSetup.getData(geomDetToken_);
   const PTrackerParameters* ptp = &iSetup.getData(ptpToken_);
-  const PTrackerPhase2ITParameters* ptitp = &iSetup.getData(ptitpToken_);
+  const PTrackerAdditionalParametersPerDet* ptitp = &iSetup.getData(ptitpToken_);
 
   TrackerGeomBuilderFromGeometricDet trackerBuilder;
   //currernt tracker

@@ -11,7 +11,7 @@
 #include "Geometry/TrackerGeometryBuilder/interface/PixelTopologyBuilder.h"
 #include "Geometry/TrackerGeometryBuilder/interface/StripTopologyBuilder.h"
 #include "CondFormats/GeometryObjects/interface/PTrackerParameters.h"
-#include "CondFormats/GeometryObjects/interface/PTrackerPhase2ITParameters.h"
+#include "CondFormats/GeometryObjects/interface/PTrackerAdditionalParametersPerDet.h"
 #include "DataFormats/DetId/interface/DetId.h"
 #include "DataFormats/TrackerCommon/interface/TrackerTopology.h"
 #include "DataFormats/GeometrySurface/interface/MediumProperties.h"
@@ -42,7 +42,7 @@ namespace {
 }  // namespace
 
 TrackerGeometry* TrackerGeomBuilderFromGeometricDet::build(const GeometricDet* gd,
-                                                           const PTrackerPhase2ITParameters* ptitpx,
+                                                           const PTrackerAdditionalParametersPerDet* ptitpx,
                                                            const PTrackerParameters& ptp,
                                                            const TrackerTopology* tTopo) {
   if (ptp.vpars.size() != 6) {
@@ -173,7 +173,7 @@ TrackerGeometry* TrackerGeomBuilderFromGeometricDet::build(const GeometricDet* g
 
 void TrackerGeomBuilderFromGeometricDet::buildPixel(
     std::vector<const GeometricDet*> const& gdv,
-    const PTrackerPhase2ITParameters* const& ptitp,
+    const PTrackerAdditionalParametersPerDet* const& ptitp,
     TrackerGeometry* tracker,
     GeomDetType::SubDetector det,
     bool upgradeGeometry,

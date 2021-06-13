@@ -48,7 +48,7 @@ public:
 private:
   edm::ESGetToken<GeometricDet, IdealGeometryRecord> geomDetToken_;
   edm::ESGetToken<PTrackerParameters, PTrackerParametersRcd> ptpToken_;
-  edm::ESGetToken<PTrackerPhase2ITParameters, PTrackerPhase2ITParametersRcd> ptitpToken_;
+  edm::ESGetToken<PTrackerAdditionalParametersPerDet, PTrackerAdditionalParametersPerDetRcd> ptitpToken_;
   edm::ESGetToken<TrackerTopology, TrackerTopologyRcd> topoToken_;
 
   const bool theSaveToDB;  /// whether or not writing to DB
@@ -89,7 +89,7 @@ std::unique_ptr<TrackerGeometry> MisalignedTrackerESProducer::produce(const Trac
   // Create the tracker geometry from ideal geometry
   const GeometricDet* gD = &iRecord.get(geomDetToken_);
   const PTrackerParameters& ptp = iRecord.get(ptpToken_);
-  const PTrackerPhase2ITParameters* ptitp = &iRecord.get(ptitpToken_);
+  const PTrackerAdditionalParametersPerDet* ptitp = &iRecord.get(ptitpToken_);
 
   TrackerGeomBuilderFromGeometricDet trackerBuilder;
   std::unique_ptr<TrackerGeometry> theTracker(trackerBuilder.build(gD, ptitp, ptp, tTopo));

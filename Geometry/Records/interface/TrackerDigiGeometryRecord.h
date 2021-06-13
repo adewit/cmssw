@@ -10,7 +10,7 @@
 #include "Geometry/Records/interface/IdealGeometryRecord.h"
 #include "Geometry/Records/interface/TrackerTopologyRcd.h"
 #include "Geometry/Records/interface/PTrackerParametersRcd.h"
-#include "Geometry/Records/interface/PTrackerPhase2ITParametersRcd.h"
+#include "Geometry/Records/interface/PTrackerAdditionalParametersPerDetRcd.h"
 #include "FWCore/Utilities/interface/mplVector.h"
 
 class TrackerDigiGeometryRecord
@@ -22,6 +22,6 @@ class TrackerDigiGeometryRecord
                                                                              GlobalPositionRcd,
                                                                              TrackerTopologyRcd,
                                                                              PTrackerParametersRcd,
-                                                                             PTrackerPhase2ITParametersRcd> > {};
+                                                                             PTrackerAdditionalParametersPerDetRcd> > {};
 
 #endif /* RECORDS_TRACKERDIGIGEOMETRYRECORD_H */

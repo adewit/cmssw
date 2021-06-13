@@ -116,7 +116,7 @@
 #include "CondFormats/PhysicsToolsObjects/interface/PhysicsTFormulaPayload.h"
 #include "CondFormats/GeometryObjects/interface/PGeometricDet.h"
 #include "CondFormats/GeometryObjects/interface/PTrackerParameters.h"
-#include "CondFormats/GeometryObjects/interface/PTrackerPhase2ITParameters.h"
+#include "CondFormats/GeometryObjects/interface/PTrackerAdditionalParametersPerDet.h"
 #include "CondFormats/GeometryObjects/interface/PHGCalParameters.h"
 #include "CondFormats/RPCObjects/interface/RPCEMap.h"
 #include "CondFormats/RPCObjects/interface/RPCObFebmap.h"

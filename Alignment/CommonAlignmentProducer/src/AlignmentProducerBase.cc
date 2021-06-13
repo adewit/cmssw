@@ -18,6 +18,7 @@
 #include "CondFormats/Alignment/interface/SurveyError.h"
 #include "CondFormats/Alignment/interface/SurveyErrors.h"
 #include "CondFormats/GeometryObjects/interface/PTrackerParameters.h"
+#include "CondFormats/GeometryObjects/interface/PTrackerAdditionalParametersPerDet.h"
 
 #include "FWCore/Framework/interface/ESTransientHandle.h"
 #include "FWCore/Framework/interface/Run.h"
@@ -25,6 +26,7 @@
 
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeomBuilderFromGeometricDet.h"
 #include "Geometry/Records/interface/TrackerTopologyRcd.h"
+#include "Geometry/Records/interface/PTrackerAdditionalParametersPerDetRcd.h"
 
 //------------------------------------------------------------------------------
 AlignmentProducerBase::AlignmentProducerBase(const edm::ParameterSet& config)
@@ -416,10 +418,13 @@ void AlignmentProducerBase::createGeometries(const edm::EventSetup& iSetup, cons
 
     edm::ESHandle<PTrackerParameters> ptp;
     iSetup.get<PTrackerParametersRcd>().get(ptp);
+ 
+    edm::ESHandle<PTrackerAdditionalParametersPerDet> ptitp;
+    iSetup.get<PTrackerAdditionalParametersPerDetRcd>().get(ptitp);
 
     TrackerGeomBuilderFromGeometricDet trackerBuilder;
 
-    trackerGeometry_ = std::shared_ptr<TrackerGeometry>(trackerBuilder.build(&(*geometricDet), *ptp, tTopo));
+    trackerGeometry_ = std::shared_ptr<TrackerGeometry>(trackerBuilder.build(&(*geometricDet), &(*ptitp), *ptp, tTopo));
   }
 
   if (doMuon_) {

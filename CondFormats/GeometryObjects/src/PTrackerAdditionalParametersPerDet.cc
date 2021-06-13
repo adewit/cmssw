@@ -1,4 +1,4 @@
-#include "CondFormats/GeometryObjects/interface/PTrackerPhase2ITParameters.h"
+#include "CondFormats/GeometryObjects/interface/PTrackerAdditionalParametersPerDet.h"
 #include <iostream>
 
 template <typename T>
@@ -24,23 +24,23 @@ const std::vector<T>& getAllParams(const std::vector<std::vector<T>>& params, si
   return params[index_outer];
 }
 
-int PTrackerPhase2ITParameters::getGeographicalId(int theIndex) const {
+int PTrackerAdditionalParametersPerDet::getGeographicalId(int theIndex) const {
   return getThisParam(intParams_, GEOGRAPHICAL_ID, theIndex);
 }
 
-std::vector<int> PTrackerPhase2ITParameters::getAllGeographicalIds() const {
+std::vector<int> PTrackerAdditionalParametersPerDet::getAllGeographicalIds() const {
   return getAllParams(intParams_, GEOGRAPHICAL_ID);
 }
 
-bool PTrackerPhase2ITParameters::getBricked(int theIndex) const {
+bool PTrackerAdditionalParametersPerDet::getBricked(int theIndex) const {
   return getThisParam(boolParams_, BRICKEDNESS, theIndex);
 }
 
-std::vector<bool> PTrackerPhase2ITParameters::getAllBricked() const { return getAllParams(boolParams_, BRICKEDNESS); }
+std::vector<bool> PTrackerAdditionalParametersPerDet::getAllBricked() const { return getAllParams(boolParams_, BRICKEDNESS); }
 
-void PTrackerPhase2ITParameters::setGeographicalId(int geographicalId) {
+void PTrackerAdditionalParametersPerDet::setGeographicalId(int geographicalId) {
   setThisParam(intParams_, GEOGRAPHICAL_ID, geographicalId);
 }
 
-void PTrackerPhase2ITParameters::setBricked(bool isBricked) { setThisParam(boolParams_, BRICKEDNESS, isBricked); }
+void PTrackerAdditionalParametersPerDet::setBricked(bool isBricked) { setThisParam(boolParams_, BRICKEDNESS, isBricked); }
 //This doesn't work properly because intParams_ and boolParams_ are vectors of vecotrs - the outer vector should be the number of parameters and the inner vector the number of geometricDets.

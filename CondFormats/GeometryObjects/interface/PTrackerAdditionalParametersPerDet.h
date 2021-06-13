@@ -1,19 +1,19 @@
-#ifndef CondFormats_PTrackerPhase2ITParameters_h
-#define CondFormats_PTrackerPhase2ITParameters_h
+#ifndef CondFormats_PTrackerAdditionalParametersPerDet_h
+#define CondFormats_PTrackerAdditionalParametersPerDet_h
 
 #include "CondFormats/Serialization/interface/Serializable.h"
 
 #include <vector>
 #include <string>
 
-class PTrackerPhase2ITParameters {
+class PTrackerAdditionalParametersPerDet {
 public:
-  PTrackerPhase2ITParameters() {
+  PTrackerAdditionalParametersPerDet() {
     intParams_.resize(ISIZE, std::vector<int>(0, 0));
     floatParams_.resize(FSIZE, std::vector<float>(0, 0.));
     boolParams_.resize(BSIZE, std::vector<bool>(0, false));
   };
-  ~PTrackerPhase2ITParameters(){};
+  ~PTrackerAdditionalParametersPerDet(){};
 
   enum IntParamIndex { GEOGRAPHICAL_ID = 0, ISIZE = 1 };
   enum BoolParamIndex { BRICKEDNESS = 0, BSIZE = 1 };

@@ -44,7 +44,7 @@
 #include "Geometry/CommonTopologies/interface/GeometryAligner.h"
 #include "CondFormats/GeometryObjects/interface/PTrackerParameters.h"
 #include "Geometry/Records/interface/PTrackerParametersRcd.h"
-#include "Geometry/Records/interface/PTrackerPhase2ITParametersRcd.h"
+#include "Geometry/Records/interface/PTrackerAdditionalParametersPerDetRcd.h"
 #include "Geometry/Records/interface/MuonGeometryRecord.h"
 #include "CondFormats/AlignmentRecord/interface/TrackerAlignmentRcd.h"
 #include "CondFormats/AlignmentRecord/interface/TrackerAlignmentErrorExtendedRcd.h"
@@ -141,8 +141,8 @@ void AlignmentMonitorAsAnalyzer::analyze(const edm::Event& iEvent, const edm::Ev
     iSetup.get<IdealGeometryRecord>().get(theGeometricDet);
     edm::ESHandle<PTrackerParameters> ptp;
     iSetup.get<PTrackerParametersRcd>().get(ptp);
-    edm::ESHandle<PTrackerPhase2ITParameters> ptitp;
-    iSetup.get<PTrackerPhase2ITParametersRcd>().get(ptitp);
+    edm::ESHandle<PTrackerAdditionalParametersPerDet> ptitp;
+    iSetup.get<PTrackerAdditionalParametersPerDetRcd>().get(ptitp);
     TrackerGeomBuilderFromGeometricDet trackerBuilder;
     std::shared_ptr<TrackerGeometry> theTracker(trackerBuilder.build(&(*theGeometricDet), &(*ptitp), *ptp, tTopo));
 

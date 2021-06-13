@@ -4,28 +4,28 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "FWCore/ServiceRegistry/interface/Service.h"
 #include "CondCore/DBOutputService/interface/PoolDBOutputService.h"
-#include "CondFormats/GeometryObjects/interface/PTrackerPhase2ITParameters.h"
+#include "CondFormats/GeometryObjects/interface/PTrackerAdditionalParametersPerDet.h"
 #include "DetectorDescription/DDCMS/interface/DDCompactView.h"
 #include "DetectorDescription/Core/interface/DDCompactView.h"
 #include "Geometry/Records/interface/IdealGeometryRecord.h"
 #include "Geometry/TrackerNumberingBuilder/interface/GeometricDet.h"
 
-class PTrackerPhase2ITParametersDBBuilder : public edm::one::EDAnalyzer<edm::one::WatchRuns> {
+class PTrackerAdditionalParametersPerDetDBBuilder : public edm::one::EDAnalyzer<edm::one::WatchRuns> {
 public:
-  PTrackerPhase2ITParametersDBBuilder(const edm::ParameterSet&);
+  PTrackerAdditionalParametersPerDetDBBuilder(const edm::ParameterSet&);
 
   void beginRun(edm::Run const& iEvent, edm::EventSetup const&) override;
   void analyze(edm::Event const& iEvent, edm::EventSetup const&) override {}
   void endRun(edm::Run const& iEvent, edm::EventSetup const&) override {}
 };
 
-PTrackerPhase2ITParametersDBBuilder::PTrackerPhase2ITParametersDBBuilder(const edm::ParameterSet& iConfig) {}
+PTrackerAdditionalParametersPerDetDBBuilder::PTrackerAdditionalParametersPerDetDBBuilder(const edm::ParameterSet& iConfig) {}
 
-void PTrackerPhase2ITParametersDBBuilder::beginRun(const edm::Run&, edm::EventSetup const& es) {
-  PTrackerPhase2ITParameters* ptitp = new PTrackerPhase2ITParameters;
+void PTrackerAdditionalParametersPerDetDBBuilder::beginRun(const edm::Run&, edm::EventSetup const& es) {
+  PTrackerAdditionalParametersPerDet* ptitp = new PTrackerAdditionalParametersPerDet;
   edm::Service<cond::service::PoolDBOutputService> mydbservice;
   if (!mydbservice.isAvailable()) {
-    edm::LogError("PTrackerPhase2ITParametersDBBuilder") << "PoolDBOutputService unavailable";
+    edm::LogError("PTrackerAdditionalParametersPerDetDBBuilder") << "PoolDBOutputService unavailable";
     return;
   }
 
@@ -40,13 +40,13 @@ void PTrackerPhase2ITParametersDBBuilder::beginRun(const edm::Run&, edm::EventSe
     ptitp->setBricked(i->isBricked());
   }
 
-  if (mydbservice->isNewTagRequest("PTrackerPhase2ITParametersRcd")) {
-    mydbservice->createNewIOV<PTrackerPhase2ITParameters>(
-        ptitp, mydbservice->beginOfTime(), mydbservice->endOfTime(), "PTrackerPhase2ITParametersRcd");
+  if (mydbservice->isNewTagRequest("PTrackerAdditionalParametersPerDetRcd")) {
+    mydbservice->createNewIOV<PTrackerAdditionalParametersPerDet>(
+        ptitp, mydbservice->beginOfTime(), mydbservice->endOfTime(), "PTrackerAdditionalParametersPerDetRcd");
   } else {
-    edm::LogError("PTrackerPhase2ITParametersDBBuilder")
-        << "PTrackerPhase2ITParameters and PTrackerPhase2ITParametersRcd Tag already present";
+    edm::LogError("PTrackerAdditionalParametersPerDetDBBuilder")
+        << "PTrackerAdditionalParametersPerDet and PTrackerAdditionalParametersPerDetRcd Tag already present";
   }
 }
 
-DEFINE_FWK_MODULE(PTrackerPhase2ITParametersDBBuilder);
+DEFINE_FWK_MODULE(PTrackerAdditionalParametersPerDetDBBuilder);

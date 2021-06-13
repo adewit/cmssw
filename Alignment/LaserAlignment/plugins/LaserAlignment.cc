@@ -11,9 +11,9 @@
 #include "FWCore/Framework/interface/Run.h"
 #include "Geometry/Records/interface/TrackerTopologyRcd.h"
 #include "CondFormats/GeometryObjects/interface/PTrackerParameters.h"
-#include "CondFormats/GeometryObjects/interface/PTrackerPhase2ITParameters.h"
+#include "CondFormats/GeometryObjects/interface/PTrackerAdditionalParametersPerDet.h"
 #include "Geometry/Records/interface/PTrackerParametersRcd.h"
-#include "Geometry/Records/interface/PTrackerPhase2ITParametersRcd.h"
+#include "Geometry/Records/interface/PTrackerAdditionalParametersPerDetRcd.h"
 
 ///
 ///
@@ -301,7 +301,7 @@ void LaserAlignment::produce(edm::Event& theEvent, edm::EventSetup const& theSet
       // the AlignableTracker object is initialized with the ideal geometry
       const GeometricDet* theGeometricDet = &theSetup.getData(geomDetToken_);
       const PTrackerParameters* ptp = &theSetup.getData(ptpToken_);
-      const PTrackerPhase2ITParameters* ptitp = &theSetup.getData(ptitpToken_);
+      const PTrackerAdditionalParametersPerDet* ptitp = &theSetup.getData(ptitpToken_);
 
       TrackerGeomBuilderFromGeometricDet trackerBuilder;
       TrackerGeometry* theRefTracker = trackerBuilder.build(&*theGeometricDet, &*ptitp, *ptp, tTopo);

@@ -114,7 +114,7 @@ void TrackerSystematicMisalignments::analyze(const edm::Event& event, const edm:
   //Retrieve tracker topology from geometry
   const GeometricDet* geom = &setup.getData(geomDetToken_);
   const PTrackerParameters& ptp = setup.getData(ptpToken_);
-  const PTrackerPhase2ITParameters* ptitp = &setup.getData(ptitpToken_);
+  const PTrackerAdditionalParametersPerDet* ptitp = &setup.getData(ptitpToken_);
   const TrackerTopology* tTopo = &setup.getData(topoToken_);
 
   TrackerGeometry* tracker = TrackerGeomBuilderFromGeometricDet().build(geom, ptitp, ptp, tTopo);

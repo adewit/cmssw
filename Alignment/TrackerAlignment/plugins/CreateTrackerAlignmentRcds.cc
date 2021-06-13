@@ -51,7 +51,7 @@
 #include "CondFormats/AlignmentRecord/interface/TrackerAlignmentErrorExtendedRcd.h"
 #include "CondFormats/AlignmentRecord/interface/TrackerSurfaceDeformationRcd.h"
 #include "CondFormats/GeometryObjects/interface/PTrackerParameters.h"
-#include "CondFormats/GeometryObjects/interface/PTrackerPhase2ITParameters.h"
+#include "CondFormats/GeometryObjects/interface/PTrackerAdditionalParametersPerDet.h"
 
 #include "DataFormats/TrackerCommon/interface/TrackerTopology.h"
 
@@ -60,7 +60,7 @@
 #include "Geometry/Records/interface/IdealGeometryRecord.h"
 #include "Geometry/Records/interface/TrackerTopologyRcd.h"
 #include "Geometry/Records/interface/PTrackerParametersRcd.h"
-#include "Geometry/Records/interface/PTrackerPhase2ITParametersRcd.h"
+#include "Geometry/Records/interface/PTrackerAdditionalParametersPerDetRcd.h"
 
 #include "CLHEP/Vector/RotationInterfaces.h"
 
@@ -90,7 +90,7 @@ private:
 
   const edm::ESGetToken<GeometricDet, IdealGeometryRecord> geomDetToken_;
   const edm::ESGetToken<PTrackerParameters, PTrackerParametersRcd> ptpToken_;
-  const edm::ESGetToken<PTrackerPhase2ITParameters, PTrackerPhase2ITParametersRcd> ptitpToken_;
+  const edm::ESGetToken<PTrackerAdditionalParametersPerDet, PTrackerAdditionalParametersPerDetRcd> ptitpToken_;
   const edm::ESGetToken<TrackerTopology, TrackerTopologyRcd> topoToken_;
   const edm::ESGetToken<Alignments, TrackerAlignmentRcd> aliToken_;
   const edm::ESGetToken<AlignmentErrorsExtended, TrackerAlignmentErrorExtendedRcd> aliErrorToken_;
@@ -255,7 +255,7 @@ void CreateIdealTkAlRecords::clearAlignmentInfos() {
 std::unique_ptr<TrackerGeometry> CreateIdealTkAlRecords::retrieveGeometry(const edm::EventSetup& iSetup) {
   const GeometricDet* geometricDet = &iSetup.getData(geomDetToken_);
   const PTrackerParameters& ptp = iSetup.getData(ptpToken_);
-  const PTrackerPhase2ITParameters* ptitp = &iSetup.getData(ptitpToken_);
+  const PTrackerAdditionalParametersPerDet* ptitp = &iSetup.getData(ptitpToken_);
   const TrackerTopology* tTopo = &iSetup.getData(topoToken_);
 
   TrackerGeomBuilderFromGeometricDet trackerBuilder;

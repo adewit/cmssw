@@ -368,7 +368,7 @@ void TrackerGeometryCompare::createROOTGeometry(const edm::EventSetup& iSetup) {
 
   const GeometricDet* theGeometricDet = &iSetup.getData(geomDetToken_);
   const PTrackerParameters* ptp = &iSetup.getData(ptpToken_);
-  const PTrackerPhase2ITParameters* ptitp = &iSetup.getData(ptitpToken_);
+  const PTrackerAdditionalParametersPerDet* ptitp = &iSetup.getData(ptitpToken_);
   TrackerGeomBuilderFromGeometricDet trackerBuilder;
 
   //reference tracker

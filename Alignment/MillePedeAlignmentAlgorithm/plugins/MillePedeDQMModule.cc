@@ -88,7 +88,7 @@ void MillePedeDQMModule ::beginRun(const edm::Run&, const edm::EventSetup& setup
   const TrackerTopology* const tTopo = &setup.getData(tTopoToken_);
   const GeometricDet* geometricDet = &setup.getData(gDetToken_);
   const PTrackerParameters* ptp = &setup.getData(ptpToken_);
-  const PTrackerPhase2ITParameters* ptitp = &setup.getData(ptitpToken_);
+  const PTrackerAdditionalParametersPerDet* ptitp = &setup.getData(ptitpToken_);
 
   // take the thresholds from DB
   const auto& thresholds_ = &setup.getData(aliThrToken_);
