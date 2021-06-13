@@ -52,6 +52,8 @@ upgradeKeys[2026] = [
     '2026D82PU',
     '2026D83',
     '2026D83PU',
+    '2026D84',
+    '2026D84PU',
 ]
 
 # pre-generation of WF numbers
@@ -1180,6 +1182,14 @@ upgradeProperties[2026] = {
         'Era' : 'Phase2C11I13M9',
         'ScenToRun' : ['GenSimHLBeamSpot','DigiTrigger','RecoGlobal', 'HARVESTGlobal'],
     },
+    '2026D84' : {
+        'Geom' : 'Extended2026D84', # N.B.: Geometry with 3D pixels in the Inner Tracker L1.
+        'HLTmenu': '@fake2',
+        'GT' : 'auto:phase2_realistic_T27',
+        'Era' : 'Phase2C11I13T25M9', # customized for 3D pixels and Muon M9
+        'ScenToRun' : ['GenSimHLBeamSpot','DigiTrigger'],
+    },
+
 }
 
 # standard PU sequences
