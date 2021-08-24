@@ -76,7 +76,6 @@ private:
   vector<double> phiAngles;
   vector<double> radiusValues;
   vector<double> yawAngles;
-  bool hasinfo;
   bool isZPlus;           //Is Z positive ?
   double tiltAngle;       //Module's tilt angle (absolute value)
   bool isFlipped;         //Is the module flipped ?
@@ -102,18 +101,9 @@ void DDTrackerIrregularRingAlgo::initialize(const DDNumericArguments& nArgs,
   startAngle = nArgs["StartAngle"];
   radius = nArgs["Radius"];
   center = vArgs["Center"];
-  if(nArgs.find("hasExtraInfo")!=nArgs.end()){
-    hasinfo = bool(nArgs["hasExtraInfo"]);
-  } else hasinfo=false;
-  if(hasinfo){
-    yawAngles = vArgs["yawAngleValues"];
-    phiAngles = vArgs["phiAngleValues"];
-    radiusValues = vArgs["radiusValues"];
-  } else {
-    yawAngles = vector<double>();
-    phiAngles = vector<double>();
-    radiusValues = vector<double>();
-  }
+  yawAngles = vArgs["yawAngleValues"];
+  phiAngles = vArgs["phiAngleValues"];
+  radiusValues = vArgs["radiusValues"];
   isZPlus = bool(nArgs["IsZPlus"]);
   tiltAngle = nArgs["TiltAngle"];
   isFlipped = bool(nArgs["IsFlipped"]);
@@ -145,6 +135,7 @@ void DDTrackerIrregularRingAlgo::execute(DDCompactView& cpv) {
   DDRotation flipRot, tiltRot, phiOwnAxisRot, phiRot, globalRot;                          // Identity
   DDRotationMatrix flipMatrix, tiltMatrix, phiOwnAxisRotMatrix, phiRotMatrix, globalRotMatrix;  // Identity matrix
   string rotstr = "RTrackerRingAlgo";
+  std::cout<<"I'M IN DDTRackerIRREGULARRINGALGO"<<std::endl;
 
   // flipMatrix calculus
   if (isFlipped) {
@@ -215,13 +206,10 @@ void DDTrackerIrregularRingAlgo::execute(DDCompactView& cpv) {
     // phiRotMatrix calculus
     double phix = phi;
     double phix_ownaxis=0 * CLHEP::deg;
-    if (hasinfo){
-      std::cout<<"YUHUUUUU"<<std::endl;
-      phix = phiAngles.at(i) * CLHEP::deg;
-      phix_ownaxis=yawAngles.at(i) * CLHEP::deg;
-      radius = radiusValues.at(i);
-      std::cout<<" phi "<<phix/CLHEP::deg << " yawAngle "<< phix_ownaxis/CLHEP::deg << " radius "<<radius<< " z "<<center[2]<<std::endl;;
-    }
+    phix = phiAngles.at(i) * CLHEP::deg;
+    phix_ownaxis=yawAngles.at(i) * CLHEP::deg;
+    radius = radiusValues.at(i);
+    // std::cout<<" phi "<<phix/CLHEP::deg << " yawAngle "<< phix_ownaxis/CLHEP::deg << " radius "<<radius<< " z "<<center[2]<<std::endl;;
     double phiy = phix + 90. * CLHEP::deg;
     double phiy_ownaxis = phix_ownaxis + 90. * CLHEP::deg;
     double phideg = phix / CLHEP::deg;

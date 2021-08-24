@@ -1,4 +1,4 @@
-#include "Geometry/TrackerNumberingBuilder/plugins/CmsTrackerPixelPhase2EndcapBuilder.h"
+#include "Geometry/TrackerNumberingBuilder/plugins/CmsTrackerPixelPhase2NearEndcapBuilder.h"
 #include "Geometry/TrackerNumberingBuilder/interface/GeometricDet.h"
 #include "Geometry/TrackerNumberingBuilder/plugins/ExtractStringFromDDD.h"
 #include "DataFormats/DetId/interface/DetId.h"
@@ -14,7 +14,7 @@
 #include <bitset>
 
 template <class FilteredView>
-void CmsTrackerPixelPhase2EndcapBuilder<FilteredView>::buildComponent(FilteredView& fv,
+void CmsTrackerPixelPhase2NearEndcapBuilder<FilteredView>::buildComponent(FilteredView& fv,
                                                                       GeometricDet* g,
                                                                       const std::string& s) {
   CmsTrackerPhase2TPDiskBuilder<FilteredView> theCmsTrackerPhase2DiskBuilder;
@@ -44,7 +44,7 @@ void CmsTrackerPixelPhase2EndcapBuilder<FilteredView>::buildComponent(FilteredVi
       break;
 
     default:
-      edm::LogError("CmsTrackerPixelPhase2EndcapBuilder")
+      edm::LogError("CmsTrackerPixelPhase2NearEndcapBuilder")
           << " ERROR - I was expecting a Disk... I got a " << ExtractStringFromDDD<FilteredView>::getString(s, &fv);
   }
 
@@ -52,7 +52,7 @@ void CmsTrackerPixelPhase2EndcapBuilder<FilteredView>::buildComponent(FilteredVi
 }
 
 template <class FilteredView>
-void CmsTrackerPixelPhase2EndcapBuilder<FilteredView>::sortNS(FilteredView& fv, GeometricDet* det) {
+void CmsTrackerPixelPhase2NearEndcapBuilder<FilteredView>::sortNS(FilteredView& fv, GeometricDet* det) {
   GeometricDet::ConstGeometricDetContainer& comp = det->components();
 
   std::sort(comp.begin(), comp.end(), CmsTrackerLevelBuilderHelper::isLessModZ);
@@ -60,8 +60,11 @@ void CmsTrackerPixelPhase2EndcapBuilder<FilteredView>::sortNS(FilteredView& fv, 
   for (uint32_t i = 0; i < comp.size(); i++) {
     det->component(i)->setGeographicalID(
         i + 1);  // Every subdetector: Inner pixel first, OT later, then sort by disk number
+
+    std::cout<<"Setting geographicalID in Phase2NearEndcapBuilder of "<<i+1<<std::endl;
+    std::cout<<"detID is "<<det->component(i)->geographicalId()<<std::endl;
   }
 }
 
-template class CmsTrackerPixelPhase2EndcapBuilder<DDFilteredView>;
-template class CmsTrackerPixelPhase2EndcapBuilder<cms::DDFilteredView>;
+template class CmsTrackerPixelPhase2NearEndcapBuilder<DDFilteredView>;
+template class CmsTrackerPixelPhase2NearEndcapBuilder<cms::DDFilteredView>;

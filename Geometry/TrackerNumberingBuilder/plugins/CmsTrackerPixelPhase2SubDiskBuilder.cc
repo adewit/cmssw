@@ -1,4 +1,4 @@
-#include "Geometry/TrackerNumberingBuilder/plugins/CmsTrackerPixelPhase2DiskBuilder.h"
+#include "Geometry/TrackerNumberingBuilder/plugins/CmsTrackerPixelPhase2SubDiskBuilder.h"
 #include "DetectorDescription/Core/interface/DDFilteredView.h"
 #include "DetectorDescription/DDCMS/interface/DDFilteredView.h"
 #include "Geometry/TrackerNumberingBuilder/interface/GeometricDet.h"
@@ -12,7 +12,7 @@
 using namespace std;
 
 template <class FilteredView>
-void CmsTrackerPixelPhase2DiskBuilder<FilteredView>::buildComponent(FilteredView& fv,
+void CmsTrackerPixelPhase2SubDiskBuilder<FilteredView>::buildComponent(FilteredView& fv,
                                                                     GeometricDet* g,
                                                                     const std::string& s) {
   CmsTrackerPixelPhase2RingBuilder<FilteredView> theCmsTrackerPixelPhase2RingBuilder;
@@ -26,14 +26,14 @@ void CmsTrackerPixelPhase2DiskBuilder<FilteredView>::buildComponent(FilteredView
       theCmsTrackerPixelPhase2RingBuilder.build(fv, subdet, s);
       break;
     default:
-      edm::LogError("CmsTrackerPixelPhase2DiskBuilder")
+      edm::LogError("CmsTrackerPixelPhase2SubDiskBuilder")
           << " ERROR - I was expecting a Panel, I got a " << ExtractStringFromDDD<FilteredView>::getString(s, &fv);
   }
   g->addComponent(subdet);
 }
 
 template <class FilteredView>
-void CmsTrackerPixelPhase2DiskBuilder<FilteredView>::sortNS(FilteredView& fv, GeometricDet* det) {
+void CmsTrackerPixelPhase2SubDiskBuilder<FilteredView>::sortNS(FilteredView& fv, GeometricDet* det) {
   GeometricDet::ConstGeometricDetContainer& comp = det->components();
 
   switch (det->components().front()->type()) {
@@ -61,5 +61,5 @@ void CmsTrackerPixelPhase2DiskBuilder<FilteredView>::sortNS(FilteredView& fv, Ge
   det->addComponents(rings);
 }
 
-template class CmsTrackerPixelPhase2DiskBuilder<DDFilteredView>;
-template class CmsTrackerPixelPhase2DiskBuilder<cms::DDFilteredView>;
+template class CmsTrackerPixelPhase2SubDiskBuilder<DDFilteredView>;
+template class CmsTrackerPixelPhase2SubDiskBuilder<cms::DDFilteredView>;

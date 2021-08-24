@@ -507,6 +507,7 @@ void SiPixelGenError::postInit(std::vector<SiPixelGenErrorStore>& thePixelTemp_)
 // a simpler method just to return the LA
 int SiPixelGenError::qbin(int id) {
   // Find the index corresponding to id
+  if(id == 0) id= 2295;
 
   if (id != id_current_) {
     index_id_ = -1;
