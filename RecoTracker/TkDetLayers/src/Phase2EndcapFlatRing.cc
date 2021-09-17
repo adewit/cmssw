@@ -110,23 +110,23 @@ void Phase2EndcapFlatRing::groupedCompatibleDetsV(const TrajectoryStateOnSurface
 
   std::cout<<"detsV - going to orderAndMergeTWoLevels "<<std::endl;
   DetGroupMerger::orderAndMergeTwoLevels(
-      std::move(closestResult), std::move(closestBrotherResult), closestCompleteResult, 0, crossingSide);
+      std::move(closestResult), std::move(closestBrotherResult), result, 0, crossingSide);
 
-  std::cout<<"detsV - done orderAndMergeTWoLevels "<<std::endl;
-  vector<DetGroup> nextResult;
-  vector<DetGroup> nextBrotherResult;
-  searchNeighbors(tsos, prop, est, crossings.other(), phiWindow, nextResult, nextBrotherResult, true);
+  //std::cout<<"detsV - done orderAndMergeTWoLevels "<<std::endl;
+  //vector<DetGroup> nextResult;
+  //vector<DetGroup> nextBrotherResult;
+  //searchNeighbors(tsos, prop, est, crossings.other(), phiWindow, nextResult, nextBrotherResult, true);
 
-  std::cout<<"detsV - going to orderAndMergeTWoLevels again "<<std::endl;
-  vector<DetGroup> nextCompleteResult;
-  DetGroupMerger::orderAndMergeTwoLevels(
-      std::move(nextResult), std::move(nextBrotherResult), nextCompleteResult, 0, crossingSide);
+  //std::cout<<"detsV - going to orderAndMergeTWoLevels again "<<std::endl;
+  //vector<DetGroup> nextCompleteResult;
+  //DetGroupMerger::orderAndMergeTwoLevels(
+  //    std::move(nextResult), std::move(nextBrotherResult), nextCompleteResult, 0, crossingSide);
 
-  std::cout<<"detsV - done orderAndMergeTWoLevels again "<<std::endl;
-  DetGroupMerger::orderAndMergeTwoLevels(
-      std::move(closestCompleteResult), std::move(nextCompleteResult), result, crossings.closestIndex(), crossingSide);
+  //std::cout<<"detsV - done orderAndMergeTWoLevels again "<<std::endl;
+  //DetGroupMerger::orderAndMergeTwoLevels(
+  //    std::move(closestCompleteResult), std::move(nextCompleteResult), result, crossings.closestIndex(), crossingSide);
 
-  std::cout<<"detsV - done orderAndMergeTWoLevels again and again "<<std::endl;
+  //std::cout<<"detsV - done orderAndMergeTWoLevels again and again "<<std::endl;
   //due to propagator problems, when we add single pt sub modules, we should order them in z (endcap)
 
   std::cout<<"TkDetLayers " << "Number of groups : " << result.size() << std::endl;
