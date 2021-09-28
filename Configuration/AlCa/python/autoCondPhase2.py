@@ -8,6 +8,7 @@ SiPixelTemplatesRecord    =   "SiPixelTemplateDBObjectRcd"
 SiPixel2DTemplatesRecord  =   "SiPixel2DTemplateDBObjectRcd"     
 TrackerLARecord           =   "SiPhase2OuterTrackerLorentzAngleRcd"
 TrackerSimLARecord        =   "SiPhase2OuterTrackerLorentzAngleSimRcd"
+TrackerDTCCablingRecord = "TrackerDetToDTCELinkCablingMapRcd"
 
 ##
 ## Active geometries: https://github.com/cms-sw/cmssw/blob/master/Configuration/Geometry/README.md
@@ -23,6 +24,11 @@ TrackerSimLARecord        =   "SiPhase2OuterTrackerLorentzAngleSimRcd"
 
 #combines in a single dict of dict the tags defined below
 allTags={}
+
+# Cabling Maps
+allTags["DTCCabling"] = {
+    "T23" :  ( ','.join( [ 'TrackerDetToDTCELinkCablingMap__OT616_200_IT700__T23_Full' ,TrackerDTCCablingRecord, connectionString, "", "2021-09-28 12:30:00.000"] ), ), # Inner-Tacker DTC cabling map provided for T23 geometry
+}
 
 allTags["LA"] = {
     'T15' : ( ','.join( [ 'SiPixelLorentzAngle_phase2_T15_v5_mc' ,SiPixelLARecord,connectionString, "", "2020-05-05 20:00:00.000"] ), ),  #uH = 0.053/T (TBPX), uH=0.0/T (TEPX+TFPX)
@@ -120,7 +126,7 @@ allTags["Template2Dden"] = {
 }
 
 # list of active tags to be replaced
-activeKeys = ["LA","LAWidth","SimLA","LAfromAlignment","GenError","Template"]#,"SimOTLA","OTLA"]
+activeKeys = ["LA","LAWidth","SimLA","LAfromAlignment","GenError","Template","DTCCabling"]#,"SimOTLA","OTLA"]
 
 # list of geometries supported
 activeDets = ["T15","T21","T22","T23","T25","T26","T27"]

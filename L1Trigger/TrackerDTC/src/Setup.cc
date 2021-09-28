@@ -270,21 +270,23 @@ namespace trackerDTC {
 
   // converts tk layout id into dtc id
   int Setup::dtcId(int tkLayoutId) const {
-    checkTKLayoutId(tkLayoutId);
-    const int tkId = tkLayoutId - 1;
-    const int side = tkId / (numRegions_ * numATCASlots_);
-    const int region = (tkId % (numRegions_ * numATCASlots_)) / numATCASlots_;
-    const int slot = tkId % numATCASlots_;
-    return region * numDTCsPerRegion_ + side * numATCASlots_ + slot;
+    if (checkTKLayoutId(tkLayoutId)){
+      const int tkId = tkLayoutId - 1;
+      const int side = tkId / (numRegions_ * numATCASlots_);
+      const int region = (tkId % (numRegions_ * numATCASlots_)) / numATCASlots_;
+      const int slot = tkId % numATCASlots_;
+      return region * numDTCsPerRegion_ + side * numATCASlots_ + slot;
+    } else return -1;
   }
 
   // converts dtc id into tk layout id
   int Setup::tkLayoutId(int dtcId) const {
-    checkDTCId(dtcId);
-    const int slot = dtcId % numATCASlots_;
-    const int region = dtcId / numDTCsPerRegion_;
-    const int side = (dtcId % numDTCsPerRegion_) / numATCASlots_;
-    return (side * numRegions_ + region) * numATCASlots_ + slot + 1;
+    if (checkDTCId(dtcId)){
+      const int slot = dtcId % numATCASlots_;
+      const int region = dtcId / numDTCsPerRegion_;
+      const int side = (dtcId % numDTCsPerRegion_) / numATCASlots_;
+      return (side * numRegions_ + region) * numATCASlots_ + slot + 1;
+    } else return -1;
   }
 
   // converts TFP identifier (region[0-8], channel[0-47]) into dtc id
@@ -298,23 +300,26 @@ namespace trackerDTC {
 
   // checks if given DTC id is connected to PS or 2S sensormodules
   bool Setup::psModule(int dtcId) const {
-    checkDTCId(dtcId);
-    // from tklayout: first 3 are 10 gbps PS, next 3 are 5 gbps PS and residual 6 are 5 gbps 2S modules
-    return slot(dtcId) < numATCASlots_ / 2;
+    if (checkDTCId(dtcId) ){
+      // from tklayout: first 3 are 10 gbps PS, next 3 are 5 gbps PS and residual 6 are 5 gbps 2S modules
+      return slot(dtcId) < numATCASlots_ / 2;
+    } else return false;
   }
 
   // checks if given dtcId is connected to -z (false) or +z (true)
   bool Setup::side(int dtcId) const {
-    checkDTCId(dtcId);
-    const int side = (dtcId % numDTCsPerRegion_) / numATCASlots_;
-    // from tkLayout: first 12 +z, next 12 -z
-    return side == 0;
+    if (checkDTCId(dtcId) ) {
+      const int side = (dtcId % numDTCsPerRegion_) / numATCASlots_;
+      // from tkLayout: first 12 +z, next 12 -z
+      return side == 0;
+    } else return false;
   }
 
   // ATCA slot number [0-11] of given dtcId
   int Setup::slot(int dtcId) const {
-    checkDTCId(dtcId);
-    return dtcId % numATCASlots_;
+    if (checkDTCId(dtcId)) {;
+      return dtcId % numATCASlots_;
+    } else return -1;
   }
 
   // sensor module for det id
@@ -625,6 +630,7 @@ namespace trackerDTC {
       const int layerId =
           (barrel ? trackerTopology_->layer(detId) : trackerTopology_->tidWheel(detId)) - offsetLayerId_;
       const bool side = Setup::side(dtcId);
+      std::cout<< "side is "<<side<< "dtc Id is "<<dtcId<<std::endl;
       SensorModule::Type type;
       if (barrel && psModule)
         type = SensorModule::BarrelPS;
@@ -687,25 +693,27 @@ namespace trackerDTC {
   }
 
   // range check of dtc id
-  void Setup::checkDTCId(int dtcId) const {
+  bool Setup::checkDTCId(int dtcId) const {
     if (dtcId < 0 || dtcId >= numDTCsPerRegion_ * numRegions_) {
-      cms::Exception exception("out_of_range");
-      exception.addContext("trackerDTC::Setup::checkDTCId");
-      exception << "Used DTC Id (" << dtcId << ") "
-                << "is out of range 0 to " << numDTCsPerRegion_ * numRegions_ - 1 << ".";
-      throw exception;
-    }
+      //cms::Exception exception("out_of_range");
+      //exception.addContext("trackerDTC::Setup::checkDTCId");
+      std::cout << "Used DTC Id (" << dtcId << ") "
+                << "is out of range 0 to " << numDTCsPerRegion_ * numRegions_ - 1 << "." <<std::endl;
+      //throw exception;
+      return false;
+    } else return true;
   }
 
   // range check of tklayout id
-  void Setup::checkTKLayoutId(int tkLayoutId) const {
+  bool Setup::checkTKLayoutId(int tkLayoutId) const {
     if (tkLayoutId <= 0 || tkLayoutId > numDTCsPerRegion_ * numRegions_) {
-      cms::Exception exception("out_of_range");
-      exception.addContext("trackerDTC::Setup::checkTKLayoutId");
-      exception << "Used TKLayout Id (" << tkLayoutId << ") "
-                << "is out of range 1 to " << numDTCsPerRegion_ * numRegions_ << ".";
-      throw exception;
-    }
+      //cms::Exception exception("out_of_range");
+      //exception.addContext("trackerDTC::Setup::checkTKLayoutId");
+      std::cout << "Used TKLayout Id (" << tkLayoutId << ") "
+                << "is out of range 1 to " << numDTCsPerRegion_ * numRegions_ << "." <<std::endl;
+      //throw exception;
+      return false;
+    } else return true;
   }
 
   // range check of tfp identifier

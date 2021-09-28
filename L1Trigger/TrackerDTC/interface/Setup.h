@@ -428,9 +428,9 @@ namespace trackerDTC {
     // create sensor modules
     void produceSensorModules();
     // range check of dtc id
-    void checkDTCId(int dtcId) const;
+    bool checkDTCId(int dtcId) const;
     // range check of tklayout id
-    void checkTKLayoutId(int tkLayoutId) const;
+    bool checkTKLayoutId(int tkLayoutId) const;
     // range check of tfp identifier
     void checkTFPIdentifier(int tfpRegion, int tfpChannel) const;
 
