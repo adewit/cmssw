@@ -32,6 +32,7 @@ allTags["LA"] = {
     'T25' : ( ','.join( [ 'SiPixelLorentzAngle_phase2_T25_v0_mc' ,SiPixelLARecord,connectionString, "", "2021-03-16 20:00:00.000"] ), ),  #uH = 0.053/T (TBPX L2,L3,L4), uH=0.0/T (TBPX L1 TEPX+TFPX)
     'T26' : ( ','.join( [ 'SiPixelLorentzAngle_phase2_T25_v0_mc' ,SiPixelLARecord,connectionString, "", "2021-03-16 20:00:00.000"] ), ),  #uH = 0.053/T (TBPX L2,L3,L4), uH=0.0/T (TBPX L1 TEPX+TFPX)
     'T27' : ( ','.join( [ 'SiPixelLorentzAngle_phase2_T25_v0_mc' ,SiPixelLARecord,connectionString, "", "2021-03-16 20:00:00.000"] ), ),  #uH = 0.053/T (TBPX L2,L3,L4), uH=0.0/T (TBPX L1 TEPX+TFPX)
+    'TXPh3' : ( ','.join( [ 'SiPixelLorentzAngle_phase3_IT_v6.1.5_15x60_v1_mc' ,SiPixelLARecord,connectionString, "", "2021-10-19 20:00:00.000"] ), ),  #
 }
 
 allTags["LAWidth"] = {
@@ -42,6 +43,7 @@ allTags["LAWidth"] = {
     'T25' : ( ','.join( [ 'SiPixelLorentzAngle_phase2_T19_mc_forWidthEmpty' ,SiPixelLARecord,connectionString, "forWidth", "2020-02-23 14:00:00.000"] ), ),  # uH=0.0/T (fall-back to offset)
     'T26' : ( ','.join( [ 'SiPixelLorentzAngle_phase2_T19_mc_forWidthEmpty' ,SiPixelLARecord,connectionString, "forWidth", "2020-02-23 14:00:00.000"] ), ),  # uH=0.0/T (fall-back to offset)
     'T27' : ( ','.join( [ 'SiPixelLorentzAngle_phase2_T19_mc_forWidthEmpty' ,SiPixelLARecord,connectionString, "forWidth", "2020-02-23 14:00:00.000"] ), ),  # uH=0.0/T (fall-back to offset)
+    'TXPh3' : ( ','.join( [ 'SiPixelLorentzAngle_phase2_T19_mc_forWidthEmpty' ,SiPixelLARecord,connectionString, "forWidth", "2020-02-23 14:00:00.000"] ), ),  # uH=0.0/T (fall-back to offset)
 }
 
 allTags["LAfromAlignment"] = {
@@ -52,6 +54,7 @@ allTags["LAfromAlignment"] = {
     'T25' : ( ','.join( [ 'SiPixelLorentzAngle_phase2_T19_mc_forWidthEmpty' ,SiPixelLARecord,connectionString, "fromAlignment", "2020-02-23 14:00:00.000"] ), ),  # uH=0.0/T (not in use)
     'T26' : ( ','.join( [ 'SiPixelLorentzAngle_phase2_T19_mc_forWidthEmpty' ,SiPixelLARecord,connectionString, "fromAlignment", "2020-02-23 14:00:00.000"] ), ),  # uH=0.0/T (not in use)
     'T27' : ( ','.join( [ 'SiPixelLorentzAngle_phase2_T19_mc_forWidthEmpty' ,SiPixelLARecord,connectionString, "fromAlignment", "2020-02-23 14:00:00.000"] ), ),  # uH=0.0/T (not in use)
+    'TXPh3' : ( ','.join( [ 'SiPixelLorentzAngle_phase2_T19_mc_forWidthEmpty' ,SiPixelLARecord,connectionString, "fromAlignment", "2020-02-23 14:00:00.000"] ), ),  # uH=0.0/T (not in use)
 }
 
 allTags["SimLA"] = {
@@ -62,6 +65,7 @@ allTags["SimLA"] = {
     'T25' : ( ','.join( [ 'SiPixelSimLorentzAngle_phase2_T25_v0_mc' ,SiPixelSimLARecord,connectionString, "", "2021-03-16 20:00:00.000"] ), ), #uH = 0.053/T (TBPX L2,L3,L4), uH=0.0/T (TBPX L1 TEPX+TFPX)
     'T26' : ( ','.join( [ 'SiPixelSimLorentzAngle_phase2_T25_v0_mc' ,SiPixelSimLARecord,connectionString, "", "2021-03-16 20:00:00.000"] ), ), #uH = 0.053/T (TBPX L2,L3,L4), uH=0.0/T (TBPX L1 TEPX+TFPX)
     'T27' : ( ','.join( [ 'SiPixelSimLorentzAngle_phase2_T25_v0_mc' ,SiPixelSimLARecord,connectionString, "", "2021-03-16 20:00:00.000"] ), ), #uH = 0.053/T (TBPX L2,L3,L4), uH=0.0/T (TBPX L1 TEPX+TFPX)
+    'TXPh3' : ( ','.join( [ 'SiPixelSimLorentzAngle_phase2_T15_v5_mc' ,SiPixelSimLARecord,connectionString, "", "2020-05-05 20:00:00.000"] ), ), #uH = 0.053/T (TBPX), uH=0.0/T (TEPX+TFPX)
 }
 
 allTags["GenError"] = {
@@ -71,7 +75,9 @@ allTags["GenError"] = {
     'T23' : ( ','.join( [ 'SiPixelGenErrorDBObject_phase2_IT_v7.0.0_25x100_v2_mc' ,SiPixelGenErrorRecord,connectionString, "", "2021-04-17 20:00:00"] ), ),  # cell is 25um (local-x) x 100um (local-y) , VBias=350V, 3D pixels in TBPX L1+L2 and TFPX R1
     'T25' : ( ','.join( [ 'SiPixelGenErrorDBObject_phase2_IT_v7.0.2_25x100_v2_mc' ,SiPixelGenErrorRecord,connectionString, "", "2021-04-17 20:00:00"] ), ),  # cell is 25um (local-x) x 100um (local-y) , VBias=350V, 3D pixels in TBPX L1
     'T26' : ( ','.join( [ 'SiPixelGenErrorDBObject_phase2_IT_v7.0.3_mixed_v2_mc' ,SiPixelGenErrorRecord,connectionString, "", "2021-04-17 20:00:00"] ), ),  # TBPX cells are 25um (local-x) x 100um (local-y), TFPX TEPX 50 um x 50 um , VBias=350V, 3D pixels in TBPX L1
+    'TXPh3' : ( ','.join( [ 'SiPixelGenErrorDBObject_phase3_IT_v6.1.5_15x60_v1_mc' ,SiPixelGenErrorRecord,connectionString, "", "2021-10-19 21:00:00"] ), ),  # 
 }
+
 
 allTags["Template"] = {
     'T15' : ( ','.join( [ 'SiPixelTemplateDBObject_phase2_IT_v6.1.5_25x100_v3_mc',SiPixelTemplatesRecord,connectionString, "", "2021-01-27 10:00:00"] ), ),  # cell is 25um (local-x) x 100um (local-y) , VBias=350V
@@ -80,6 +86,7 @@ allTags["Template"] = {
     'T23' : ( ','.join( [ 'SiPixelTemplateDBObject_phase2_IT_v7.0.0_25x100_v2_mc' ,SiPixelTemplatesRecord,connectionString, "", "2021-04-17 20:00:00"] ), ),  # cell is 25um (local-x) x 100um (local-y) , VBias=350V, 3D pixels in TBPX L1+L2 and TFPX R1
     'T25' : ( ','.join( [ 'SiPixelTemplateDBObject_phase2_IT_v7.0.2_25x100_v2_mc' ,SiPixelTemplatesRecord,connectionString, "", "2021-04-17 20:00:00"] ), ),  # cell is 25um (local-x) x 100um (local-y) , VBias=350V, 3D pixels in TBPX L1
     'T26' : ( ','.join( [ 'SiPixelTemplateDBObject_phase2_IT_v7.0.3_mixed_v2_mc' ,SiPixelTemplatesRecord,connectionString, "", "2021-04-17 20:00:00"] ), ),  # TBPX cells are 25um (local-x) x 100um (local-y), TFPX TEPX 50 um x 50 um , VBias=350V, 3D pixels in TBPX L1
+    'TXPh3' : ( ','.join( [ 'SiPixelTemplateDBObject_phase3_IT_v6.1.5_15x60_v1_mc' ,SiPixelTemplatesRecord,connectionString, "", "2021-10-19 21:00:00"] ), ),  # 
 }
 
 ##
@@ -95,6 +102,7 @@ allTags["OTLA"] = {
     'T25' : ( ','.join( [ 'SiPhase2OuterTrackerLorentzAngle_v0_mc' ,TrackerLARecord,connectionString, "", "2020-07-19 17:00:00.000"] ), ),  #uH = 0.07/T
     'T26' : ( ','.join( [ 'SiPhase2OuterTrackerLorentzAngle_v0_mc' ,TrackerLARecord,connectionString, "", "2020-07-19 17:00:00.000"] ), ),  #uH = 0.07/T
     'T27' : ( ','.join( [ 'SiPhase2OuterTrackerLorentzAngle_v0_mc' ,TrackerLARecord,connectionString, "", "2020-07-19 17:00:00.000"] ), ),  #uH = 0.07/T
+    'TXPh3' : ( ','.join( [ 'SiPhase2OuterTrackerLorentzAngle_v0_mc' ,TrackerLARecord,connectionString, "", "2020-07-19 17:00:00.000"] ), ),  #uH = 0.07/T
 }
 
 allTags["SimOTLA"] = {
@@ -105,6 +113,7 @@ allTags["SimOTLA"] = {
     'T25' : ( ','.join( [ 'SiPhase2OuterTrackerLorentzAngleSim_v0_mc' ,TrackerSimLARecord,connectionString, "", "2020-07-19 17:00:00.000"] ), ),  #uH = 0.07/T
     'T26' : ( ','.join( [ 'SiPhase2OuterTrackerLorentzAngleSim_v0_mc' ,TrackerSimLARecord,connectionString, "", "2020-07-19 17:00:00.000"] ), ),  #uH = 0.07/T
     'T27' : ( ','.join( [ 'SiPhase2OuterTrackerLorentzAngleSim_v0_mc' ,TrackerSimLARecord,connectionString, "", "2020-07-19 17:00:00.000"] ), ),  #uH = 0.07/T
+    'TXPh3' : ( ','.join( [ 'SiPhase2OuterTrackerLorentzAngleSim_v0_mc' ,TrackerSimLARecord,connectionString, "", "2020-07-19 17:00:00.000"] ), ),  #uH = 0.07/T
 }
 '''
 ##
@@ -123,7 +132,7 @@ allTags["Template2Dden"] = {
 activeKeys = ["LA","LAWidth","SimLA","LAfromAlignment","GenError","Template"]#,"SimOTLA","OTLA"]
 
 # list of geometries supported
-activeDets = ["T15","T21","T22","T23","T25","T26","T27"]
+activeDets = ["T15","T21","T22","T23","T25","T26","T27","TXPh3"]
 phase2GTs = {}
 for det in activeDets:
     appendedTags = ()
