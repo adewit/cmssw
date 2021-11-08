@@ -79,7 +79,7 @@ public:
     PixelPhase2FullDisk = 217,
     PixelPhase2ReducedDisk = 227,
     PixelPhase2TDRDisk = 237,
-    PixelPhase2FatDisk = 347,
+    PixelPhase2DoubleDisk = 347,
     PixelPhase2SubDisk = 357
   } GeometricEnumType;
 

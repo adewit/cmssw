@@ -1,4 +1,4 @@
-#include "Phase2EndcapLayerFatDisk.h"
+#include "Phase2EndcapLayerDoubleDisk.h"
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 
@@ -17,7 +17,7 @@ using namespace std;
 typedef GeometricSearchDet::DetWithState DetWithState;
 
 //hopefully is never called!
-const std::vector<const GeometricSearchDet*>& Phase2EndcapLayerFatDisk::components() const {
+const std::vector<const GeometricSearchDet*>& Phase2EndcapLayerDoubleDisk::components() const {
   if (not theComponents) {
     auto temp = std::make_unique<std::vector<const GeometricSearchDet*>>();
     temp->reserve(15);  // This number is just an upper bound
@@ -32,14 +32,14 @@ const std::vector<const GeometricSearchDet*>& Phase2EndcapLayerFatDisk::componen
   return *theComponents;
 }
 
-void Phase2EndcapLayerFatDisk::fillSubDiskPars(int i) {
+void Phase2EndcapLayerDoubleDisk::fillSubDiskPars(int i) {
   const BoundDisk& subDiskDisk = static_cast<const BoundDisk&>(theComps[i]->surface());
   SubDiskPar tempPar;
   tempPar.theSubDiskZ = std::abs(subDiskDisk.position().z());
   subDiskPars.push_back(tempPar);
 }
 
-Phase2EndcapLayerFatDisk::Phase2EndcapLayerFatDisk(vector<const Phase2EndcapSubDisk*>& subDisks)
+Phase2EndcapLayerDoubleDisk::Phase2EndcapLayerDoubleDisk(vector<const Phase2EndcapSubDisk*>& subDisks)
     : RingedForwardLayer(true), theComponents{nullptr} {
   //They should be already R-ordered. TO BE CHECKED!!
   //sort( theRings.begin(), theRings.end(), DetLessR());
@@ -61,7 +61,7 @@ Phase2EndcapLayerFatDisk::Phase2EndcapLayerFatDisk(vector<const Phase2EndcapSubD
                           << this->specificSurface().innerRadius() << " , " << this->specificSurface().outerRadius();
 }
 
-BoundDisk* Phase2EndcapLayerFatDisk::computeDisk(const vector<const Phase2EndcapSubDisk*>& subDisks) const {
+BoundDisk* Phase2EndcapLayerDoubleDisk::computeDisk(const vector<const Phase2EndcapSubDisk*>& subDisks) const {
   float theRmin = subDisks.front()->specificSurface().innerRadius();
   float theRmax = subDisks.front()->specificSurface().outerRadius();
   float theZmin = subDisks.front()->position().z() - subDisks.front()->surface().bounds().thickness() / 2;
@@ -85,14 +85,14 @@ BoundDisk* Phase2EndcapLayerFatDisk::computeDisk(const vector<const Phase2Endcap
   return new BoundDisk(pos, rot, new SimpleDiskBounds(theRmin, theRmax, theZmin - zPos, theZmax - zPos));
 }
 
-Phase2EndcapLayerFatDisk::~Phase2EndcapLayerFatDisk() {
+Phase2EndcapLayerDoubleDisk::~Phase2EndcapLayerDoubleDisk() {
   for (auto c : theComps)
     delete c;
 
   delete theComponents.load();
 }
 
-void Phase2EndcapLayerFatDisk::groupedCompatibleDetsV(const TrajectoryStateOnSurface& startingState,
+void Phase2EndcapLayerDoubleDisk::groupedCompatibleDetsV(const TrajectoryStateOnSurface& startingState,
                                                const Propagator& prop,
                                                const MeasurementEstimator& est,
                                                std::vector<DetGroup>& result) const {
@@ -189,7 +189,7 @@ void Phase2EndcapLayerFatDisk::groupedCompatibleDetsV(const TrajectoryStateOnSur
   }
 }
 
-std::array<int, 2> Phase2EndcapLayerFatDisk::subDiskIndicesByCrossingProximity(const TrajectoryStateOnSurface& startingState,
+std::array<int, 2> Phase2EndcapLayerDoubleDisk::subDiskIndicesByCrossingProximity(const TrajectoryStateOnSurface& startingState,
                                                                      const Propagator& prop) const {
   typedef HelixForwardPlaneCrossing Crossing;
   typedef MeasurementEstimator::Local2DVector Local2DVector;
@@ -237,7 +237,7 @@ std::array<int, 2> Phase2EndcapLayerFatDisk::subDiskIndicesByCrossingProximity(c
   return maxDistance.y();
 }*/
 
-std::array<int, 2> Phase2EndcapLayerFatDisk::findTwoClosest(std::vector<GlobalPoint> subDiskCrossing) const {
+std::array<int, 2> Phase2EndcapLayerDoubleDisk::findTwoClosest(std::vector<GlobalPoint> subDiskCrossing) const {
   std::array<int, 2> theBins = {{-1, -1}};
   theBins[0] = 0;
   float initialZ = subDiskPars[0].theSubDiskZ;

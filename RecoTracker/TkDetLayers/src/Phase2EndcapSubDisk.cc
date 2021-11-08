@@ -43,7 +43,7 @@ void Phase2EndcapSubDisk::fillRingPars(int i) {
   ringPars.push_back(tempPar);
 }
 
-Phase2EndcapSubDisk::Phase2EndcapSubDisk(vector<const Phase2EndcapFlatRing*>& rings)
+Phase2EndcapSubDisk::Phase2EndcapSubDisk(vector<const Phase2EndcapSingleRing*>& rings)
     : RingedForwardLayer(true), theComponents{nullptr} {
   //They should be already R-ordered. TO BE CHECKED!!
   //sort( theRings.begin(), theRings.end(), DetLessR());
@@ -65,13 +65,13 @@ Phase2EndcapSubDisk::Phase2EndcapSubDisk(vector<const Phase2EndcapFlatRing*>& ri
                           << this->specificSurface().innerRadius() << " , " << this->specificSurface().outerRadius();
 }
 
-BoundDisk* Phase2EndcapSubDisk::computeDisk(const vector<const Phase2EndcapFlatRing*>& rings) const {
+BoundDisk* Phase2EndcapSubDisk::computeDisk(const vector<const Phase2EndcapSingleRing*>& rings) const {
   float theRmin = rings.front()->specificSurface().innerRadius();
   float theRmax = rings.front()->specificSurface().outerRadius();
   float theZmin = rings.front()->position().z() - rings.front()->surface().bounds().thickness() / 2;
   float theZmax = rings.front()->position().z() + rings.front()->surface().bounds().thickness() / 2;
 
-  for (vector<const Phase2EndcapFlatRing*>::const_iterator i = rings.begin(); i != rings.end(); i++) {
+  for (vector<const Phase2EndcapSingleRing*>::const_iterator i = rings.begin(); i != rings.end(); i++) {
     float rmin = (**i).specificSurface().innerRadius();
     float rmax = (**i).specificSurface().outerRadius();
     float zmin = (**i).position().z() - (**i).surface().bounds().thickness() / 2.;

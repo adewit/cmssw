@@ -5,7 +5,7 @@
 #include "Phase2OTBarrelLayerBuilder.h"
 #include "PixelForwardLayerBuilder.h"
 #include "Phase2EndcapLayerBuilder.h"
-#include "Phase2EndcapLayerFatDiskBuilder.h"
+#include "Phase2EndcapLayerDoubleDiskBuilder.h"
 #include "TIBLayerBuilder.h"
 #include "TOBLayerBuilder.h"
 #include "TIDLayerBuilder.h"
@@ -30,7 +30,7 @@ GeometricSearchTracker *GeometricSearchTrackerBuilder::build(const GeometricDet 
   PixelForwardLayerBuilder<PixelBlade, PixelForwardLayer> aPixelForwardLayerBuilder;
   PixelForwardLayerBuilder<Phase1PixelBlade, PixelForwardLayerPhase1> aPhase1PixelForwardLayerBuilder;
   Phase2EndcapLayerBuilder aPhase2EndcapLayerBuilder;
-  Phase2EndcapLayerFatDiskBuilder aPhase2EndcapLayerFatDiskBuilder;
+  Phase2EndcapLayerDoubleDiskBuilder aPhase2EndcapLayerDoubleDiskBuilder;
   TIBLayerBuilder aTIBLayerBuilder;
   TOBLayerBuilder aTOBLayerBuilder;
   TIDLayerBuilder aTIDLayerBuilder;
@@ -139,20 +139,26 @@ GeometricSearchTracker *GeometricSearchTrackerBuilder::build(const GeometricDet 
         //hopefully we can get rid of it soon
         if ((*it2)->positionBounds().z() < 0) {
           if ((*it2)->type() == GeometricDet::PixelPhase2FullDisk ||
-              (*it2)->type() == GeometricDet::PixelPhase2ReducedDisk)
+              (*it2)->type() == GeometricDet::PixelPhase2ReducedDisk){
             theNegPxlFwdLayers.push_back(aPhase1PixelForwardLayerBuilder.build(*it2, theGeomDetGeometry));
-          else if ((*it2)->type() == GeometricDet::PixelPhase2TDRDisk)
+          }
+          else if ((*it2)->type() == GeometricDet::PixelPhase2TDRDisk){
             theNegPxlFwdLayers.push_back(aPhase2EndcapLayerBuilder.build(*it2, theGeomDetGeometry, false));
-          else if ((*it2)->type() == GeometricDet::PixelPhase2FatDisk)
-            theNegPxlFwdLayers.push_back(aPhase2EndcapLayerFatDiskBuilder.build(*it2,theGeomDetGeometry));
+          }
+          else if ((*it2)->type() == GeometricDet::PixelPhase2DoubleDisk){
+            theNegPxlFwdLayers.push_back(aPhase2EndcapLayerDoubleDiskBuilder.build(*it2,theGeomDetGeometry));
+          }
         } else if ((*it2)->positionBounds().z() > 0) {
           if ((*it2)->type() == GeometricDet::PixelPhase2FullDisk ||
-              (*it2)->type() == GeometricDet::PixelPhase2ReducedDisk)
+              (*it2)->type() == GeometricDet::PixelPhase2ReducedDisk){
             thePosPxlFwdLayers.push_back(aPhase1PixelForwardLayerBuilder.build(*it2, theGeomDetGeometry));
-          else if ((*it2)->type() == GeometricDet::PixelPhase2TDRDisk)
+          }
+          else if ((*it2)->type() == GeometricDet::PixelPhase2TDRDisk){
             thePosPxlFwdLayers.push_back(aPhase2EndcapLayerBuilder.build(*it2, theGeomDetGeometry, false));
-          else if ((*it2)->type() == GeometricDet::PixelPhase2FatDisk)
-            thePosPxlFwdLayers.push_back(aPhase2EndcapLayerFatDiskBuilder.build(*it2,theGeomDetGeometry));
+          }
+          else if ((*it2)->type() == GeometricDet::PixelPhase2DoubleDisk){
+            thePosPxlFwdLayers.push_back(aPhase2EndcapLayerDoubleDiskBuilder.build(*it2,theGeomDetGeometry));
+          }
         } else {
           edm::LogError("TkDetLayers") << "In PixelPhase2EndCap the disks are neither PixelPhase2FullDisk nor "
                                           "PixelPhase2ReducedDisk nor PixelPhase2TDRDisk...";

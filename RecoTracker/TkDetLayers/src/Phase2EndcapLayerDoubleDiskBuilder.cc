@@ -1,13 +1,13 @@
-#include "Phase2EndcapLayerFatDiskBuilder.h"
+#include "Phase2EndcapLayerDoubleDiskBuilder.h"
 #include "Phase2EndcapSubDiskBuilder.h"
 
 using namespace edm;
 using namespace std;
 
-Phase2EndcapLayerFatDisk* Phase2EndcapLayerFatDiskBuilder::build(const GeometricDet* aPhase2EndcapLayerFatDisk,
+Phase2EndcapLayerDoubleDisk* Phase2EndcapLayerDoubleDiskBuilder::build(const GeometricDet* aPhase2EndcapLayerDoubleDisk,
                                                    const TrackerGeometry* theGeomDetGeometry) {
-  LogTrace("TkDetLayers") << "Phase2EndcapLayerFatDiskBuilder::build";
-  vector<const GeometricDet*> theSubDisks = aPhase2EndcapLayerFatDisk->components();
+  LogTrace("TkDetLayers") << "Phase2EndcapLayerDoubleDiskBuilder::build";
+  vector<const GeometricDet*> theSubDisks = aPhase2EndcapLayerDoubleDisk->components();
   LogTrace("TkDetLayers") << "theSubDisks.size(): " << theSubDisks.size();
 
   Phase2EndcapSubDiskBuilder myBuilder;
@@ -18,5 +18,5 @@ Phase2EndcapLayerFatDisk* Phase2EndcapLayerFatDiskBuilder::build(const Geometric
     thePhase2EndcapSubDisks.push_back(myBuilder.build(*it, theGeomDetGeometry));
   }
 
-  return new Phase2EndcapLayerFatDisk(thePhase2EndcapSubDisks);
+  return new Phase2EndcapLayerDoubleDisk(thePhase2EndcapSubDisks);
 }

@@ -1,5 +1,5 @@
-#ifndef TkDetLayers_Phase2EndcapLayerFatDisk_h
-#define TkDetLayers_Phase2EndcapLayerFatDisk_h
+#ifndef TkDetLayers_Phase2EndcapLayerDoubleDisk_h
+#define TkDetLayers_Phase2EndcapLayerDoubleDisk_h
 
 #include "TrackingTools/DetLayers/interface/RingedForwardLayer.h"
 #include "Phase2EndcapSubDisk.h"
@@ -12,14 +12,14 @@
  */
 
 #pragma GCC visibility push(hidden)
-class Phase2EndcapLayerFatDisk final : public RingedForwardLayer {
+class Phase2EndcapLayerDoubleDisk final : public RingedForwardLayer {
 public:
-  Phase2EndcapLayerFatDisk(std::vector<const Phase2EndcapSubDisk*>& subDisks) __attribute__((cold));
-  ~Phase2EndcapLayerFatDisk() override __attribute__((cold));
+  Phase2EndcapLayerDoubleDisk(std::vector<const Phase2EndcapSubDisk*>& subDisks) __attribute__((cold));
+  ~Phase2EndcapLayerDoubleDisk() override __attribute__((cold));
 
   // Default implementations would not properly manage memory
-  Phase2EndcapLayerFatDisk(const Phase2EndcapLayerFatDisk&) = delete;
-  Phase2EndcapLayerFatDisk& operator=(const Phase2EndcapLayerFatDisk&) = delete;
+  Phase2EndcapLayerDoubleDisk(const Phase2EndcapLayerDoubleDisk&) = delete;
+  Phase2EndcapLayerDoubleDisk& operator=(const Phase2EndcapLayerDoubleDisk&) = delete;
 
   // GeometricSearchDet interface
 

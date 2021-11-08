@@ -13,7 +13,7 @@
 #include "Geometry/TrackerNumberingBuilder/plugins/CmsTrackerBuilder.h"
 #include "Geometry/TrackerNumberingBuilder/plugins/CmsTrackerDetIdBuilder.h"
 
-#define DEBUG false
+#define DEBUG true
 
 std::unique_ptr<GeometricDet> DDDCmsTrackerContruction::construct(const DDCompactView& cpv,
                                                                   std::vector<int> const& detidShifts) {
@@ -44,7 +44,8 @@ std::unique_ptr<GeometricDet> DDDCmsTrackerContruction::construct(const DDCompac
   theCmsTrackerDetIdBuilder.buildId(*tracker);
 
   if (DEBUG) {
-    printAllTrackerGeometricDets(tracker.get());
+    //printAllTrackerGeometricDets(tracker.get());
+    printAllTrackerGeometricDetsBeforeDetIDBuilding(tracker.get());
   }
 
   fv.parent();
@@ -88,7 +89,8 @@ std::unique_ptr<GeometricDet> DDDCmsTrackerContruction::construct(const cms::DDC
   theCmsTrackerDetIdBuilder.buildId(*tracker);
 
   if (DEBUG) {
-    printAllTrackerGeometricDets(tracker.get());
+   // printAllTrackerGeometricDets(tracker.get());
+    printAllTrackerGeometricDetsBeforeDetIDBuilding(tracker.get());
   }
 
   return tracker;
@@ -100,8 +102,11 @@ std::unique_ptr<GeometricDet> DDDCmsTrackerContruction::construct(const cms::DDC
  * and all GeometricDets are sorted according to their geometric position.
  * This allows a convenient debugging, as the DetIds will be later assigned according to this information.
  */
-void DDDCmsTrackerContruction::printAllTrackerGeometricDets(const GeometricDet* tracker) {
+//void DDDCmsTrackerContruction::printAllTrackerGeometricDets(const GeometricDet* tracker) {
+void DDDCmsTrackerContruction::printAllTrackerGeometricDetsBeforeDetIDBuilding(const GeometricDet* tracker) {
   std::ofstream outputFile("All_Tracker_GeometricDets_before_DetId_building.log", std::ios::out);
+  std::ofstream outputFileCSV("All_Tracker_GeometricDets_before_DetId_buildingCSV.csv", std::ios::out);
+  outputFileCSV<<"translx,transly,translz,rho,phi,corneronex,corneroney,cornertwox,cornertwoy,cornerthreex,cornerthreey,cornerfourx,cornerfoury"<<std::endl;
 
   // Tree navigation: queue for BFS (we want to see same hierarchy level together).
   // (for DFS, would just use a stack instead).
@@ -114,6 +119,20 @@ void DDDCmsTrackerContruction::printAllTrackerGeometricDets(const GeometricDet* 
 
     for (auto& child : myDet->components()) {
       queue.emplace_back(child);
+    }
+
+   if(myDet->name().find("IT")!=std::string::npos && (myDet->name().find("R1EModule")!=std::string::npos || myDet->name().find("R2EModule")!=std::string::npos || myDet->name().find("R3EModule")!=std::string::npos||myDet->name().find("R4EModule")!=std::string::npos) && myDet->name().find("Disc9")==std::string::npos && myDet->name().find("Disc10")==std::string::npos && myDet->name().find("Disc11")==std::string::npos && myDet->name().find("Disc12")==std::string::npos && myDet->name().find("Upper")==std::string::npos && myDet->name().find("Lower")==std::string::npos){
+      DD3Vector vecone(myDet->bounds()->width()*10/2., myDet->bounds()->length()*10/2., 0);
+      DD3Vector vectwo(-myDet->bounds()->width()*10/2., myDet->bounds()->length()*10/2., 0);
+      DD3Vector vecthree(myDet->bounds()->width()*10/2., -myDet->bounds()->length()*10/2., 0);
+      DD3Vector vecfour(-myDet->bounds()->width()*10/2., -myDet->bounds()->length()*10/2., 0);
+      std::cout<<"Bounds are "<<myDet->bounds()->width()<<" and length "<<myDet->bounds()->length()<<std::endl;
+      //std::cout<<(myDet->rotation()*testlocpp).X()+myDet->translation().X()<<" and "<<(myDet->rotation()*testlocpp).Y()+myDet->translation().Y()<<" and "<<(myDet->rotation()*testlocpp).Z()+myDet->translation().Z()<<std::endl;
+      double tslx=myDet->translation().X();
+      double tsly=myDet->translation().Y();
+      std::cout<<" Translation is in x "<<tslx<<" and in y "<<tsly<<std::endl;
+      //                            //double tslz=myDet->translation().Z();
+      outputFileCSV << myDet->translation().X() << ","<<myDet->translation().Y()<<","<<myDet->translation().Z()<<","<<myDet->rho()<<","<<myDet->phi()<<","<<(myDet->rotation()*vecone).X()+tslx<<","<<(myDet->rotation()*vecone).Y()+tsly<<","<<(myDet->rotation()*vectwo).X()+tslx<<","<<(myDet->rotation()*vectwo).Y()+tsly<<","<<(myDet->rotation()*vecthree).X()+tslx<<","<<(myDet->rotation()*vecthree).Y()+tsly<<","<<(myDet->rotation()*vecfour).X()+tslx<<","<<(myDet->rotation()*vecfour).Y()+tsly<<std::endl;
     }
 
     outputFile << " " << std::endl;

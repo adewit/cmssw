@@ -1,4 +1,4 @@
-#include "Phase2EndcapFlatRing.h"
+#include "Phase2EndcapSingleRing.h"
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 
@@ -26,7 +26,7 @@ public:
   }
 };
 
-Phase2EndcapFlatRing::Phase2EndcapFlatRing(vector<const GeomDet*>& allDets)
+Phase2EndcapSingleRing::Phase2EndcapSingleRing(vector<const GeomDet*>& allDets)
     : GeometricSearchDet(true),
       theDets(allDets.begin(), allDets.end()){
  // theDets.assign(theFrontDets.begin(), theFrontDets.end());
@@ -48,7 +48,7 @@ Phase2EndcapFlatRing::Phase2EndcapFlatRing(vector<const GeomDet*>& allDets)
   theBinFinder = BinFinderType(theDets.front()->surface().position().phi(),theDets.size());
 
 #ifdef EDM_ML_DEBUG
-  LogDebug("TkDetLayers") << "DEBUG INFO for Phase2EndcapFlatRing";
+  LogDebug("TkDetLayers") << "DEBUG INFO for Phase2EndcapSingleRing";
   for (vector<const GeomDet*>::const_iterator it = theDets.begin(); it != theDets.end(); it++) {
     LogDebug("TkDetLayers") << "Det detId,phi,z,r: " << (*it)->geographicalId().rawId() << " , "
                             << (*it)->surface().position().phi() << " , " << (*it)->surface().position().z() << " , "
@@ -58,20 +58,20 @@ Phase2EndcapFlatRing::Phase2EndcapFlatRing(vector<const GeomDet*>& allDets)
 #endif
 }
 
-Phase2EndcapFlatRing::~Phase2EndcapFlatRing() {}
+Phase2EndcapSingleRing::~Phase2EndcapSingleRing() {}
 
-const vector<const GeometricSearchDet*>& Phase2EndcapFlatRing::components() const {
-  throw DetLayerException("Phase2EndcapFlatRing doesn't have GeometricSearchDet components");
+const vector<const GeometricSearchDet*>& Phase2EndcapSingleRing::components() const {
+  throw DetLayerException("Phase2EndcapSingleRing doesn't have GeometricSearchDet components");
 }
 
-pair<bool, TrajectoryStateOnSurface> Phase2EndcapFlatRing::compatible(const TrajectoryStateOnSurface&,
+pair<bool, TrajectoryStateOnSurface> Phase2EndcapSingleRing::compatible(const TrajectoryStateOnSurface&,
                                                                   const Propagator&,
                                                                   const MeasurementEstimator&) const {
-  edm::LogError("TkDetLayers") << "temporary dummy implementation of Phase2EndcapFlatRing::compatible()!!";
+  edm::LogError("TkDetLayers") << "temporary dummy implementation of Phase2EndcapSingleRing::compatible()!!";
   return pair<bool, TrajectoryStateOnSurface>();
 }
 
-void Phase2EndcapFlatRing::groupedCompatibleDetsV(const TrajectoryStateOnSurface& tsos,
+void Phase2EndcapSingleRing::groupedCompatibleDetsV(const TrajectoryStateOnSurface& tsos,
                                               const Propagator& prop,
                                               const MeasurementEstimator& est,
                                               std::vector<DetGroup>& result) const {
@@ -133,7 +133,7 @@ void Phase2EndcapFlatRing::groupedCompatibleDetsV(const TrajectoryStateOnSurface
   for (auto& grp : result) {
     if (grp.empty())
       continue;
-    std::cout<<"TkDetLayers " << "New group in Phase2EndcapFlatRing made by : " << std::endl;
+    std::cout<<"TkDetLayers " << "New group in Phase2EndcapSingleRing made by : " << std::endl;
     for (auto const& det : grp) {
       std::cout<<"TkDetLayers " << " geom det at r: " << det.det()->position().perp()
                               << " id:" << det.det()->geographicalId().rawId()
@@ -142,7 +142,7 @@ void Phase2EndcapFlatRing::groupedCompatibleDetsV(const TrajectoryStateOnSurface
   }
 }
 
-SubLayerCrossings Phase2EndcapFlatRing::computeCrossings(const TrajectoryStateOnSurface& startingState,
+SubLayerCrossings Phase2EndcapSingleRing::computeCrossings(const TrajectoryStateOnSurface& startingState,
                                                      PropagationDirection propDir) const {
   auto rho = startingState.transverseCurvature();
 
@@ -175,7 +175,7 @@ SubLayerCrossings Phase2EndcapFlatRing::computeCrossings(const TrajectoryStateOn
   return SubLayerCrossings(frontSLC,frontSLC,0);
 }
 
-bool Phase2EndcapFlatRing::addClosest(const TrajectoryStateOnSurface& tsos,
+bool Phase2EndcapSingleRing::addClosest(const TrajectoryStateOnSurface& tsos,
                                   const Propagator& prop,
                                   const MeasurementEstimator& est,
                                   const SubLayerCrossing& crossing,
@@ -205,7 +205,7 @@ bool Phase2EndcapFlatRing::addClosest(const TrajectoryStateOnSurface& tsos,
   return firstgroup || brothergroup;
 }
 
-void Phase2EndcapFlatRing::searchNeighbors(const TrajectoryStateOnSurface& tsos,
+void Phase2EndcapSingleRing::searchNeighbors(const TrajectoryStateOnSurface& tsos,
                                        const Propagator& prop,
                                        const MeasurementEstimator& est,
                                        const SubLayerCrossing& crossing,

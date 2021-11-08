@@ -1,13 +1,13 @@
-#include "Phase2EndcapFlatRingBuilder.h"
+#include "Phase2EndcapSingleRingBuilder.h"
 #include "TrackingTools/DetLayers/interface/DetLayerException.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 
 using namespace edm;
 using namespace std;
 
-Phase2EndcapFlatRing* Phase2EndcapFlatRingBuilder::build(const GeometricDet* aPhase2EndcapFlatRing,
+Phase2EndcapSingleRing* Phase2EndcapSingleRingBuilder::build(const GeometricDet* aPhase2EndcapSingleRing,
                                                  const TrackerGeometry* theGeomDetGeometry) {
-  vector<const GeometricDet*> allGeometricDets = aPhase2EndcapFlatRing->components();
+  vector<const GeometricDet*> allGeometricDets = aPhase2EndcapSingleRing->components();
   vector<const GeometricDet*> compGeometricDets;
   vector<const GeomDet*> allDets;
 
@@ -18,7 +18,7 @@ Phase2EndcapFlatRing* Phase2EndcapFlatRingBuilder::build(const GeometricDet* aPh
       allDets.push_back(theGeomDet);
    }
 
-  LogDebug("TkDetLayers") << "Phase2EndcapFlatRingBuilder with #Modules: " << allGeometricDets.size() << std::endl;
+  LogDebug("TkDetLayers") << "Phase2EndcapSingleRingBuilder with #Modules: " << allGeometricDets.size() << std::endl;
 
-  return new Phase2EndcapFlatRing(allDets);
+  return new Phase2EndcapSingleRing(allDets);
 }

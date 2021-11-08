@@ -2,19 +2,19 @@
 #define TkDetLayers_Phase2EndcapSubDisk_h
 
 #include "TrackingTools/DetLayers/interface/RingedForwardLayer.h"
-#include "Phase2EndcapFlatRing.h"
+#include "Phase2EndcapSingleRing.h"
 #include <array>
 #include <atomic>
 
 /** A concrete implementation for Phase 2 Endcap/Forward layer 
- *  built out of Phase2EndcapFlatRings
+ *  built out of Phase2EndcapSingleRings
  *  this classs is used for both OT and Pixel detector
  */
 
 #pragma GCC visibility push(hidden)
 class Phase2EndcapSubDisk final : public RingedForwardLayer {
 public:
-  Phase2EndcapSubDisk(std::vector<const Phase2EndcapFlatRing*>& rings) __attribute__((cold));
+  Phase2EndcapSubDisk(std::vector<const Phase2EndcapSingleRing*>& rings) __attribute__((cold));
   ~Phase2EndcapSubDisk() override __attribute__((cold));
 
   // Default implementations would not properly manage memory
@@ -39,7 +39,7 @@ public:
 
 private:
   // private methods for the implementation of groupedCompatibleDets()
-  BoundDisk* computeDisk(const std::vector<const Phase2EndcapFlatRing*>& rings) const __attribute__((cold));
+  BoundDisk* computeDisk(const std::vector<const Phase2EndcapSingleRing*>& rings) const __attribute__((cold));
 
   std::array<int, 3> ringIndicesByCrossingProximity(const TrajectoryStateOnSurface& startingState,
                                                     const Propagator& prop) const;
@@ -60,7 +60,7 @@ private:
 private:
   std::vector<GeomDet const*> theBasicComps;
   mutable std::atomic<std::vector<const GeometricSearchDet*>*> theComponents;
-  std::vector<const Phase2EndcapFlatRing*> theComps;
+  std::vector<const Phase2EndcapSingleRing*> theComps;
   struct RingPar {
     float theRingR, thetaRingMin, thetaRingMax;
   };

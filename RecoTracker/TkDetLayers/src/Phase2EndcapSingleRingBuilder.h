@@ -1,20 +1,20 @@
-#ifndef TkDetLayers_Phase2EndcapFlatRingBuilder_h
-#define TkDetLayers_Phase2EndcapFlatRingBuilder_h
+#ifndef TkDetLayers_Phase2EndcapSingleRingBuilder_h
+#define TkDetLayers_Phase2EndcapSingleRingBuilder_h
 
-#include "Phase2EndcapFlatRing.h"
+#include "Phase2EndcapSingleRing.h"
 
 #include "FWCore/Framework/interface/ESHandle.h"
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeometry.h"
 #include "Geometry/TrackerNumberingBuilder/interface/GeometricDet.h"
 
-/** A concrete builder for Phase2EndcapFlatRing 
+/** A concrete builder for Phase2EndcapSingleRing 
  */
 
 #pragma GCC visibility push(hidden)
-class Phase2EndcapFlatRingBuilder {
+class Phase2EndcapSingleRingBuilder {
 public:
-  Phase2EndcapFlatRingBuilder(){};
-  Phase2EndcapFlatRing* build(const GeometricDet* aPhase2EndcapFlatRing,
+  Phase2EndcapSingleRingBuilder(){};
+  Phase2EndcapSingleRing* build(const GeometricDet* aPhase2EndcapSingleRing,
                           const TrackerGeometry* theGeomDetGeometry) __attribute__((cold));
 };
 

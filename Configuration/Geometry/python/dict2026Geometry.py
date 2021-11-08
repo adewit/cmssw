@@ -364,7 +364,7 @@ trackerDict = {
     },
     "TX1" : {
         1 : [
-            'Geometry/TrackerCommonData/data/PhaseII/trackerParameters.xml',
+            'Geometry/TrackerCommonData/data/PhaseII/TFPXTEPXReordered/trackerParameters.xml',
             'Geometry/TrackerCommonData/data/pixfwdCommon.xml',
             'Geometry/TrackerCommonData/data/PhaseII/Tracker_DD4hep_compatible_2021_02/pixfwd.xml',
             'Geometry/TrackerCommonData/data/PhaseII/OuterTracker616_2020_04/pixbar.xml',

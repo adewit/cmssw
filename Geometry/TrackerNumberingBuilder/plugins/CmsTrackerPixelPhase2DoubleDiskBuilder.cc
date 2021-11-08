@@ -1,4 +1,4 @@
-#include "Geometry/TrackerNumberingBuilder/plugins/CmsTrackerPixelPhase2FatDiskBuilder.h"
+#include "Geometry/TrackerNumberingBuilder/plugins/CmsTrackerPixelPhase2DoubleDiskBuilder.h"
 #include "DetectorDescription/Core/interface/DDFilteredView.h"
 #include "DetectorDescription/DDCMS/interface/DDFilteredView.h"
 #include "Geometry/TrackerNumberingBuilder/interface/GeometricDet.h"
@@ -12,7 +12,7 @@
 using namespace std;
 
 template <class FilteredView>
-void CmsTrackerPixelPhase2FatDiskBuilder<FilteredView>::buildComponent(FilteredView& fv,
+void CmsTrackerPixelPhase2DoubleDiskBuilder<FilteredView>::buildComponent(FilteredView& fv,
                                                                     GeometricDet* g,
                                                                     const std::string& s) {
   CmsTrackerPixelPhase2SubDiskBuilder<FilteredView> theCmsTrackerPixelPhase2SubDiskBuilder;
@@ -26,14 +26,14 @@ void CmsTrackerPixelPhase2FatDiskBuilder<FilteredView>::buildComponent(FilteredV
       theCmsTrackerPixelPhase2SubDiskBuilder.build(fv, subdet, s);
       break;
     default:
-      edm::LogError("CmsTrackerPixelPhase2FatDiskBuilder")
+      edm::LogError("CmsTrackerPixelPhase2DoubleDiskBuilder")
           << " ERROR - I was expecting a SubDisk, I got a " << ExtractStringFromDDD<FilteredView>::getString(s, &fv);
   }
   g->addComponent(subdet);
 }
 
 template <class FilteredView>
-void CmsTrackerPixelPhase2FatDiskBuilder<FilteredView>::sortNS(FilteredView& fv, GeometricDet* det) {
+void CmsTrackerPixelPhase2DoubleDiskBuilder<FilteredView>::sortNS(FilteredView& fv, GeometricDet* det) {
   GeometricDet::ConstGeometricDetContainer& comp = det->components();
 
   std::sort(comp.begin(), comp.end(), CmsTrackerLevelBuilderHelper::isLessModZ);
@@ -48,11 +48,10 @@ void CmsTrackerPixelPhase2FatDiskBuilder<FilteredView>::sortNS(FilteredView& fv,
  // }
 
   for (uint32_t i = 0; i < comp.size(); i++) {
-    std::cout<<"Setting geographicalID in FatDiskBuilder of "<<i<<std::endl;
     det->component(i)->setGeographicalID(i);
   }
 
 }
 
-template class CmsTrackerPixelPhase2FatDiskBuilder<DDFilteredView>;
-template class CmsTrackerPixelPhase2FatDiskBuilder<cms::DDFilteredView>;
+template class CmsTrackerPixelPhase2DoubleDiskBuilder<DDFilteredView>;
+template class CmsTrackerPixelPhase2DoubleDiskBuilder<cms::DDFilteredView>;

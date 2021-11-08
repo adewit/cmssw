@@ -1,5 +1,5 @@
-#ifndef TkDetLayers_Phase2EndcapFlatRing_h
-#define TkDetLayers_Phase2EndcapFlatRing_h
+#ifndef TkDetLayers_Phase2EndcapSingleRing_h
+#define TkDetLayers_Phase2EndcapSingleRing_h
 
 #include "TrackingTools/DetLayers/interface/GeometricSearchDet.h"
 #include "Utilities/BinningTools/interface/PeriodicBinFinderInPhi.h"
@@ -10,10 +10,10 @@
  */
 
 #pragma GCC visibility push(hidden)
-class Phase2EndcapFlatRing final : public GeometricSearchDet {
+class Phase2EndcapSingleRing final : public GeometricSearchDet {
 public:
-  Phase2EndcapFlatRing(std::vector<const GeomDet*>& allDets);
-  ~Phase2EndcapFlatRing() override;
+  Phase2EndcapSingleRing(std::vector<const GeomDet*>& allDets);
+  ~Phase2EndcapSingleRing() override;
 
   // GeometricSearchDet interface
   const BoundSurface& surface() const override { return *theDisk; }

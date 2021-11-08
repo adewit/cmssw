@@ -4,7 +4,7 @@
 #include "DataFormats/DetId/interface/DetId.h"
 #include "Geometry/TrackerNumberingBuilder/plugins/CmsTrackerPhase2TPDiskBuilder.h"
 #include "Geometry/TrackerNumberingBuilder/plugins/CmsTrackerPixelPhase2DiskBuilder.h"
-#include "Geometry/TrackerNumberingBuilder/plugins/CmsTrackerPixelPhase2FatDiskBuilder.h"
+#include "Geometry/TrackerNumberingBuilder/plugins/CmsTrackerPixelPhase2DoubleDiskBuilder.h"
 #include "Geometry/TrackerNumberingBuilder/plugins/CmsTrackerOTDiscBuilder.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "DetectorDescription/Core/interface/DDFilteredView.h"
@@ -19,7 +19,7 @@ void CmsTrackerPixelPhase2NearEndcapBuilder<FilteredView>::buildComponent(Filter
                                                                       const std::string& s) {
   CmsTrackerPhase2TPDiskBuilder<FilteredView> theCmsTrackerPhase2DiskBuilder;
   CmsTrackerPixelPhase2DiskBuilder<FilteredView> theCmsTrackerPixelPhase2DiskBuilder;
-  CmsTrackerPixelPhase2FatDiskBuilder<FilteredView> theCmsTrackerPixelPhase2FatDiskBuilder;
+  CmsTrackerPixelPhase2DoubleDiskBuilder<FilteredView> theCmsTrackerPixelPhase2DoubleDiskBuilder;
   CmsTrackerOTDiscBuilder<FilteredView> theCmsTrackerOTDiscBuilder;
 
   GeometricDet* subdet = new GeometricDet(&fv,
@@ -36,8 +36,8 @@ void CmsTrackerPixelPhase2NearEndcapBuilder<FilteredView>::buildComponent(Filter
     case GeometricDet::PixelPhase2TDRDisk:
       theCmsTrackerPixelPhase2DiskBuilder.build(fv, subdet, s);
       break;
-    case GeometricDet::PixelPhase2FatDisk:
-      theCmsTrackerPixelPhase2FatDiskBuilder.build(fv, subdet, s);
+    case GeometricDet::PixelPhase2DoubleDisk:
+      theCmsTrackerPixelPhase2DoubleDiskBuilder.build(fv, subdet, s);
       break;
     case GeometricDet::OTPhase2Wheel:
       theCmsTrackerOTDiscBuilder.build(fv, subdet, s);
@@ -60,9 +60,6 @@ void CmsTrackerPixelPhase2NearEndcapBuilder<FilteredView>::sortNS(FilteredView& 
   for (uint32_t i = 0; i < comp.size(); i++) {
     det->component(i)->setGeographicalID(
         i + 1);  // Every subdetector: Inner pixel first, OT later, then sort by disk number
-
-    std::cout<<"Setting geographicalID in Phase2NearEndcapBuilder of "<<i+1<<std::endl;
-    std::cout<<"detID is "<<det->component(i)->geographicalId()<<std::endl;
   }
 }
 
