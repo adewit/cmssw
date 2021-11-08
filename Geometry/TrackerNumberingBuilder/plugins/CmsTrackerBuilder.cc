@@ -7,7 +7,6 @@
 #include "Geometry/TrackerNumberingBuilder/plugins/CmsTrackerSubStrctBuilder.h"
 #include "Geometry/TrackerNumberingBuilder/plugins/CmsTrackerPixelPhase1EndcapBuilder.h"
 #include "Geometry/TrackerNumberingBuilder/plugins/CmsTrackerPixelPhase2EndcapBuilder.h"
-#include "Geometry/TrackerNumberingBuilder/plugins/CmsTrackerPixelPhase2NearEndcapBuilder.h"
 
 #include <bitset>
 
@@ -16,7 +15,6 @@ void CmsTrackerBuilder<FilteredView>::buildComponent(FilteredView& fv, Geometric
   CmsTrackerSubStrctBuilder<FilteredView> theCmsTrackerSubStrctBuilder;
   CmsTrackerPixelPhase1EndcapBuilder<FilteredView> theCmsTrackerPixelPhase1EndcapBuilder;
   CmsTrackerPixelPhase2EndcapBuilder<FilteredView> theCmsTrackerPixelPhase2EndcapBuilder;
-  CmsTrackerPixelPhase2NearEndcapBuilder<FilteredView> theCmsTrackerPixelPhase2NearEndcapBuilder;
 
   GeometricDet* subdet = new GeometricDet(&fv,
                                           CmsTrackerLevelBuilder<FilteredView>::theCmsTrackerStringToEnum.type(
@@ -40,9 +38,6 @@ void CmsTrackerBuilder<FilteredView>::buildComponent(FilteredView& fv, Geometric
       break;
     case GeometricDet::PixelPhase2EndCap:
       theCmsTrackerPixelPhase2EndcapBuilder.build(fv, subdet, s);
-      break;
-    case GeometricDet::PixelPhase2NearEndCap:
-      theCmsTrackerPixelPhase2NearEndcapBuilder.build(fv,subdet,s);
       break;
     case GeometricDet::OTPhase2EndCap:
       theCmsTrackerPixelPhase2EndcapBuilder.build(fv, subdet, s);
