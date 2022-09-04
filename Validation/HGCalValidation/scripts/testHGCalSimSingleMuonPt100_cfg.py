@@ -144,6 +144,7 @@ process.simulation_step = cms.Path(process.psim)
 process.genfiltersummary_step = cms.EndPath(process.genFilterSummary)
 process.endjob_step = cms.EndPath(process.endOfProcess)
 process.analysis_step = cms.Path(process.hgcalHitPartialEE+process.hgcalHitPartialHE+process.hgcalHitPartialHEB)
+process.analysis_step = cms.Path(process.hgcalHitPartialEE+process.hgcalHitPartialHE)
 process.out_step = cms.EndPath(process.output)
 
 # Schedule definition
