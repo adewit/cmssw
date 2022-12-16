@@ -36,6 +36,30 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 <PartSelector path="//ITLayer4RodFlipped"/>
 <Parameter name="TkDDDStructure" value="PixelBarrelLadder"/>
 </SpecPar>
+<SpecPar name = "InnerTrackerBarrelCombinedPar">
+<PartSelector path="//ITLayer1R1BModule"/>
+<PartSelector path="//ITLayer1R2BModule"/>
+<PartSelector path="//ITLayer1R3BModule"/>
+<PartSelector path="//ITLayer1R4BModule"/>
+<PartSelector path="//ITLayer1R5BModule"/>
+<Parameter name="TkDDDStructure" value="Phase2ITBarrelCombined"/>
+</SpecPar>
+<SpecPar name="InnerTrackerFirstDetectorsPar">
+<PartSelector path="//ITLayer1R1BModuleInnerPixel3DOneActive"/>
+<PartSelector path="//ITLayer1R2BModuleInnerPixel3DOneActive"/>
+<PartSelector path="//ITLayer1R3BModuleInnerPixel3DOneActive"/>
+<PartSelector path="//ITLayer1R4BModuleInnerPixel3DOneActive"/>
+<PartSelector path="//ITLayer1R5BModuleInnerPixel3DOneActive"/>
+<Parameter name="TrackerFirstDetectors" value="true"/>
+</SpecPar>
+<SpecPar name="InnerTrackerSecondDetectorsPar">
+<PartSelector path="//ITLayer1R1BModuleInnerPixel3DTwoActive"/>
+<PartSelector path="//ITLayer1R2BModuleInnerPixel3DTwoActive"/>
+<PartSelector path="//ITLayer1R3BModuleInnerPixel3DTwoActive"/>
+<PartSelector path="//ITLayer1R4BModuleInnerPixel3DTwoActive"/>
+<PartSelector path="//ITLayer1R5BModuleInnerPixel3DTwoActive"/>
+<Parameter name="TrackerSecondDetectors" value="true"/>
+</SpecPar>
 <SpecPar name="PixelPhase2EndcapSubDetPar">
 <PartSelector path="//Phase2PixelEndcap"/>
 <Parameter name="TkDDDStructure" value="PixelPhase2EndcapSubDet"/>
