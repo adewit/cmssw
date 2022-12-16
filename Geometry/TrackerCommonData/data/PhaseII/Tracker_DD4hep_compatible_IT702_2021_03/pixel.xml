@@ -6510,7 +6510,7 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 <Box name="ITLayer1R1BModuleInnerPixelOnewafer" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
 <Box name="ITLayer1R1BModuleInnerPixelTwowafer" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
 <Box name="ITLayer1R1BModuleInnerPixel3DOneActive" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
-<Box name="ITLayer1R1BModuleInnerPixel3DTwoActive" dx="8.4*mm" dy="21.85*mm" dz="0.075*mm"/>
+<Box name="ITLayer1R1BModuleInnerPixel3DTwoActive" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
 <Box name="ITLayer1R1BModuleHybrid" dx="8.4*mm" dy="21.85*mm" dz="0.25*mm"/>
 <Box name="ITLayer1R1BModuleChip" dx="8.9*mm" dy="21.85*mm" dz="0.25*mm"/>
 <Box name="ITLayer1R1BModuleDeadAreaRight" dx="0.075*mm" dy="21.85*mm" dz="0.075*mm"/>
@@ -6521,7 +6521,7 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 <Box name="ITLayer1R2BModuleInnerPixelOnewafer" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
 <Box name="ITLayer1R2BModuleInnerPixelTwowafer" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
 <Box name="ITLayer1R2BModuleInnerPixel3DOneActive" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
-<Box name="ITLayer1R2BModuleInnerPixel3DTwoActive" dx="8.4*mm" dy="21.85*mm" dz="0.075*mm"/>
+<Box name="ITLayer1R2BModuleInnerPixel3DTwoActive" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
 <Box name="ITLayer1R2BModuleHybrid" dx="8.4*mm" dy="21.85*mm" dz="0.25*mm"/>
 <Box name="ITLayer1R2BModuleChip" dx="8.9*mm" dy="21.85*mm" dz="0.25*mm"/>
 <Box name="ITLayer1R2BModuleDeadAreaRight" dx="0.075*mm" dy="21.85*mm" dz="0.075*mm"/>
@@ -6532,7 +6532,7 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 <Box name="ITLayer1R3BModuleInnerPixelOnewafer" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
 <Box name="ITLayer1R3BModuleInnerPixelTwowafer" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
 <Box name="ITLayer1R3BModuleInnerPixel3DOneActive" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
-<Box name="ITLayer1R3BModuleInnerPixel3DTwoActive" dx="8.4*mm" dy="21.85*mm" dz="0.075*mm"/>
+<Box name="ITLayer1R3BModuleInnerPixel3DTwoActive" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
 <Box name="ITLayer1R3BModuleHybrid" dx="8.4*mm" dy="21.85*mm" dz="0.25*mm"/>
 <Box name="ITLayer1R3BModuleChip" dx="8.9*mm" dy="21.85*mm" dz="0.25*mm"/>
 <Box name="ITLayer1R3BModuleDeadAreaRight" dx="0.075*mm" dy="21.85*mm" dz="0.075*mm"/>
@@ -6543,7 +6543,7 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 <Box name="ITLayer1R4BModuleInnerPixelOnewafer" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
 <Box name="ITLayer1R4BModuleInnerPixelTwowafer" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
 <Box name="ITLayer1R4BModuleInnerPixel3DOneActive" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
-<Box name="ITLayer1R4BModuleInnerPixel3DTwoActive" dx="8.4*mm" dy="21.85*mm" dz="0.075*mm"/>
+<Box name="ITLayer1R4BModuleInnerPixel3DTwoActive" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
 <Box name="ITLayer1R4BModuleHybrid" dx="8.4*mm" dy="21.85*mm" dz="0.25*mm"/>
 <Box name="ITLayer1R4BModuleChip" dx="8.9*mm" dy="21.85*mm" dz="0.25*mm"/>
 <Box name="ITLayer1R4BModuleDeadAreaRight" dx="0.075*mm" dy="21.85*mm" dz="0.075*mm"/>
@@ -6554,7 +6554,7 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 <Box name="ITLayer1R5BModuleInnerPixelOnewafer" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
 <Box name="ITLayer1R5BModuleInnerPixelTwowafer" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
 <Box name="ITLayer1R5BModuleInnerPixel3DOneActive" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
-<Box name="ITLayer1R5BModuleInnerPixel3DTwoActive" dx="8.4*mm" dy="21.85*mm" dz="0.075*mm"/>
+<Box name="ITLayer1R5BModuleInnerPixel3DTwoActive" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
 <Box name="ITLayer1R5BModuleHybrid" dx="8.4*mm" dy="21.85*mm" dz="0.25*mm"/>
 <Box name="ITLayer1R5BModuleChip" dx="8.9*mm" dy="21.85*mm" dz="0.25*mm"/>
 <Box name="ITLayer1R5BModuleDeadAreaRight" dx="0.075*mm" dy="21.85*mm" dz="0.075*mm"/>
@@ -7599,12 +7599,12 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R1BModuleInnerPixelOnewafer"/>
 <rChild name="pixel:ITLayer1R1BModuleInnerPixel3DOneActive"/>
-<Translation x="0*mm" y="11.05*mm" z="0*mm"/>
+<Translation x="0*mm" y="0*mm" z="0*mm"/>
 </PosPart>
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R1BModuleInnerPixelTwowafer"/>
 <rChild name="pixel:ITLayer1R1BModuleInnerPixel3DTwoActive"/>
-<Translation x="0*mm" y="11.05*mm" z="0*mm"/>
+<Translation x="0*mm" y="0*mm" z="0*mm"/>
 </PosPart>
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R1BModule"/>
@@ -7640,13 +7640,13 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 <rParent name="pixel:ITLayer1RodFlipped"/>
 <rChild name="pixel:ITLayer1R2BModule"/>
 <rRotation name="pixel:INNERTRACKERRODTOFLIPPEDMODULE"/>
-<Translation x="0*mm" y="11.05*mm" z="44.4*mm"/>
+<Translation x="0*mm" y="0*mm" z="44.4*mm"/>
 </PosPart>
 <PosPart copyNumber="2">
 <rParent name="pixel:ITLayer1RodFlipped"/>
 <rChild name="pixel:ITLayer1R2BModule"/>
 <rRotation name="pixel:INNERTRACKERRODTOFLIPPEDMODULE"/>
-<Translation x="0*mm" y="11.05*mm" z="-44.4*mm"/>
+<Translation x="0*mm" y="0*mm" z="-44.4*mm"/>
 </PosPart>
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R2BModule"/>
@@ -7661,12 +7661,12 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R2BModuleInnerPixelOnewafer"/>
 <rChild name="pixel:ITLayer1R2BModuleInnerPixel3DOneActive"/>
-<Translation x="0*mm" y="11.05*mm" z="0*mm"/>
+<Translation x="0*mm" y="0*mm" z="0*mm"/>
 </PosPart>
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R2BModuleInnerPixelTwowafer"/>
 <rChild name="pixel:ITLayer1R2BModuleInnerPixel3DTwoActive"/>
-<Translation x="0*mm" y="11.05*mm" z="0*mm"/>
+<Translation x="0*mm" y="0*mm" z="0*mm"/>
 </PosPart>
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R2BModule"/>
@@ -7702,13 +7702,13 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 <rParent name="pixel:ITLayer1RodFlipped"/>
 <rChild name="pixel:ITLayer1R3BModule"/>
 <rRotation name="pixel:INNERTRACKERRODTOFLIPPEDMODULE"/>
-<Translation x="0*mm" y="11.05*mm" z="88.8*mm"/>
+<Translation x="0*mm" y="0*mm" z="88.8*mm"/>
 </PosPart>
 <PosPart copyNumber="2">
 <rParent name="pixel:ITLayer1RodFlipped"/>
 <rChild name="pixel:ITLayer1R3BModule"/>
 <rRotation name="pixel:INNERTRACKERRODTOFLIPPEDMODULE"/>
-<Translation x="0*mm" y="11.05*mm" z="-88.8*mm"/>
+<Translation x="0*mm" y="0*mm" z="-88.8*mm"/>
 </PosPart>
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R3BModule"/>
@@ -7723,12 +7723,12 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R3BModuleInnerPixelOnewafer"/>
 <rChild name="pixel:ITLayer1R3BModuleInnerPixel3DOneActive"/>
-<Translation x="0*mm" y="11.05*mm" z="0*mm"/>
+<Translation x="0*mm" y="0*mm" z="0*mm"/>
 </PosPart>
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R3BModuleInnerPixelTwowafer"/>
 <rChild name="pixel:ITLayer1R3BModuleInnerPixel3DTwoActive"/>
-<Translation x="0*mm" y="11.05*mm" z="0*mm"/>
+<Translation x="0*mm" y="0*mm" z="0*mm"/>
 </PosPart>
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R3BModule"/>
@@ -7764,13 +7764,13 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 <rParent name="pixel:ITLayer1RodFlipped"/>
 <rChild name="pixel:ITLayer1R4BModule"/>
 <rRotation name="pixel:INNERTRACKERRODTOFLIPPEDMODULE"/>
-<Translation x="0*mm" y="11.05*mm" z="133.2*mm"/>
+<Translation x="0*mm" y="0*mm" z="133.2*mm"/>
 </PosPart>
 <PosPart copyNumber="2">
 <rParent name="pixel:ITLayer1RodFlipped"/>
 <rChild name="pixel:ITLayer1R4BModule"/>
 <rRotation name="pixel:INNERTRACKERRODTOFLIPPEDMODULE"/>
-<Translation x="0*mm" y="11.05*mm" z="-133.2*mm"/>
+<Translation x="0*mm" y="0*mm" z="-133.2*mm"/>
 </PosPart>
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R4BModule"/>
@@ -7785,12 +7785,12 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R4BModuleInnerPixelOnewafer"/>
 <rChild name="pixel:ITLayer1R4BModuleInnerPixel3DOneActive"/>
-<Translation x="0*mm" y="11.05*mm" z="0*mm"/>
+<Translation x="0*mm" y="0*mm" z="0*mm"/>
 </PosPart>
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R4BModuleInnerPixelTwowafer"/>
 <rChild name="pixel:ITLayer1R4BModuleInnerPixel3DTwoActive"/>
-<Translation x="0*mm" y="11.05*mm" z="0*mm"/>
+<Translation x="0*mm" y="0*mm" z="0*mm"/>
 </PosPart>
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R4BModule"/>
@@ -7826,13 +7826,13 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 <rParent name="pixel:ITLayer1RodFlipped"/>
 <rChild name="pixel:ITLayer1R5BModule"/>
 <rRotation name="pixel:INNERTRACKERRODTOFLIPPEDMODULE"/>
-<Translation x="0*mm" y="11.05*mm" z="177.6*mm"/>
+<Translation x="0*mm" y="0*mm" z="177.6*mm"/>
 </PosPart>
 <PosPart copyNumber="2">
 <rParent name="pixel:ITLayer1RodFlipped"/>
 <rChild name="pixel:ITLayer1R5BModule"/>
 <rRotation name="pixel:INNERTRACKERRODTOFLIPPEDMODULE"/>
-<Translation x="0*mm" y="11.05*mm" z="-177.6*mm"/>
+<Translation x="0*mm" y="0*mm" z="-177.6*mm"/>
 </PosPart>
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R5BModule"/>
@@ -7847,12 +7847,12 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R5BModuleInnerPixelOnewafer"/>
 <rChild name="pixel:ITLayer1R5BModuleInnerPixel3DOneActive"/>
-<Translation x="0*mm" y="11.05*mm" z="0*mm"/>
+<Translation x="0*mm" y="0*mm" z="0*mm"/>
 </PosPart>
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R5BModuleInnerPixelTwowafer"/>
 <rChild name="pixel:ITLayer1R5BModuleInnerPixel3DTwoActive"/>
-<Translation x="0*mm" y="11.05*mm" z="0*mm"/>
+<Translation x="0*mm" y="0*mm" z="0*mm"/>
 </PosPart>
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R5BModule"/>
@@ -7888,55 +7888,55 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 <rParent name="pixel:ITLayer1RodUnflipped"/>
 <rChild name="pixel:ITLayer1R1BModule"/>
 <rRotation name="pixel:INNERTRACKERRODTOMODULE"/>
-<Translation x="0*mm" y="11.05*mm" z="3.55271e-15*mm"/>
+<Translation x="0*mm" y="0*mm" z="3.55271e-15*mm"/>
 </PosPart>
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1RodUnflipped"/>
 <rChild name="pixel:ITLayer1R2BModule"/>
 <rRotation name="pixel:INNERTRACKERRODTOMODULE"/>
-<Translation x="0*mm" y="11.05*mm" z="44.4*mm"/>
+<Translation x="0*mm" y="0*mm" z="44.4*mm"/>
 </PosPart>
 <PosPart copyNumber="2">
 <rParent name="pixel:ITLayer1RodUnflipped"/>
 <rChild name="pixel:ITLayer1R2BModule"/>
 <rRotation name="pixel:INNERTRACKERRODTOMODULE"/>
-<Translation x="0*mm" y="11.05*mm" z="-44.4*mm"/>
+<Translation x="0*mm" y="0*mm" z="-44.4*mm"/>
 </PosPart>
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1RodUnflipped"/>
 <rChild name="pixel:ITLayer1R3BModule"/>
 <rRotation name="pixel:INNERTRACKERRODTOMODULE"/>
-<Translation x="0*mm" y="11.05*mm" z="88.8*mm"/>
+<Translation x="0*mm" y="0*mm" z="88.8*mm"/>
 </PosPart>
 <PosPart copyNumber="2">
 <rParent name="pixel:ITLayer1RodUnflipped"/>
 <rChild name="pixel:ITLayer1R3BModule"/>
 <rRotation name="pixel:INNERTRACKERRODTOMODULE"/>
-<Translation x="0*mm" y="11.05*mm" z="-88.8*mm"/>
+<Translation x="0*mm" y="0*mm" z="-88.8*mm"/>
 </PosPart>
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1RodUnflipped"/>
 <rChild name="pixel:ITLayer1R4BModule"/>
 <rRotation name="pixel:INNERTRACKERRODTOMODULE"/>
-<Translation x="0*mm" y="11.05*mm" z="133.2*mm"/>
+<Translation x="0*mm" y="0*mm" z="133.2*mm"/>
 </PosPart>
 <PosPart copyNumber="2">
 <rParent name="pixel:ITLayer1RodUnflipped"/>
 <rChild name="pixel:ITLayer1R4BModule"/>
 <rRotation name="pixel:INNERTRACKERRODTOMODULE"/>
-<Translation x="0*mm" y="11.05*mm" z="-133.2*mm"/>
+<Translation x="0*mm" y="0*mm" z="-133.2*mm"/>
 </PosPart>
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1RodUnflipped"/>
 <rChild name="pixel:ITLayer1R5BModule"/>
 <rRotation name="pixel:INNERTRACKERRODTOMODULE"/>
-<Translation x="0*mm" y="11.05*mm" z="177.6*mm"/>
+<Translation x="0*mm" y="0*mm" z="177.6*mm"/>
 </PosPart>
 <PosPart copyNumber="2">
 <rParent name="pixel:ITLayer1RodUnflipped"/>
 <rChild name="pixel:ITLayer1R5BModule"/>
 <rRotation name="pixel:INNERTRACKERRODTOMODULE"/>
-<Translation x="0*mm" y="11.05*mm" z="-177.6*mm"/>
+<Translation x="0*mm" y="0*mm" z="-177.6*mm"/>
 </PosPart>
 <PosPart copyNumber="11">
 <rParent name="pixel:ITLayer1"/>

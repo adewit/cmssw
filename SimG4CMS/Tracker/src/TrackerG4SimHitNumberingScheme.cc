@@ -25,11 +25,12 @@ void TrackerG4SimHitNumberingScheme::buildAll() {
 
   std::vector<const GeometricDet*> allSensitiveDets;
   geomDet_->deepComponents(allSensitiveDets);
-  edm::LogVerbatim("TrackerSimInfoNumbering")
-      << " TouchableTo History: got " << allSensitiveDets.size() << " sensitive detectors from GeometricDet.";
+  std::cout << " TouchableTo History: got " << allSensitiveDets.size() << " sensitive detectors from GeometricDet." <<std::endl;
 
   for (auto& theSD : allSensitiveDets) {
     auto const& t = theSD->translation();
+    std::cout<<" the name of this sensitive det is "<<theSD->name()<<std::endl;
+    std::cout<<" the ID of this sensitive det is "<<theSD->geographicalId()<<std::endl;
     theNavigator.LocateGlobalPointAndSetup(G4ThreeVector(t.x(), t.y(), t.z()));
     G4TouchableHistory* hist = theNavigator.CreateTouchableHistory();
     TrackerG4SimHitNumberingScheme::Nav_Story st;
@@ -37,14 +38,14 @@ void TrackerG4SimHitNumberingScheme::buildAll() {
 
     directMap_[st] = theSD->geographicalId();
 
-    LogDebug("TrackerSimDebugNumbering") << " INSERTING LV " << hist->GetVolume()->GetLogicalVolume()->GetName()
-                                         << " SD: "
-                                         << hist->GetVolume()->GetLogicalVolume()->GetSensitiveDetector()->GetName()
-                                         << " Now size is " << directMap_.size();
+    std::cout << " INSERTING LV " << hist->GetVolume()->GetLogicalVolume()->GetName() <<std::endl;
+                                         //<< " SD: "
+                                         //<< hist->GetVolume()->GetLogicalVolume()->GetSensitiveDetector()->GetName()
+                                         //<< " Now size is " << directMap_.size()<<std::endl;
     delete hist;
   }
-  edm::LogVerbatim("TrackerSimInfoNumbering")
-      << " TrackerG4SimHitNumberingScheme: mapped " << directMap_.size() << " detectors to Geant4.";
+  
+ std::cout<< " TrackerG4SimHitNumberingScheme: mapped " << directMap_.size() << " detectors to Geant4."<<std::endl;
 
   if (directMap_.size() != allSensitiveDets.size()) {
     edm::LogError("TrackerSimInfoNumbering") << " ERROR: GeomDet sensitive detectors do not match Geant4 ones.";
