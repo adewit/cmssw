@@ -32,6 +32,7 @@ class GeometricSearchTracker;
 class SiStripRecHitMatcher;
 class GluedGeomDet;
 class StackGeomDet;
+class DoubleSensGeomDet;
 class SiPixelFedCabling;
 class TrackerGeometry;
 
@@ -100,6 +101,7 @@ public:
   const std::vector<TkPixelMeasurementDet>& pixelDets() const { return thePixelDets; }
   const std::vector<TkGluedMeasurementDet>& gluedDets() const { return theGluedDets; }
   const std::vector<TkStackMeasurementDet>& stackDets() const { return theStackDets; }
+  const std::vector<TkStackMeasurementDet>& doubleSensGeomDets() const { return theDoubleSensGeomDets; }
 
   const StMeasurementConditionSet& stripDetConditions() const override { return theStDetConditions; }
   const PxMeasurementConditionSet& pixelDetConditions() const override { return thePxDetConditions; }
@@ -117,6 +119,7 @@ protected:
   std::vector<TkPhase2OTMeasurementDet> thePhase2Dets;
   std::vector<TkGluedMeasurementDet> theGluedDets;
   std::vector<TkStackMeasurementDet> theStackDets;
+  std::vector<TkStackMeasurementDet> theDoubleSensGeomDets;
 
   const SiPixelFedCabling* thePixelCabling;
 
@@ -131,6 +134,7 @@ protected:
 
   void addGluedDet(const GluedGeomDet* gd);
   void addStackDet(const StackGeomDet* gd);
+  void addDoubleSensGeomDet(const DoubleSensGeomDet* gd);
 
   void initGluedDet(TkGluedMeasurementDet& det, const TrackerTopology* trackerTopology);
   void initStackDet(TkStackMeasurementDet& det);
