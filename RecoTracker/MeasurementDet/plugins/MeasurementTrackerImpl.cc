@@ -7,6 +7,7 @@
 #include "Geometry/CommonDetUnit/interface/GeomDet.h"
 #include "Geometry/CommonDetUnit/interface/GluedGeomDet.h"
 #include "Geometry/CommonDetUnit/interface/StackGeomDet.h"
+#include "Geometry/CommonDetUnit/interface/DoubleSensGeomDet.h"
 #include "Geometry/Records/interface/TrackerDigiGeometryRecord.h"
 
 #include "MagneticField/Records/interface/IdealMagneticFieldRecord.h"
@@ -172,6 +173,12 @@ void MeasurementTrackerImpl::initialize(const TrackerTopology* trackerTopology) 
   for (unsigned int i = 0; i != theStackDets.size(); ++i)
     initStackDet(theStackDets[i]);
 
+  // and then the double sensor dets
+  sortTKD(theDoubleSensGeomDets);
+  for (unsigned int i = 0; i != theDoubleSensGeomDets.size(); ++i)
+    initStackDet(theDoubleSensGeomDets[i]); //We'll pretend these are stacked dets for now
+
+
   if (!checkDets())
     throw MeasurementDetException("Number of dets in MeasurementTracker not consistent with TrackerGeometry!");
 }
@@ -235,14 +242,17 @@ void MeasurementTrackerImpl::addDets(const TrackingGeometry::DetContainer& dets,
       //Glued or Stack GeomDet
       const GluedGeomDet* gluedDet = dynamic_cast<const GluedGeomDet*>(*gd);
       const StackGeomDet* stackDet = dynamic_cast<const StackGeomDet*>(*gd);
+      const DoubleSensGeomDet* doubleSensGeomDet = dynamic_cast<const DoubleSensGeomDet*>(*gd);
 
-      if ((gluedDet == nullptr && stackDet == nullptr) || (gluedDet != nullptr && stackDet != nullptr)) {
-        throw MeasurementDetException("MeasurementTracker ERROR: GeomDet neither DetUnit nor GluedDet nor StackDet");
+      if ((gluedDet == nullptr && stackDet == nullptr && doubleSensGeomDet == nullptr) || (gluedDet != nullptr && stackDet != nullptr && doubleSensGeomDet != nullptr)) {
+        throw MeasurementDetException("MeasurementTracker ERROR: GeomDet neither DetUnit nor GluedDet nor StackDet nor DoubleSensGeomDet");
       }
       if (gluedDet != nullptr)
         addGluedDet(gluedDet);
-      else
+      else if (stackDet != nullptr)
         addStackDet(stackDet);
+      else 
+        addDoubleSensGeomDet(doubleSensGeomDet);
     }
   }
 }
@@ -286,6 +296,11 @@ void MeasurementTrackerImpl::addStackDet(const StackGeomDet* gd) {
   //both cluster parameter estimators are needed? - right now just the thePixelCPE is used.
   theStackDets.push_back(TkStackMeasurementDet(gd, thePxDetConditions.pixelCPE()));
 }
+
+void MeasurementTrackerImpl::addDoubleSensGeomDet(const DoubleSensGeomDet* gd) {
+  theDoubleSensGeomDets.push_back(TkStackMeasurementDet(gd, thePxDetConditions.pixelCPE()));//Use stack measurement det for now to see if it works
+}
+
 
 void MeasurementTrackerImpl::initGluedDet(TkGluedMeasurementDet& det, const TrackerTopology* trackerTopology) {
   const GluedGeomDet& gd = det.specificGeomDet();
