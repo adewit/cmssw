@@ -34,6 +34,7 @@
 #include "TkPhase2OTMeasurementDet.h"
 #include "TkGluedMeasurementDet.h"
 #include "TkStackMeasurementDet.h"
+#include "TkDoubleSensMeasurementDet.h"
 
 #include "CondFormats/SiStripObjects/interface/SiStripNoises.h"
 #include "CondFormats/DataRecord/interface/SiStripNoisesRcd.h"
@@ -176,7 +177,7 @@ void MeasurementTrackerImpl::initialize(const TrackerTopology* trackerTopology) 
   // and then the double sensor dets
   sortTKD(theDoubleSensGeomDets);
   for (unsigned int i = 0; i != theDoubleSensGeomDets.size(); ++i)
-    initStackDet(theDoubleSensGeomDets[i]); //We'll pretend these are stacked dets for now
+    initDoubleSensDet(theDoubleSensGeomDets[i]); //We'll pretend these are stacked dets for now
 
 
   if (!checkDets())
@@ -298,7 +299,7 @@ void MeasurementTrackerImpl::addStackDet(const StackGeomDet* gd) {
 }
 
 void MeasurementTrackerImpl::addDoubleSensGeomDet(const DoubleSensGeomDet* gd) {
-  theDoubleSensGeomDets.push_back(TkStackMeasurementDet(gd, thePxDetConditions.pixelCPE()));//Use stack measurement det for now to see if it works
+  theDoubleSensGeomDets.push_back(TkDoubleSensMeasurementDet(gd, thePxDetConditions.pixelCPE()));
 }
 
 
@@ -325,6 +326,19 @@ void MeasurementTrackerImpl::initStackDet(TkStackMeasurementDet& det) {
   det.init(lowerDet, upperDet);
   theDetMap[gd.geographicalId()] = &det;
 }
+
+void MeasurementTrackerImpl::initDoubleSensDet(TkDoubleSensMeasurementDet& det) {
+  const DoubleSensGeomDet& gd = det.specificGeomDet();
+  const MeasurementDet* firstDet = findDet(gd.firstDet()->geographicalId());
+  const MeasurementDet* secondDet = findDet(gd.secondDet()->geographicalId());
+  if (firstDet == nullptr || secondDet == nullptr) {
+    edm::LogError("MeasurementDet") << "MeasurementTracker ERROR: StackDet components not found as MeasurementDets ";
+    throw MeasurementDetException("MeasurementTracker ERROR: StackDet components not found as MeasurementDets");
+  }
+  det.init(firstDet, secondDet);
+  theDetMap[gd.geographicalId()] = &det;
+}
+
 
 void MeasurementTrackerImpl::initializeStripStatus(const BadStripCutsDet& badStripCuts,
                                                    const SiStripQuality* quality,
