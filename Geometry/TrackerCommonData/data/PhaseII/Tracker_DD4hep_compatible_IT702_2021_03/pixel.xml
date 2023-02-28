@@ -2864,12 +2864,12 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 <rSolid name="pixel:ITLayer1R1BModuleInnerPixelTwowafer"/>
 <rMaterial name="materials:Air"/>
 </LogicalPart>
-<LogicalPart name="ITLayer1R1BModuleInnerPixel3DOneActive" category="unspecified">
-<rSolid name="pixel:ITLayer1R1BModuleInnerPixel3DOneActive"/>
+<LogicalPart name="ITLayer1R1BModuleInnerPixel3DActiveOne" category="unspecified">
+<rSolid name="pixel:ITLayer1R1BModuleInnerPixel3DActiveOne"/>
 <rMaterial name="tracker:tkLayout_SenSi"/>
 </LogicalPart>
-<LogicalPart name="ITLayer1R1BModuleInnerPixel3DTwoActive" category="unspecified">
-<rSolid name="pixel:ITLayer1R1BModuleInnerPixel3DTwoActive"/>
+<LogicalPart name="ITLayer1R1BModuleInnerPixel3DActiveTwo" category="unspecified">
+<rSolid name="pixel:ITLayer1R1BModuleInnerPixel3DActiveTwo"/>
 <rMaterial name="tracker:tkLayout_SenSi"/>
 </LogicalPart>
 <LogicalPart name="ITLayer1R1BModuleHybrid" category="unspecified">
@@ -2908,12 +2908,12 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 <rSolid name="pixel:ITLayer1R2BModuleInnerPixelTwowafer"/>
 <rMaterial name="materials:Air"/>
 </LogicalPart>
-<LogicalPart name="ITLayer1R2BModuleInnerPixel3DOneActive" category="unspecified">
-<rSolid name="pixel:ITLayer1R2BModuleInnerPixel3DOneActive"/>
+<LogicalPart name="ITLayer1R2BModuleInnerPixel3DActiveOne" category="unspecified">
+<rSolid name="pixel:ITLayer1R2BModuleInnerPixel3DActiveOne"/>
 <rMaterial name="tracker:tkLayout_SenSi"/>
 </LogicalPart>
-<LogicalPart name="ITLayer1R2BModuleInnerPixel3DTwoActive" category="unspecified">
-<rSolid name="pixel:ITLayer1R2BModuleInnerPixel3DTwoActive"/>
+<LogicalPart name="ITLayer1R2BModuleInnerPixel3DActiveTwo" category="unspecified">
+<rSolid name="pixel:ITLayer1R2BModuleInnerPixel3DActiveTwo"/>
 <rMaterial name="tracker:tkLayout_SenSi"/>
 </LogicalPart>
 <LogicalPart name="ITLayer1R2BModuleHybrid" category="unspecified">
@@ -2952,12 +2952,12 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 <rSolid name="pixel:ITLayer1R3BModuleInnerPixelTwowafer"/>
 <rMaterial name="materials:Air"/>
 </LogicalPart>
-<LogicalPart name="ITLayer1R3BModuleInnerPixel3DOneActive" category="unspecified">
-<rSolid name="pixel:ITLayer1R3BModuleInnerPixel3DOneActive"/>
+<LogicalPart name="ITLayer1R3BModuleInnerPixel3DActiveOne" category="unspecified">
+<rSolid name="pixel:ITLayer1R3BModuleInnerPixel3DActiveOne"/>
 <rMaterial name="tracker:tkLayout_SenSi"/>
 </LogicalPart>
-<LogicalPart name="ITLayer1R3BModuleInnerPixel3DTwoActive" category="unspecified">
-<rSolid name="pixel:ITLayer1R3BModuleInnerPixel3DTwoActive"/>
+<LogicalPart name="ITLayer1R3BModuleInnerPixel3DActiveTwo" category="unspecified">
+<rSolid name="pixel:ITLayer1R3BModuleInnerPixel3DActiveTwo"/>
 <rMaterial name="tracker:tkLayout_SenSi"/>
 </LogicalPart>
 <LogicalPart name="ITLayer1R3BModuleHybrid" category="unspecified">
@@ -2996,12 +2996,12 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 <rSolid name="pixel:ITLayer1R4BModuleInnerPixelTwowafer"/>
 <rMaterial name="materials:Air"/>
 </LogicalPart>
-<LogicalPart name="ITLayer1R4BModuleInnerPixel3DOneActive" category="unspecified">
-<rSolid name="pixel:ITLayer1R4BModuleInnerPixel3DOneActive"/>
+<LogicalPart name="ITLayer1R4BModuleInnerPixel3DActiveOne" category="unspecified">
+<rSolid name="pixel:ITLayer1R4BModuleInnerPixel3DActiveOne"/>
 <rMaterial name="tracker:tkLayout_SenSi"/>
 </LogicalPart>
-<LogicalPart name="ITLayer1R4BModuleInnerPixel3DTwoActive" category="unspecified">
-<rSolid name="pixel:ITLayer1R4BModuleInnerPixel3DTwoActive"/>
+<LogicalPart name="ITLayer1R4BModuleInnerPixel3DActiveTwo" category="unspecified">
+<rSolid name="pixel:ITLayer1R4BModuleInnerPixel3DActiveTwo"/>
 <rMaterial name="tracker:tkLayout_SenSi"/>
 </LogicalPart>
 <LogicalPart name="ITLayer1R4BModuleHybrid" category="unspecified">
@@ -3040,12 +3040,12 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 <rSolid name="pixel:ITLayer1R5BModuleInnerPixelTwowafer"/>
 <rMaterial name="materials:Air"/>
 </LogicalPart>
-<LogicalPart name="ITLayer1R5BModuleInnerPixel3DOneActive" category="unspecified">
-<rSolid name="pixel:ITLayer1R5BModuleInnerPixel3DOneActive"/>
+<LogicalPart name="ITLayer1R5BModuleInnerPixel3DActiveOne" category="unspecified">
+<rSolid name="pixel:ITLayer1R5BModuleInnerPixel3DActiveOne"/>
 <rMaterial name="tracker:tkLayout_SenSi"/>
 </LogicalPart>
-<LogicalPart name="ITLayer1R5BModuleInnerPixel3DTwoActive" category="unspecified">
-<rSolid name="pixel:ITLayer1R5BModuleInnerPixel3DTwoActive"/>
+<LogicalPart name="ITLayer1R5BModuleInnerPixel3DActiveTwo" category="unspecified">
+<rSolid name="pixel:ITLayer1R5BModuleInnerPixel3DActiveTwo"/>
 <rMaterial name="tracker:tkLayout_SenSi"/>
 </LogicalPart>
 <LogicalPart name="ITLayer1R5BModuleHybrid" category="unspecified">
@@ -6509,8 +6509,8 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 <Box name="ITLayer1R1BModule" dx="9.4*mm" dy="22*mm" dz="0.575*mm"/>
 <Box name="ITLayer1R1BModuleInnerPixelOnewafer" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
 <Box name="ITLayer1R1BModuleInnerPixelTwowafer" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
-<Box name="ITLayer1R1BModuleInnerPixel3DOneActive" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
-<Box name="ITLayer1R1BModuleInnerPixel3DTwoActive" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
+<Box name="ITLayer1R1BModuleInnerPixel3DActiveOne" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
+<Box name="ITLayer1R1BModuleInnerPixel3DActiveTwo" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
 <Box name="ITLayer1R1BModuleHybrid" dx="8.4*mm" dy="21.85*mm" dz="0.25*mm"/>
 <Box name="ITLayer1R1BModuleChip" dx="8.9*mm" dy="21.85*mm" dz="0.25*mm"/>
 <Box name="ITLayer1R1BModuleDeadAreaRight" dx="0.075*mm" dy="21.85*mm" dz="0.075*mm"/>
@@ -6520,8 +6520,8 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 <Box name="ITLayer1R2BModule" dx="9.4*mm" dy="22*mm" dz="0.575*mm"/>
 <Box name="ITLayer1R2BModuleInnerPixelOnewafer" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
 <Box name="ITLayer1R2BModuleInnerPixelTwowafer" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
-<Box name="ITLayer1R2BModuleInnerPixel3DOneActive" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
-<Box name="ITLayer1R2BModuleInnerPixel3DTwoActive" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
+<Box name="ITLayer1R2BModuleInnerPixel3DActiveOne" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
+<Box name="ITLayer1R2BModuleInnerPixel3DActiveTwo" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
 <Box name="ITLayer1R2BModuleHybrid" dx="8.4*mm" dy="21.85*mm" dz="0.25*mm"/>
 <Box name="ITLayer1R2BModuleChip" dx="8.9*mm" dy="21.85*mm" dz="0.25*mm"/>
 <Box name="ITLayer1R2BModuleDeadAreaRight" dx="0.075*mm" dy="21.85*mm" dz="0.075*mm"/>
@@ -6531,8 +6531,8 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 <Box name="ITLayer1R3BModule" dx="9.4*mm" dy="22*mm" dz="0.575*mm"/>
 <Box name="ITLayer1R3BModuleInnerPixelOnewafer" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
 <Box name="ITLayer1R3BModuleInnerPixelTwowafer" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
-<Box name="ITLayer1R3BModuleInnerPixel3DOneActive" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
-<Box name="ITLayer1R3BModuleInnerPixel3DTwoActive" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
+<Box name="ITLayer1R3BModuleInnerPixel3DActiveOne" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
+<Box name="ITLayer1R3BModuleInnerPixel3DActiveTwo" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
 <Box name="ITLayer1R3BModuleHybrid" dx="8.4*mm" dy="21.85*mm" dz="0.25*mm"/>
 <Box name="ITLayer1R3BModuleChip" dx="8.9*mm" dy="21.85*mm" dz="0.25*mm"/>
 <Box name="ITLayer1R3BModuleDeadAreaRight" dx="0.075*mm" dy="21.85*mm" dz="0.075*mm"/>
@@ -6542,8 +6542,8 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 <Box name="ITLayer1R4BModule" dx="9.4*mm" dy="22*mm" dz="0.575*mm"/>
 <Box name="ITLayer1R4BModuleInnerPixelOnewafer" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
 <Box name="ITLayer1R4BModuleInnerPixelTwowafer" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
-<Box name="ITLayer1R4BModuleInnerPixel3DOneActive" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
-<Box name="ITLayer1R4BModuleInnerPixel3DTwoActive" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
+<Box name="ITLayer1R4BModuleInnerPixel3DActiveOne" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
+<Box name="ITLayer1R4BModuleInnerPixel3DActiveTwo" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
 <Box name="ITLayer1R4BModuleHybrid" dx="8.4*mm" dy="21.85*mm" dz="0.25*mm"/>
 <Box name="ITLayer1R4BModuleChip" dx="8.9*mm" dy="21.85*mm" dz="0.25*mm"/>
 <Box name="ITLayer1R4BModuleDeadAreaRight" dx="0.075*mm" dy="21.85*mm" dz="0.075*mm"/>
@@ -6553,8 +6553,8 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 <Box name="ITLayer1R5BModule" dx="9.4*mm" dy="22*mm" dz="0.575*mm"/>
 <Box name="ITLayer1R5BModuleInnerPixelOnewafer" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
 <Box name="ITLayer1R5BModuleInnerPixelTwowafer" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
-<Box name="ITLayer1R5BModuleInnerPixel3DOneActive" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
-<Box name="ITLayer1R5BModuleInnerPixel3DTwoActive" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
+<Box name="ITLayer1R5BModuleInnerPixel3DActiveOne" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
+<Box name="ITLayer1R5BModuleInnerPixel3DActiveTwo" dx="8.4*mm" dy="10.8*mm" dz="0.075*mm"/>
 <Box name="ITLayer1R5BModuleHybrid" dx="8.4*mm" dy="21.85*mm" dz="0.25*mm"/>
 <Box name="ITLayer1R5BModuleChip" dx="8.9*mm" dy="21.85*mm" dz="0.25*mm"/>
 <Box name="ITLayer1R5BModuleDeadAreaRight" dx="0.075*mm" dy="21.85*mm" dz="0.075*mm"/>
@@ -7598,12 +7598,12 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 </PosPart>
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R1BModuleInnerPixelOnewafer"/>
-<rChild name="pixel:ITLayer1R1BModuleInnerPixel3DOneActive"/>
+<rChild name="pixel:ITLayer1R1BModuleInnerPixel3DActiveOne"/>
 <Translation x="0*mm" y="0*mm" z="0*mm"/>
 </PosPart>
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R1BModuleInnerPixelTwowafer"/>
-<rChild name="pixel:ITLayer1R1BModuleInnerPixel3DTwoActive"/>
+<rChild name="pixel:ITLayer1R1BModuleInnerPixel3DActiveTwo"/>
 <Translation x="0*mm" y="0*mm" z="0*mm"/>
 </PosPart>
 <PosPart copyNumber="1">
@@ -7660,12 +7660,12 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 </PosPart>
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R2BModuleInnerPixelOnewafer"/>
-<rChild name="pixel:ITLayer1R2BModuleInnerPixel3DOneActive"/>
+<rChild name="pixel:ITLayer1R2BModuleInnerPixel3DActiveOne"/>
 <Translation x="0*mm" y="0*mm" z="0*mm"/>
 </PosPart>
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R2BModuleInnerPixelTwowafer"/>
-<rChild name="pixel:ITLayer1R2BModuleInnerPixel3DTwoActive"/>
+<rChild name="pixel:ITLayer1R2BModuleInnerPixel3DActiveTwo"/>
 <Translation x="0*mm" y="0*mm" z="0*mm"/>
 </PosPart>
 <PosPart copyNumber="1">
@@ -7722,12 +7722,12 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 </PosPart>
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R3BModuleInnerPixelOnewafer"/>
-<rChild name="pixel:ITLayer1R3BModuleInnerPixel3DOneActive"/>
+<rChild name="pixel:ITLayer1R3BModuleInnerPixel3DActiveOne"/>
 <Translation x="0*mm" y="0*mm" z="0*mm"/>
 </PosPart>
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R3BModuleInnerPixelTwowafer"/>
-<rChild name="pixel:ITLayer1R3BModuleInnerPixel3DTwoActive"/>
+<rChild name="pixel:ITLayer1R3BModuleInnerPixel3DActiveTwo"/>
 <Translation x="0*mm" y="0*mm" z="0*mm"/>
 </PosPart>
 <PosPart copyNumber="1">
@@ -7784,12 +7784,12 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 </PosPart>
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R4BModuleInnerPixelOnewafer"/>
-<rChild name="pixel:ITLayer1R4BModuleInnerPixel3DOneActive"/>
+<rChild name="pixel:ITLayer1R4BModuleInnerPixel3DActiveOne"/>
 <Translation x="0*mm" y="0*mm" z="0*mm"/>
 </PosPart>
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R4BModuleInnerPixelTwowafer"/>
-<rChild name="pixel:ITLayer1R4BModuleInnerPixel3DTwoActive"/>
+<rChild name="pixel:ITLayer1R4BModuleInnerPixel3DActiveTwo"/>
 <Translation x="0*mm" y="0*mm" z="0*mm"/>
 </PosPart>
 <PosPart copyNumber="1">
@@ -7846,12 +7846,12 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 </PosPart>
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R5BModuleInnerPixelOnewafer"/>
-<rChild name="pixel:ITLayer1R5BModuleInnerPixel3DOneActive"/>
+<rChild name="pixel:ITLayer1R5BModuleInnerPixel3DActiveOne"/>
 <Translation x="0*mm" y="0*mm" z="0*mm"/>
 </PosPart>
 <PosPart copyNumber="1">
 <rParent name="pixel:ITLayer1R5BModuleInnerPixelTwowafer"/>
-<rChild name="pixel:ITLayer1R5BModuleInnerPixel3DTwoActive"/>
+<rChild name="pixel:ITLayer1R5BModuleInnerPixel3DActiveTwo"/>
 <Translation x="0*mm" y="0*mm" z="0*mm"/>
 </PosPart>
 <PosPart copyNumber="1">

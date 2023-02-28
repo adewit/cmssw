@@ -11,16 +11,16 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
 <DDDefinition xmlns="http://www.cern.ch/cms/DDL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.cern.ch/cms/DDL ../../../DetectorDescription/Schema/DDLSchema.xsd">
 <SpecParSection label="spec-pars2.xml">
   <SpecPar name="ROUHitsTrackerPhase2PixelBarrel">
-<PartSelector path="//ITLayer1R1BModuleInnerPixel3DOneActive"/>
-<PartSelector path="//ITLayer1R1BModuleInnerPixel3DTwoActive"/>
-<PartSelector path="//ITLayer1R2BModuleInnerPixel3DOneActive"/>
-<PartSelector path="//ITLayer1R2BModuleInnerPixel3DTwoActive"/>
-<PartSelector path="//ITLayer1R3BModuleInnerPixel3DOneActive"/>
-<PartSelector path="//ITLayer1R3BModuleInnerPixel3DTwoActive"/>
-<PartSelector path="//ITLayer1R4BModuleInnerPixel3DOneActive"/>
-<PartSelector path="//ITLayer1R4BModuleInnerPixel3DTwoActive"/>
-<PartSelector path="//ITLayer1R5BModuleInnerPixel3DOneActive"/>
-<PartSelector path="//ITLayer1R5BModuleInnerPixel3DTwoActive"/>
+<PartSelector path="//ITLayer1R1BModuleInnerPixel3DActiveOne"/>
+<PartSelector path="//ITLayer1R1BModuleInnerPixel3DActiveTwo"/>
+<PartSelector path="//ITLayer1R2BModuleInnerPixel3DActiveOne"/>
+<PartSelector path="//ITLayer1R2BModuleInnerPixel3DActiveTwo"/>
+<PartSelector path="//ITLayer1R3BModuleInnerPixel3DActiveOne"/>
+<PartSelector path="//ITLayer1R3BModuleInnerPixel3DActiveTwo"/>
+<PartSelector path="//ITLayer1R4BModuleInnerPixel3DActiveOne"/>
+<PartSelector path="//ITLayer1R4BModuleInnerPixel3DActiveTwo"/>
+<PartSelector path="//ITLayer1R5BModuleInnerPixel3DActiveOne"/>
+<PartSelector path="//ITLayer1R5BModuleInnerPixel3DActiveTwo"/>
 <PartSelector path="//ITLayer2R1BModuleInnerPixelActive"/>
 <PartSelector path="//ITLayer2R2BModuleInnerPixelActive"/>
 <PartSelector path="//ITLayer2R3BModuleInnerPixelActive"/>

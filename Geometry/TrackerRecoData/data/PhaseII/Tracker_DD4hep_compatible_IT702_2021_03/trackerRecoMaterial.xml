@@ -12,16 +12,16 @@ note: see OT800_IT7010_2022_10_13.cfg for full config files
   <SpecParSection label="spec-pars2.xml">
 
 <SpecPar name="TrackerRecMaterialPhase2PixelBarrelLayer1" eval="true">
-<PartSelector path="//ITLayer1R1BModuleInnerPixel3DOneActive"/>
-<PartSelector path="//ITLayer1R1BModuleInnerPixel3DTwoActive"/>
-<PartSelector path="//ITLayer1R2BModuleInnerPixel3DOneActive"/>
-<PartSelector path="//ITLayer1R2BModuleInnerPixel3DTwoActive"/>
-<PartSelector path="//ITLayer1R3BModuleInnerPixel3DOneActive"/>
-<PartSelector path="//ITLayer1R3BModuleInnerPixel3DTwoActive"/>
-<PartSelector path="//ITLayer1R4BModuleInnerPixel3DOneActive"/>
-<PartSelector path="//ITLayer1R4BModuleInnerPixel3DTwoActive"/>
-<PartSelector path="//ITLayer1R5BModuleInnerPixel3DOneActive"/>
-<PartSelector path="//ITLayer1R5BModuleInnerPixel3DTwoActive"/>
+<PartSelector path="//ITLayer1R1BModuleInnerPixel3DActiveOne"/>
+<PartSelector path="//ITLayer1R1BModuleInnerPixel3DActiveTwo"/>
+<PartSelector path="//ITLayer1R2BModuleInnerPixel3DActiveOne"/>
+<PartSelector path="//ITLayer1R2BModuleInnerPixel3DActiveTwo"/>
+<PartSelector path="//ITLayer1R3BModuleInnerPixel3DActiveOne"/>
+<PartSelector path="//ITLayer1R3BModuleInnerPixel3DActiveTwo"/>
+<PartSelector path="//ITLayer1R4BModuleInnerPixel3DActiveOne"/>
+<PartSelector path="//ITLayer1R4BModuleInnerPixel3DActiveTwo"/>
+<PartSelector path="//ITLayer1R5BModuleInnerPixel3DActiveOne"/>
+<PartSelector path="//ITLayer1R5BModuleInnerPixel3DActiveTwo"/>
 <Parameter name="TrackerRadLength" value="0.0185026"/>
 <Parameter name="TrackerXi" value="3.70053e-05"/>
 </SpecPar>
