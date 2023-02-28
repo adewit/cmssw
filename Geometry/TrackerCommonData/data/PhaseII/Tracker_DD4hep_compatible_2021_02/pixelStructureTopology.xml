@@ -135,7 +135,7 @@ note: see OT800_IT615_2021_02_08.cfg for full config files
 <Parameter name="TkDDDStructure" value="PixelEndcapPanel"/>
 </SpecPar>
 <SpecPar name="ITLayer1R1BModuleInnerPixelActiveReadoutParOne">
-<PartSelector path="//ITLayer1R1BModuleInnerPixelActiveOne"/>
+<PartSelector path="//ITLayer1R1BModuleInnerPixel3DOneActive"/>
 <Parameter name="TkDDDStructure" value="PixelBarrelDet"/>
 <Parameter name="PixelROCRows" eval="true" value="672"/>
 <Parameter name="PixelROCCols" eval="true" value="217"/>
@@ -143,7 +143,7 @@ note: see OT800_IT615_2021_02_08.cfg for full config files
 <Parameter name="PixelROC_Y" eval="true" value="1"/>
 </SpecPar>
 <SpecPar name="ITLayer1R1BModuleInnerPixelActiveReadoutParTwo">
-<PartSelector path="//ITLayer1R1BModuleInnerPixelActiveTwo"/>
+<PartSelector path="//ITLayer1R1BModuleInnerPixel3DTwoActive"/>
 <Parameter name="TkDDDStructure" value="PixelBarrelDet"/>
 <Parameter name="PixelROCRows" eval="true" value="672"/>
 <Parameter name="PixelROCCols" eval="true" value="217"/>
@@ -151,7 +151,7 @@ note: see OT800_IT615_2021_02_08.cfg for full config files
 <Parameter name="PixelROC_Y" eval="true" value="1"/>
 </SpecPar>
 <SpecPar name="ITLayer1R2BModuleInnerPixelActiveReadoutParOne">
-<PartSelector path="//ITLayer1R2BModuleInnerPixelActiveOne"/>
+<PartSelector path="//ITLayer1R2BModuleInnerPixel3DOneActive"/>
 <Parameter name="TkDDDStructure" value="PixelBarrelDet"/>
 <Parameter name="PixelROCRows" eval="true" value="672"/>
 <Parameter name="PixelROCCols" eval="true" value="217"/>
@@ -159,7 +159,7 @@ note: see OT800_IT615_2021_02_08.cfg for full config files
 <Parameter name="PixelROC_Y" eval="true" value="1"/>
 </SpecPar>
 <SpecPar name="ITLayer1R2BModuleInnerPixelActiveReadoutParTwo">
-<PartSelector path="//ITLayer1R2BModuleInnerPixelActiveTwo"/>
+<PartSelector path="//ITLayer1R2BModuleInnerPixel3DTwoActive"/>
 <Parameter name="TkDDDStructure" value="PixelBarrelDet"/>
 <Parameter name="PixelROCRows" eval="true" value="672"/>
 <Parameter name="PixelROCCols" eval="true" value="217"/>
@@ -167,7 +167,7 @@ note: see OT800_IT615_2021_02_08.cfg for full config files
 <Parameter name="PixelROC_Y" eval="true" value="1"/>
 </SpecPar>
 <SpecPar name="ITLayer1R3BModuleInnerPixelActiveReadoutParOne">
-<PartSelector path="//ITLayer1R3BModuleInnerPixelActiveOne"/>
+<PartSelector path="//ITLayer1R3BModuleInnerPixel3DOneActive"/>
 <Parameter name="TkDDDStructure" value="PixelBarrelDet"/>
 <Parameter name="PixelROCRows" eval="true" value="672"/>
 <Parameter name="PixelROCCols" eval="true" value="217"/>
@@ -175,7 +175,7 @@ note: see OT800_IT615_2021_02_08.cfg for full config files
 <Parameter name="PixelROC_Y" eval="true" value="1"/>
 </SpecPar>
 <SpecPar name="ITLayer1R3BModuleInnerPixelActiveReadoutParTwo">
-<PartSelector path="//ITLayer1R3BModuleInnerPixelActiveTwo"/>
+<PartSelector path="//ITLayer1R3BModuleInnerPixel3DTwoActive"/>
 <Parameter name="TkDDDStructure" value="PixelBarrelDet"/>
 <Parameter name="PixelROCRows" eval="true" value="672"/>
 <Parameter name="PixelROCCols" eval="true" value="217"/>
@@ -183,7 +183,7 @@ note: see OT800_IT615_2021_02_08.cfg for full config files
 <Parameter name="PixelROC_Y" eval="true" value="1"/>
 </SpecPar>
 <SpecPar name="ITLayer1R4BModuleInnerPixelActiveReadoutParOne">
-<PartSelector path="//ITLayer1R4BModuleInnerPixelActiveOne"/>
+<PartSelector path="//ITLayer1R4BModuleInnerPixel3DOneActive"/>
 <Parameter name="TkDDDStructure" value="PixelBarrelDet"/>
 <Parameter name="PixelROCRows" eval="true" value="672"/>
 <Parameter name="PixelROCCols" eval="true" value="217"/>
@@ -191,7 +191,7 @@ note: see OT800_IT615_2021_02_08.cfg for full config files
 <Parameter name="PixelROC_Y" eval="true" value="1"/>
 </SpecPar>
 <SpecPar name="ITLayer1R4BModuleInnerPixelActiveReadoutParTwo">
-<PartSelector path="//ITLayer1R4BModuleInnerPixelActiveTwo"/>
+<PartSelector path="//ITLayer1R4BModuleInnerPixel3DTwoActive"/>
 <Parameter name="TkDDDStructure" value="PixelBarrelDet"/>
 <Parameter name="PixelROCRows" eval="true" value="672"/>
 <Parameter name="PixelROCCols" eval="true" value="217"/>
@@ -199,7 +199,7 @@ note: see OT800_IT615_2021_02_08.cfg for full config files
 <Parameter name="PixelROC_Y" eval="true" value="1"/>
 </SpecPar>
 <SpecPar name="ITLayer1R5BModuleInnerPixelActiveReadoutParOne">
-<PartSelector path="//ITLayer1R5BModuleInnerPixelActiveOne"/>
+<PartSelector path="//ITLayer1R5BModuleInnerPixel3DOneActive"/>
 <Parameter name="TkDDDStructure" value="PixelBarrelDet"/>
 <Parameter name="PixelROCRows" eval="true" value="672"/>
 <Parameter name="PixelROCCols" eval="true" value="217"/>
@@ -207,7 +207,7 @@ note: see OT800_IT615_2021_02_08.cfg for full config files
 <Parameter name="PixelROC_Y" eval="true" value="1"/>
 </SpecPar>
 <SpecPar name="ITLayer1R5BModuleInnerPixelActiveReadoutParTwo">
-<PartSelector path="//ITLayer1R5BModuleInnerPixelActiveTwo"/>
+<PartSelector path="//ITLayer1R5BModuleInnerPixel3DTwoActive"/>
 <Parameter name="TkDDDStructure" value="PixelBarrelDet"/>
 <Parameter name="PixelROCRows" eval="true" value="672"/>
 <Parameter name="PixelROCCols" eval="true" value="217"/>
