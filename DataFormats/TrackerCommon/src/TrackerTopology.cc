@@ -372,8 +372,14 @@ std::string TrackerTopology::print(DetId id) const {
     unsigned int theLayer = pxbLayer(id);
     unsigned int theLadder = pxbLadder(id);
     unsigned int theModule = pxbModule(id);
+    std::string typeUpgrade;
+    typeUpgrade = (isFirst(id)) ? "first" : typeUpgrade;
+    typeUpgrade = (isSecond(id)) ? "second" : typeUpgrade;
+    typeUpgrade = (isFirst(id) || isSecond(id)) ? typeUpgrade + " double" : "module";
     strstr << "PixelBarrel"
-           << " Layer " << theLayer << " Ladder " << theLadder << " Module " << theModule;
+           << " Layer " << theLayer << " Ladder " << theLadder; 
+    strstr << " Module for phase0 " << theModule;
+    strstr << " Module for phase2 " << theModule << " " << typeUpgrade;
     strstr << " (" << id.rawId() << ")";
     return strstr.str();
   }
