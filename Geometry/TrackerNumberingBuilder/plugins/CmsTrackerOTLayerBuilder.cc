@@ -33,7 +33,6 @@ void CmsTrackerOTLayerBuilder<FilteredView>::buildComponent(FilteredView& fv, Ge
       edm::LogError("CmsTrackerOTLayerBuilder") << " ERROR - I was expecting a ladder or a panel, I got a "
                                                 << ExtractStringFromDDD<FilteredView>::getString(s, &fv);
   }
-  std::cout<<"this subdet name is "<<subdet->name()<<std::endl;
   g->addComponent(subdet);
 }
 

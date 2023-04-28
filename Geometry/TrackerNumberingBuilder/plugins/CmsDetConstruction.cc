@@ -52,15 +52,13 @@ void CmsDetConstruction<FilteredView>::buildSmallDetsfor3D(FilteredView& fv,
                                            ExtractStringFromDDD<FilteredView>::getString(attribute, &fv)));
 
   if (det->isFirstSensor()) {
-    std::cout<<"This is a first sensor"<<std::endl;
     uint32_t temp = 1;
     det->setGeographicalID(DetId(temp));
   } else if (det->isSecondSensor()) {
-    std::cout<<"This is a second sensor"<<std::endl;
     uint32_t temp = 2;
     det->setGeographicalID(DetId(temp));
   } else {
-    edm::LogError("DetConstruction") << " module defined in a 3D module but not first or second!? ";
+    edm::LogError("DetConstruction") << " module defined in a 3D module but not first or second sensor!? ";
   }
   mother->addComponent(det);
 }
@@ -99,11 +97,9 @@ void CmsDetConstruction<DDFilteredView>::buildComponent(DDFilteredView& fv,
       }
       // PHASE 2 (STACKDET)
       else if (isPhase2ModuleWith2Sensors) {
-        std::cout<<"HELLO, I NEED TO BUILD smallDETSFORSTACK"<<std::endl;
         buildSmallDetsforStack(fv, det, attribute);
       }
       else if (isPhase2BarrelModuleWith2Sensors) {
-        std::cout<<"HELLO, I NEED TO BUILD smallDETSFOR3D"<<std::endl;
         buildSmallDetsfor3D(fv, det, attribute);
       }
 
