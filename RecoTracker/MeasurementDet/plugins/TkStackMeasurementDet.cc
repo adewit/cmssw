@@ -7,9 +7,6 @@ using namespace std;
 TkStackMeasurementDet::TkStackMeasurementDet(const StackGeomDet* gdet, const PixelClusterParameterEstimator* cpe)
     : MeasurementDet(gdet), thePixelCPE(cpe), theLowerDet(nullptr), theUpperDet(nullptr) {}
 
-TkStackMeasurementDet::TkStackMeasurementDet(const DoubleSensGeomDet* gdet, const PixelClusterParameterEstimator* cpe)
-    : MeasurementDet(gdet), thePixelCPE(cpe), theLowerDet(nullptr), theUpperDet(nullptr) {}
-
 void TkStackMeasurementDet::init(const MeasurementDet* lowerDet, const MeasurementDet* upperDet) {
   theLowerDet = dynamic_cast<const TkPhase2OTMeasurementDet*>(lowerDet);
   theUpperDet = dynamic_cast<const TkPhase2OTMeasurementDet*>(upperDet);

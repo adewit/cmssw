@@ -1,30 +1,26 @@
 <?xml version="1.0"?>
 <!--
 ============= XML GENERATION METADATA HEADER =============
-tkLayout revision: sensor-comp-3449-2fde603
+tkLayout revision: dev-3555-6297061
 tkLayout developed by https://github.com/tkLayout/tkLayout/graphs/contributors .
-Adinda De Wit (adewit on lxplus729.cern.ch) responsible for cross-check of the automatically-generated description below.
-generation date: 2021-03-16.10:13:17
-note: see OT800_IT702_2021_03_16.cfg for full config files
+Adinda De Wit (adewit on lxplus766.cern.ch) responsible for cross-check of the automatically-generated description below.
+generation date: 2022-10-13.17:58:59
+note: see OT800_IT7010_2022_10_13.cfg for full config files
 =========== END XML GENERATION METADATA HEADER ===========
 -->
 <DDDefinition xmlns="http://www.cern.ch/cms/DDL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.cern.ch/cms/DDL ../../../DetectorDescription/Schema/DDLSchema.xsd">
-  <SpecParSection label="trackerProdCuts.xml" eval="true">
-    <SpecPar name="tracker-dead-pixel">
-      <PartSelector path="//Phase2PixelBarrel"/>
-      <PartSelector path="//Phase2PixelEndcap"/>
-      <Parameter name="CMSCutsRegion" value="TrackerPixelDeadRegion" eval="false"/>
-      <Parameter name="ProdCutsForElectrons" value="1*mm"/>
-      <Parameter name="ProdCutsForPositrons" value="1*mm"/>
-      <Parameter name="ProdCutsForGamma" value="1*mm"/>
-    </SpecPar>
-    
-    <SpecPar name="tracker-sens-pixel">
-<PartSelector path="//ITLayer1R1BModuleInnerPixel3DActive"/>
-<PartSelector path="//ITLayer1R2BModuleInnerPixel3DActive"/>
-<PartSelector path="//ITLayer1R3BModuleInnerPixel3DActive"/>
-<PartSelector path="//ITLayer1R4BModuleInnerPixel3DActive"/>
-<PartSelector path="//ITLayer1R5BModuleInnerPixel3DActive"/>
+<SpecParSection label="spec-pars2.xml">
+  <SpecPar name="ROUHitsTrackerPhase2PixelBarrel">
+<PartSelector path="//ITLayer1R1BModuleInnerPixel3DActiveOne"/>
+<PartSelector path="//ITLayer1R1BModuleInnerPixel3DActiveTwo"/>
+<PartSelector path="//ITLayer1R2BModuleInnerPixel3DActiveOne"/>
+<PartSelector path="//ITLayer1R2BModuleInnerPixel3DActiveTwo"/>
+<PartSelector path="//ITLayer1R3BModuleInnerPixel3DActiveOne"/>
+<PartSelector path="//ITLayer1R3BModuleInnerPixel3DActiveTwo"/>
+<PartSelector path="//ITLayer1R4BModuleInnerPixel3DActiveOne"/>
+<PartSelector path="//ITLayer1R4BModuleInnerPixel3DActiveTwo"/>
+<PartSelector path="//ITLayer1R5BModuleInnerPixel3DActiveOne"/>
+<PartSelector path="//ITLayer1R5BModuleInnerPixel3DActiveTwo"/>
 <PartSelector path="//ITLayer2R1BModuleInnerPixelActive"/>
 <PartSelector path="//ITLayer2R2BModuleInnerPixelActive"/>
 <PartSelector path="//ITLayer2R3BModuleInnerPixelActive"/>
@@ -40,6 +36,11 @@ note: see OT800_IT702_2021_03_16.cfg for full config files
 <PartSelector path="//ITLayer4R3BModuleInnerPixelActive"/>
 <PartSelector path="//ITLayer4R4BModuleInnerPixelActive"/>
 <PartSelector path="//ITLayer4R5BModuleInnerPixelActive"/>
+    <Parameter name="SensitiveDetector" value="TkAccumulatingSensitiveDetector" />
+    <Parameter name="ReadOutName" value="TrackerHitsPixelBarrel" />
+  </SpecPar>
+
+  <SpecPar name="ROUHitsTrackerPhase2PixelEndcap">
 <PartSelector path="//ITDisc1R1EModuleInnerPixelActive"/>
 <PartSelector path="//ITDisc1R2EModuleInnerPixelActive"/>
 <PartSelector path="//ITDisc1R3EModuleInnerPixelActive"/>
@@ -92,13 +93,9 @@ note: see OT800_IT702_2021_03_16.cfg for full config files
 <PartSelector path="//ITDisc12R3EModuleInnerPixelActive"/>
 <PartSelector path="//ITDisc12R4EModuleInnerPixelActive"/>
 <PartSelector path="//ITDisc12R5EModuleInnerPixelActive"/>
-      <Parameter name="CMSCutsRegion" value="TrackerPixelSensRegion" eval="false"/>
-      <Parameter name="ProdCutsForElectrons" value="0.01*mm"/>
-      <Parameter name="ProdCutsForPositrons" value="0.01*mm"/>
-      <Parameter name="ProdCutsForGamma" value="0.01*mm"/>
-    </SpecPar>
-
-  </SpecParSection>
+    <Parameter name="SensitiveDetector" value="TkAccumulatingSensitiveDetector" />
+    <Parameter name="ReadOutName" value="TrackerHitsPixelEndcap" />
+  </SpecPar>
+</SpecParSection>
 </DDDefinition>
-
 

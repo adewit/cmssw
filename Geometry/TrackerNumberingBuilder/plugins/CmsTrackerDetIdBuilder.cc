@@ -38,7 +38,7 @@ void CmsTrackerDetIdBuilder::iterate(GeometricDet& in, int level, unsigned int I
   iSubDet = iSubDet >> 25;
   //
 
-  std::cout<< std::string(2 * level, '-') << "+" << ID << " " << iSubDet << " " << level<<std::endl;
+  LogTrace("BuildingTrackerDetId") << std::string(2 * level, '-') << "+" << ID << " " << iSubDet << " " << level;
 
   switch (level) {
       // level 0: special case because it is used to assign the proper detid bits based on the endcap-like subdetector position: +z or -z

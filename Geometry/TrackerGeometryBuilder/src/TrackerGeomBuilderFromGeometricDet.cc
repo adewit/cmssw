@@ -262,11 +262,9 @@ void TrackerGeomBuilderFromGeometricDet::buildGeomDet(TrackerGeometry* tracker) 
   auto const& gduId = tracker->detUnitIds();
 
   for (u_int32_t i = 0; i < gdu.size(); i++) {
-    std::cout<<"Adding the detector unit "<<std::endl;
     tracker->addDet(gdu[i]);
     tracker->addDetId(gduId[i]);
     string gduTypeName = gdu[i]->type().name();
-    std::cout<<"with name "<<gduTypeName<<std::endl;
 
     //this step is time consuming >> TO FIX with a MAP?
     if ((gduTypeName.find("Ster") != std::string::npos || gduTypeName.find("Lower") != std::string::npos || gduTypeName.find("One") != std::string::npos) &&

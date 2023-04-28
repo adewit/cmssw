@@ -66,33 +66,6 @@ TkDoubleSensMeasurementDet::RecHitContainer TkDoubleSensMeasurementDet::recHits(
       }
     }
   }
-//  DetId detIdStack = specificGeomDet().geographicalId();
-
-//  auto iterator = data.phase2OTVectorHits().find(detIdStack);
-//  if (iterator == data.phase2OTVectorHits().end())
-//    return result;
-//  for (const auto& vecHit : data.phase2OTVectorHits()[detIdStack]) {
-//    if (!data.phase2OTClustersToSkip().empty()) {
-//      if (skipClustersLower[vecHit.lowerCluster().key() - firstDetSet.offset()])
-//        continue;
-//      if (skipClustersUpper[vecHit.upperCluster().key() - secondDetSet.offset()])
-//        continue;
-//    }
-//    result.push_back(std::make_shared<VectorHit>(vecHit));
-//  }
-
-//  iterator = data.phase2OTVectorHitsRej().find(detIdStack);
-//  if (iterator == data.phase2OTVectorHitsRej().end())
-//    return result;
-//  for (const auto& vecHit : data.phase2OTVectorHitsRej()[detIdStack]) {
-//    if (!data.phase2OTClustersToSkip().empty()) {
-//      if (skipClustersLower[vecHit.lowerCluster().key() - firstDetSet.offset()])
-//        continue;
-//      if (skipClustersUpper[vecHit.upperCluster().key() - secondDetSet.offset()])
-//        continue;
-//    }
-//    result.push_back(std::make_shared<VectorHit>(vecHit));
-//  }
 
   return result;
 }

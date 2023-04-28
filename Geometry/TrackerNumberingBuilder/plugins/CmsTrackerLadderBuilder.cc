@@ -23,9 +23,7 @@ void CmsTrackerLadderBuilder<FilteredView>::sortNS(FilteredView& fv, GeometricDe
   std::sort(comp.begin(), comp.end(), CmsTrackerLevelBuilderHelper::isLessZ);
 
   for (uint32_t i = 0; i < comp.size(); i++) {
-    std::cout<<"det component is "<<det->component(i)->name()<<std::endl;
     det->component(i)->setGeographicalID(i + 1);
-    std::cout<<"det component has geographical ID "<<det->component(i)->geographicalId()<<std::endl;
   }
 
   if (comp.empty()) {
