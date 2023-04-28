@@ -93,11 +93,11 @@ TrackerGeometry::TrackerGeometry(GeometricDet const* gd) : theTrackerDet(gd) {
     fillTestMap(det);
     LogDebug("ThicknessAndType") << det->geographicalId() << " " << det->name() << " " << det->bounds()->thickness();
   }
-  //std::cout<< " Content of DetTypetList : size " << theDetTypetList.size() <<std::endl;
+  LogDebug("DetTypeList") << " Content of DetTypetList : size " << theDetTypetList.size();
   for (const auto& iVal : theDetTypetList) {
-   // std::cout<< " DetId " << std::get<0>(iVal) << " Type "
-    //                        << static_cast<std::underlying_type<TrackerGeometry::ModuleType>::type>(std::get<1>(iVal))
-     //                       << " Thickness " << std::get<2>(iVal)<<std::endl;
+    LogDebug("DetTypeList") << " DetId " << std::get<0>(iVal) << " Type "
+                            << static_cast<std::underlying_type<TrackerGeometry::ModuleType>::type>(std::get<1>(iVal))
+                            << " Thickness " << std::get<2>(iVal);
   }
 }
 
@@ -138,7 +138,6 @@ void TrackerGeometry::addDetUnitId(DetId p) { theDetUnitIds.emplace_back(p); }
 
 void TrackerGeometry::addDet(GeomDet const* p) {
   // set index
-  std::cout<<"Adding dets to the map "<<std::endl;
   const_cast<GeomDet*>(p)->setGdetIndex(theDets.size());
   theDets.emplace_back(p);  // add to vector
   theMap.insert(std::make_pair(p->geographicalId().rawId(), p));
@@ -187,7 +186,7 @@ const TrackerGeomDet* TrackerGeometry::idToDetUnit(DetId s) const {
     return static_cast<const TrackerGeomDet*>(p->second);
   } else {
     throw cms::Exception("WrongTrackerSubDet")
-        << "Invalid DetID: no GeomDetUnit ax associated with raw ID " << s.rawId() << " of subdet ID " << s.subdetId();
+        << "Invalid DetID: no GeomDetUnit associated with raw ID " << s.rawId() << " of subdet ID " << s.subdetId();
   }
 }
 
@@ -197,7 +196,7 @@ const TrackerGeomDet* TrackerGeometry::idToDet(DetId s) const {
     return static_cast<const TrackerGeomDet*>(p->second);
   } else {
     throw cms::Exception("WrongTrackerSubDet")
-        << "Invalid DetID: no GeomDetUnit th associated with raw ID " << s.rawId() << " of subdet ID " << s.subdetId();
+        << "Invalid DetID: no GeomDetUnit associated with raw ID " << s.rawId() << " of subdet ID " << s.subdetId();
   }
 }
 
@@ -232,7 +231,6 @@ void TrackerGeometry::fillTestMap(const GeometricDet* gd) {
   float thickness = gd->bounds()->thickness();
   std::string nameTag;
   TrackerGeometry::ModuleType mtype = moduleType(name);
-  //std::cout<<"name is "<<name<<" and detId is "<<detid.rawId()<<std::endl;
   if (theDetTypetList.empty()) {
     theDetTypetList.emplace_back(detid, mtype, thickness);
   } else {
@@ -249,8 +247,6 @@ void TrackerGeometry::fillTestMap(const GeometricDet* gd) {
 TrackerGeometry::ModuleType TrackerGeometry::getDetectorType(DetId detid) const {
   for (const auto& iVal : theDetTypetList) {
     DetId detid_max = std::get<0>(iVal);
-    //std::cout<<"detid_max raw ID "<<detid_max.rawId()<<std::endl;
-    //std::cout<<"detid raw ID "<<detid.rawId()<<std::endl;
     if (detid.rawId() <= detid_max.rawId())
       return std::get<1>(iVal);
   }
@@ -294,6 +290,10 @@ TrackerGeometry::ModuleType TrackerGeometry::moduleType(const std::string& name)
         return ModuleType::Ph2PXF;
       } else if (name.find("InnerPixel3DActive") != std::string::npos) {
         return ModuleType::Ph2PXF3D;
+      } else if (name.find("InnerPixel3DOneActive") != std::string::npos) {
+        return ModuleType::Ph2PXB3D;
+      } else if (name.find("InnerPixel3DTwoActive") != std::string::npos) {
+        return ModuleType::Ph2PXB3D;
       }
     }
   }

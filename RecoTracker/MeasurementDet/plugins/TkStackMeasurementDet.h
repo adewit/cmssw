@@ -5,7 +5,6 @@
 #include "TkPhase2OTMeasurementDet.h"
 
 #include "Geometry/CommonDetUnit/interface/StackGeomDet.h"
-#include "Geometry/CommonDetUnit/interface/DoubleSensGeomDet.h"
 #include "RecoLocalTracker/ClusterParameterEstimator/interface/PixelClusterParameterEstimator.h"
 
 #include "FWCore/Utilities/interface/Visibility.h"
@@ -15,8 +14,6 @@
 class TkStackMeasurementDet final : public MeasurementDet {
 public:
   TkStackMeasurementDet(const StackGeomDet* gdet, const PixelClusterParameterEstimator* cpe);
-  TkStackMeasurementDet(const DoubleSensGeomDet* gdet, const PixelClusterParameterEstimator* cpe);
-
   void init(const MeasurementDet* lowerDet, const MeasurementDet* upperDet);
 
   RecHitContainer recHits(const TrajectoryStateOnSurface&, const MeasurementTrackerEvent& data) const override;

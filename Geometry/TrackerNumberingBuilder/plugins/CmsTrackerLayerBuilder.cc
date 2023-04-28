@@ -37,7 +37,6 @@ void CmsTrackerLayerBuilder<FilteredView>::buildComponent(FilteredView& fv, Geom
       edm::LogError("CmsTrackerLayerBuilder") << " ERROR - I was expecting a String, Rod or Ladder, I got a "
                                               << ExtractStringFromDDD<FilteredView>::getString(s, &fv);
   }
-  std::cout<<"this subdet name is "<<subdet->name()<<std::endl;
   g->addComponent(subdet);
 }
 

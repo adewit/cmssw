@@ -10,8 +10,6 @@
 
 #include "FWCore/Utilities/interface/Visibility.h"
 
-// FIXME::TkDoubleSensMeasurementDet in this moment is just a prototype: to be fixed soon!
-
 class TkDoubleSensMeasurementDet final : public MeasurementDet {
 public:
   TkDoubleSensMeasurementDet(const DoubleSensGeomDet* gdet, const PixelClusterParameterEstimator* cpe);
@@ -34,7 +32,7 @@ public:
   const TkPixelMeasurementDet* firstDet() const { return theFirstDet; }
   const TkPixelMeasurementDet* secondDet() const { return theSecondDet; }
 
-  /// return TRUE if both lower and upper components are active
+  /// return TRUE if both first and second components are active
   bool isActive(const MeasurementTrackerEvent& data) const override {
     return firstDet()->isActive(data) && secondDet()->isActive(data);
   }
@@ -42,7 +40,7 @@ public:
     return data.empty(firstDet()->index()) || data.empty(secondDet()->index());
   }
 
-  /// return TRUE if at least one of the lower and upper components has badChannels
+  /// return TRUE if at least one of the first and second components has badChannels
   bool hasBadComponents(const TrajectoryStateOnSurface& tsos, const MeasurementTrackerEvent& data) const override {
     return (firstDet()->hasBadComponents(tsos, data) || secondDet()->hasBadComponents(tsos, data));
   }
