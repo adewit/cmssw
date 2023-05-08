@@ -16,6 +16,7 @@ TrackerSimLARecord        =   "SiPhase2OuterTrackerLorentzAngleSimRcd"
 ## (TFPX: Changed sensors spacing within all double-disks + Increased distance between Disks 6 and 7 + TBPX portcards between Disks 6 and 7.)
 ## T25: Phase2 tilted tracker. Outer Tracker (v8.0.0): same as T24/T21. Inner Tracker (v7.0.2): Based on (v6.1.5) (T24/T21), but with 3D sensors in TBPX L1.
 ## T30: Phase2 tilted tracker, exploratory geometry *only to be used in D91 for now*. Outer Tracker (v8.0.1): based on v8.0.0 with updated TB2S spacing. Inner Tracker (v6.4.0): based on v6.1.5 but TFPX with more realistic module positions
+## T33: Phase2 tilted tracker. As T25 - OT v8.0.0 (but with BTL overlap removed). IT: v7.1.0 - as in T25, except with more realistic description of 3D sensors.
 
 #combines in a single dict of dict the tags defined below
 allTags={}
@@ -93,7 +94,7 @@ allTags["Template2Dden"] = {
 activeKeys = ["LA","LAWidth","SimLA","LAfromAlignment","GenError","Template"]#,"SimOTLA","OTLA"]
 
 # list of geometries supported
-activeDets = ["T21","T25","T30"]
+activeDets = ["T21","T25","T30","T33"]
 phase2GTs = {}
 for det in activeDets:
     appendedTags = ()
