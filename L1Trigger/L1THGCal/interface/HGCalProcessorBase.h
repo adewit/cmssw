@@ -24,7 +24,7 @@ typedef HGCalProcessorBaseT<edm::Handle<l1t::HGCalTriggerCellBxCollection>,
 typedef HGCalProcessorBaseT<edm::Handle<l1t::HGCalTriggerCellBxCollection>, l1t::HGCalClusterBxCollection>
     HGCalBackendLayer1ProcessorBase;
 typedef HGCalProcessorBaseT<std::pair<uint32_t, std::vector<edm::Ptr<l1t::HGCalTriggerCell>>>,
-                            std::vector<edm::Ptr<l1t::HGCalTriggerCell>>>
+                            l1t::HGCalClusterBxCollection>
     HGCalBackendStage1ProcessorBase;
 typedef HGCalProcessorBaseT<edm::Handle<l1t::HGCalClusterBxCollection>,
                             std::pair<l1t::HGCalMulticlusterBxCollection, l1t::HGCalClusterBxCollection>>

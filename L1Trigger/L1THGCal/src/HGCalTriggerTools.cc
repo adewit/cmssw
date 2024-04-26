@@ -218,6 +218,49 @@ int HGCalTriggerTools::zside(const DetId& id) const {
   return zside;
 }
 
+int HGCalTriggerTools::waferU(const DetId& id) const {
+  int waferU = 0;
+  if (id.det() == DetId::Forward && id.subdetId() == ForwardSubdetector::HFNose) {
+    waferU = HFNoseDetId(id).waferU();
+  } else if (id.det() == DetId::Forward && id.subdetId() == ForwardSubdetector::HGCTrigger) {
+    waferU = HGCalTriggerModuleDetId(id).moduleU();
+  } else if (id.det() == DetId::HGCalEE || id.det() == DetId::HGCalHSi) {
+    waferU = HGCSiliconDetId(id).waferU();
+  } else if (id.det() == DetId::HGCalTrigger &&
+             (HGCalTriggerDetId(id).subdet() == HGCalTriggerSubdetector::HGCalEETrigger ||
+              HGCalTriggerDetId(id).subdet() == HGCalTriggerSubdetector::HGCalHSiTrigger)) {
+    waferU = HGCalTriggerDetId(id).waferU();
+  } else if (id.det() == DetId::HGCalTrigger &&
+             HGCalTriggerDetId(id).subdet() == HGCalTriggerSubdetector::HFNoseTrigger) {
+    waferU = HFNoseTriggerDetId(id).waferU();
+  } else if (id.det() == DetId::HGCalHSc) {
+    waferU = -999 ;
+  }
+  return waferU;
+}
+
+int HGCalTriggerTools::waferV(const DetId& id) const {
+  int waferV = 0;
+  if (id.det() == DetId::Forward && id.subdetId() == ForwardSubdetector::HFNose) {
+    waferV = HFNoseDetId(id).waferV();
+  } else if (id.det() == DetId::Forward && id.subdetId() == ForwardSubdetector::HGCTrigger) {
+    waferV = HGCalTriggerModuleDetId(id).moduleV();
+  } else if (id.det() == DetId::HGCalEE || id.det() == DetId::HGCalHSi) {
+    waferV = HGCSiliconDetId(id).waferV();
+  } else if (id.det() == DetId::HGCalTrigger &&
+             (HGCalTriggerDetId(id).subdet() == HGCalTriggerSubdetector::HGCalEETrigger ||
+              HGCalTriggerDetId(id).subdet() == HGCalTriggerSubdetector::HGCalHSiTrigger)) {
+    waferV = HGCalTriggerDetId(id).waferV();
+  } else if (id.det() == DetId::HGCalTrigger &&
+             HGCalTriggerDetId(id).subdet() == HGCalTriggerSubdetector::HFNoseTrigger) {
+    waferV = HFNoseTriggerDetId(id).waferV();
+  } else if (id.det() == DetId::HGCalHSc) {
+    waferV = -999;
+  }
+  return waferV;
+}
+
+
 int HGCalTriggerTools::thicknessIndex(const DetId& id) const {
   if (isScintillator(id)) {
     return kScintillatorPseudoThicknessIndex_;

@@ -83,14 +83,11 @@ void HGCalBackendStage1Producer::produce(edm::Event& e, const edm::EventSetup& e
   }
 
   // Apply truncation per FPGA
-  std::vector<edm::Ptr<l1t::HGCalTriggerCell>> truncated_tcs;
+  //std::vector<edm::Ptr<l1t::HGCalTriggerCell>> truncated_tcs;
 
   for (auto& fpga_tcs : tcs_per_fpga) {
-    backendProcess_->run(fpga_tcs, truncated_tcs);
+    backendProcess_->run(fpga_tcs, *be_cluster_output);
   }
-
-  // Merge truncated tc collections
-  clusteringDummy_->clusterizeDummy(truncated_tcs, *be_cluster_output);
 
   e.put(std::move(be_cluster_output), backendProcess_->name());
 }

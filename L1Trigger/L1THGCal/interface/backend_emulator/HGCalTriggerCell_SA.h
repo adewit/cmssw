@@ -19,6 +19,8 @@ namespace l1thgcfirmware {
           phi_(phi),
           sortKey_(0),
           deltaR2_(0),
+          deltaPhi_(0),
+          column_(0),
           dX_(0),
           Y_(0),
           frameValid_(frameValid),
@@ -35,7 +37,13 @@ namespace l1thgcfirmware {
     void setDX(const int dX) { dX_ = dX; }
     void setY(const unsigned int Y) { Y_ = Y; }
     void setDeltaR2(const unsigned int deltaR2) { deltaR2_ = deltaR2; }
+    void setDeltaPhi(const unsigned int deltaPhi) {deltaPhi_ = deltaPhi; }
     void setCmsswIndex(const std::pair<int, int> index) { index_cmssw_ = index; }
+    void setColumn(const unsigned int col) { column_ = col; }
+    void setFrame(const unsigned int frame ) { frame_ = frame; }
+    void setZside(const int zside) {zside_ = zside; }
+    void setWaferU(const int waferU) {waferU_ = waferU;}
+    void setWaferV(const int waferV) {waferV_ = waferV;}
 
     // Getters
     unsigned int clock() const { return clock_; }
@@ -46,11 +54,17 @@ namespace l1thgcfirmware {
     unsigned int phi() const { return phi_; }
     unsigned int sortKey() const { return sortKey_; }
     unsigned int deltaR2() const { return deltaR2_; }
+    unsigned int deltaPhi() const { return deltaPhi_; }
     int dX() const { return dX_; }
     unsigned int Y() const { return Y_; }
     bool frameValid() const { return frameValid_; }
     bool dataValid() const { return dataValid_; }
     const std::pair<int, int>& cmsswIndex() const { return index_cmssw_; }
+    unsigned int column() const {return column_; }
+    unsigned int frame() const {return frame_; }
+    int zside() const {return zside_; }
+    int waferU() const {return waferU_;}
+    int waferV() const {return waferV_; }
 
     // Operators
     bool operator==(const HGCalTriggerCell& rhs) const;
@@ -65,10 +79,16 @@ namespace l1thgcfirmware {
     unsigned int phi_;
     unsigned int sortKey_;
     unsigned int deltaR2_;
+    unsigned int deltaPhi_;
+    unsigned int column_;
+    unsigned int frame_;
     int dX_;
     unsigned int Y_;
     bool frameValid_;
     bool dataValid_;
+    int zside_;
+    int waferU_;
+    int waferV_;
     std::pair<int, int> index_cmssw_;
   };
 

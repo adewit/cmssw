@@ -50,6 +50,8 @@ public:
   bool isScintillator(const DetId& id) const { return !isSilicon(id); }
   bool isNose(const DetId&) const;
   int zside(const DetId&) const;
+  int waferU(const DetId&) const;
+  int waferV(const DetId&) const;
   int thicknessIndex(const DetId&) const;
 
   unsigned lastLayerEE(bool nose = false) const { return (nose ? HFNoseDetId::HFNoseLayerEEmax : eeLayers_); }

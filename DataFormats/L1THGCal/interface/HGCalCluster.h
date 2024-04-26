@@ -20,8 +20,22 @@ namespace l1t {
     void setModule(uint32_t module) { module_ = module; }
     uint32_t module() const { return module_; }
 
+    void setColumn(int column) { column_ = column; }
+    void setFrame(int frame) { frame_ = frame; }
+    void setWaferU(unsigned waferU) { waferU_ = waferU; }
+    void setWaferV(unsigned waferV) { waferV_ = waferV; }
+
+    int frame() const { return frame_; }
+    int column() const { return column_; }
+    unsigned waferU() const { return waferU_; } //probably need to change to int instead of unsigned. For next iteration (implies checksum change)
+    unsigned waferV() const { return waferV_; }
+
   private:
     uint32_t module_;
+    int column_;
+    int frame_;
+    unsigned waferU_;
+    unsigned waferV_;
   };
 
   typedef BXVector<HGCalCluster> HGCalClusterBxCollection;
