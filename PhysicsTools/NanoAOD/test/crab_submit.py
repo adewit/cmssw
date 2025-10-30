@@ -29,9 +29,9 @@ datasets = [
 # Submit each dataset
 # -------------------------
 for dataset in datasets:
-    config.General.requestName = 'private_nano' 
+    config.General.requestName = dataset.split('/')[1].split('-')[0]
     config.Data.inputDataset = dataset
-    config.Data.outputDatasetTag = 'test_private_nano'
+    config.Data.outputDatasetTag = 'nanov12-22EE'
 
     print("Submitting CRAB task for dataset: %s" % dataset)
     try:
